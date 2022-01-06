@@ -9,6 +9,7 @@ import Login from "./screens/Login";
 
 class Subject extends Component{
   render(){
+    
     return (
       <header style={{display: 'inline'}}>
         <h1 style={{display: 'inline'}}>
