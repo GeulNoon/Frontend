@@ -1,10 +1,6 @@
 import React ,{Component} from 'react';
-import { Route, NavLink, Routes } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import Study from "./Study";
-import Review from "./Review";
-import Result from "./Result";
-import Login from "./Login";
 
 const Button = styled.button`
   width: 200px;
@@ -15,7 +11,8 @@ const Button = styled.button`
   border-radius: 100px;
   background-color: ${props => props.color};
   :hover {
-    background-color: #7f947f;
+    background-color: ${props => props.color};
+    opacity: 0.7;
   }
   margin-left: 100px;
 `;
@@ -49,16 +46,11 @@ class Home extends Component {
       {id: 'Login' , title: '로그인', desc: '로그인 기능', color: '#5b6d5b'}
     ]
   }
+
   render() {
     return (
         <div style={{display: 'flex', alignItems:'center', height: '80vh'}}>
         <TOC data={this.state.contents}></TOC>
-          <Routes> 
-            <Route path="/Study" element={<Study/>}/>
-            <Route path="/Review" element={<Review/>}/>
-            <Route path="/Result" element={<Result/>}/>
-            <Route path="/Login" element={<Login/>}/>
-          </Routes>
         </div>
     )
   }

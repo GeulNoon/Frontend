@@ -6,6 +6,12 @@ import Review from "./screens/Review";
 import Result from "./screens/Result";
 import MyPage from "./screens/MyPage";
 import Login from "./screens/Login";
+import Custom from "./screens/Custom";
+import Default from './screens/Default';
+import Step1 from './screens/Step1';
+import Step2 from './screens/Step2';
+import Step3 from './screens/Step3';
+import Step4 from './screens/Step4';
 
 class Subject extends Component{
   render(){
@@ -14,7 +20,7 @@ class Subject extends Component{
       <header style={{display: 'inline'}}>
         <h1 style={{display: 'inline'}}>
             <NavLink style={{color: 'black', textDecoration: 'none', marginRight: 160}} 
-            to={{pathname: `/`}} >글눈
+            to="/" >글눈
             </NavLink>
         </h1>
       </header>
@@ -29,7 +35,7 @@ class TOC extends Component{
     while (i<this.props.data.length){
       var data = this.props.data[i];
       list.push(
-          <h4 style={{display: 'inline'}} key={data.id}>
+          <h4 style={{display: 'inline', fontSize: '14px'}} key={data.id}>
             <NavLink 
               style={({ isActive }) => ({ color: isActive ? 'grey' : 'black', textDecoration: 'none', marginRight: 200 })} 
               to={{pathname: `${data.id}`}}>{data.title} 
@@ -58,19 +64,29 @@ class App extends Component {
     return (
       <BrowserRouter> 
         <div>
+          <div style={{position: 'fixed', height: '75px', backgroundColor: 'white'}}>
           <h5 style={{margin: 0, textAlign: 'right'}}>
-            <NavLink style={{color: 'grey', textDecoration: 'none'}} to={{pathname: `/Login`}} >로그인</NavLink>
+            <NavLink style={{color: 'grey', textDecoration: 'none'}} to="/Login" >로그인</NavLink>
           </h5>
           <Subject></Subject>
           <TOC data={this.state.contents}></TOC>
+          </div>
+          <div style={{paddingTop: '75px'}}>
           <Routes> 
             <Route exact path="*" element={<Home/>}/> 
-            <Route path="/Study" element={<Study/>}/>
+            <Route path="/Study/*" element={<Study/>}/>
             <Route path="/Review" element={<Review/>}/>
             <Route path="/Result" element={<Result/>}/>
             <Route path="/MyPage" element={<MyPage/>}/>
             <Route path="/Login" element={<Login/>}/>
+            <Route path="/Study/Custom" element={<Custom/>}/>
+            <Route path="/Study/Default" element={<Default/>}/>
+            <Route path="/Study/Default/Step1" element={<Step1/>}/>
+            <Route path="/Study/Default/Step2" element={<Step2/>}/>
+            <Route path="/Study/Default/Step3" element={<Step3/>}/>
+            <Route path="/Study/Default/Step4" element={<Step4/>}/>
           </Routes>
+          </div>
         </div>
       </BrowserRouter>
     )

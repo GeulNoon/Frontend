@@ -36,3 +36,38 @@
     transform: rotate(360deg);
   }
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.column {
+  height: 100px;
+  width: 80vw;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.first-column {
+  background-color: #ffffff;
+  border-bottom: 1px solid grey;
+}
+
+.second-column {
+  background-color: #f6f6f6;
+}
+
+.movable-item {
+  background-color: #ffffff;
+  height: 30px;
+  width: 75px;
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid grey;
+}
