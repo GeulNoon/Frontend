@@ -64,7 +64,7 @@ class App extends Component {
     return (
       <BrowserRouter> 
         <div>
-          <div style={{position: 'fixed', height: '75px', backgroundColor: 'white'}}>
+          <div style={{position: 'fixed', height: '75px', backgroundColor: 'white', zIndex: 1}}>
           <h5 style={{margin: 0, textAlign: 'right'}}>
             <NavLink style={{color: 'grey', textDecoration: 'none'}} to="/Login" >로그인</NavLink>
           </h5>

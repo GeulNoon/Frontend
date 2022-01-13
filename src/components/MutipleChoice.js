@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { RadioGroup, FormControl, FormControlLabel, Radio } from '@mui/material';
-import { lineHeight } from '@mui/system';
 //npm install @mui/material @emotion/react @emotion/styled
 
 class MultipleChoice extends Component {
