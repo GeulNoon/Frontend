@@ -19,7 +19,7 @@ class ShortAnswer extends Component {
                 whiteSpace: 'pre'}}>
                 {this.state.example.map((value, i) => ( 
                     value === '_' ? <input key = {i} placeholder='단어 입력' 
-                    style={{width: '60px', height: '20px'}}/>
+                    style={{width: '60px', height: '20px', marginBottom: '0px', borderRadius: '0px', padding: '5px'}}/>
                     :value
                 ))}
             </div>

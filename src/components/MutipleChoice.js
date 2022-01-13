@@ -51,7 +51,9 @@ class MultipleChoice extends Component {
                         onChange={this.handleChange}
                         >  
                             {this.state.selectList.map((value, i) => (
-                                <FormControlLabel key={i} value={value} control={<Radio color= "success" size="small" />} label={value} />
+                                <div key={i} style={{width: '50px'}}>
+                                    <FormControlLabel value={value} control={<Radio color= "success" size="small" />} label={value} />
+                                </div>
                             ))}
                         </RadioGroup>
                     </FormControl>

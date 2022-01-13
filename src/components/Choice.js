@@ -36,7 +36,9 @@ class Choice extends Component {
                     onChange={this.handleChange}
                 >
                     {this.state.selectList.map((value, i) => (
-                    <FormControlLabel key={i} value={value} control={<Radio color='success' />} label={value+'. '+this.state.example[i]} />
+                    <div style={{width: '100px'}} key={i}>
+                        <FormControlLabel value={value} control={<Radio color='success' />} label={value+'. '+this.state.example[i]} />
+                    </div>
                     ))}
                 </RadioGroup>
                 </FormControl>

@@ -6,6 +6,7 @@ import Review from "./screens/Review";
 import Result from "./screens/Result";
 import MyPage from "./screens/MyPage";
 import Login from "./screens/Login";
+import Register from "./screens/Register";
 import Custom from "./screens/Custom";
 import Default from './screens/Default';
 import Step1 from './screens/Step1';
@@ -79,6 +80,7 @@ class App extends Component {
             <Route path="/Result" element={<Result/>}/>
             <Route path="/MyPage" element={<MyPage/>}/>
             <Route path="/Login" element={<Login/>}/>
+            <Route path="/Register" element={<Register/>}/>
             <Route path="/Study/Custom" element={<Custom/>}/>
             <Route path="/Study/Default" element={<Default/>}/>
             <Route path="/Study/Default/Step1" element={<Step1/>}/>
