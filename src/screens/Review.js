@@ -4,8 +4,7 @@ class Subject extends Component{
   render(){
     return (
       <header>
-        <h1>{this.props.title}</h1>
-        {this.props.sub}
+        <h2>{this.props.title}</h2>
       </header>
     );
   }
@@ -14,8 +13,10 @@ class Subject extends Component{
 class Review extends Component {
   render() {
     return (
-      <div>
-          <Subject title="오답노트" sub="오답노트 기능입니다."></Subject>
+      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <div style={{width: '80vw'}}>
+          <Subject title="틀린문제 다시풀기"></Subject>
+        </div>
       </div>
     );
   }

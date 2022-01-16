@@ -31,12 +31,12 @@ class TOC extends Component{
       var data = this.props.data[i];
       if(data.type === 1){
         list.push(
-          <Button key={data.id}>
-              <NavLink style={{ color: 'black', textDecoration: 'none' }} 
-              to={{pathname: `/Study/Default/${data.id}`}}>
+              <NavLink  key={data.id} style={{ color: 'black', textDecoration: 'none' }} 
+              to={{pathname: `/Study/${data.id}`}}>
+              <Button>
               {data.title}<br/>{data.desc} 
-              </NavLink>
-          </Button>);
+              </Button>
+              </NavLink>);
       } else {
         list.push(
           <Selected key={data.id}>
@@ -58,7 +58,7 @@ class NavigationBar extends Component {
     render() {
     const {list} = this.props;
       return (
-          <div style={{width: '10vw',backgroundColor: '#a2bea2', 
+          <div style={{width: '10vw',height: '90%',backgroundColor: '#a2bea2', 
           display: 'flex',flexDirection: 'column', 
           alignItems: 'center', position: 'fixed'}}>
             <div style={{

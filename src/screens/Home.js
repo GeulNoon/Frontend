@@ -14,7 +14,7 @@ const Button = styled.button`
     background-color: ${props => props.color};
     opacity: 0.7;
   }
-  margin-left: 100px;
+  margin: 50px;
 `;
 
 class TOC extends Component{
@@ -30,9 +30,9 @@ class TOC extends Component{
       i = i+1;
     }
     return (
-      <header>
+      <>
         {list}
-      </header>
+      </>
     );
   }
 }

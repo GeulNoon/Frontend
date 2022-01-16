@@ -7,8 +7,6 @@ import Result from "./screens/Result";
 import MyPage from "./screens/MyPage";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
-import Custom from "./screens/Custom";
-import Default from './screens/Default';
 import Step1 from './screens/Step1';
 import Step2 from './screens/Step2';
 import Step3 from './screens/Step3';
@@ -38,16 +36,16 @@ class TOC extends Component{
       list.push(
           <h4 style={{display: 'inline', fontSize: '14px'}} key={data.id}>
             <NavLink 
-              style={({ isActive }) => ({ color: isActive ? 'grey' : 'black', textDecoration: 'none', marginRight: 200 })} 
+              style={({ isActive }) => ({ color: isActive ? 'grey' : 'black', textDecoration: 'none' })} 
               to={{pathname: `${data.id}`}}>{data.title} 
             </NavLink>
           </h4>);
       i = i+1;
     }
     return (
-      <>
+      <div style={{display: 'flex', justifyContent: 'space-between', width: '70%', height: '40px'}}>
         {list}
-      </>
+      </div>
     );
   }
 }
@@ -65,12 +63,14 @@ class App extends Component {
     return (
       <BrowserRouter> 
         <div>
-          <div style={{position: 'fixed', height: '75px', backgroundColor: 'white', zIndex: 1}}>
-          <h5 style={{margin: 0, textAlign: 'right'}}>
-            <NavLink style={{color: 'grey', textDecoration: 'none'}} to="/Login" >로그인</NavLink>
-          </h5>
-          <Subject></Subject>
-          <TOC data={this.state.contents}></TOC>
+          <div style={{position: 'fixed', height: '75px', width: '100%', backgroundColor: 'white', zIndex: 1}}>
+            <h5 style={{margin: 0, textAlign: 'right'}}>
+              <NavLink style={{color: 'grey', textDecoration: 'none'}} to="/Login" >로그인</NavLink>
+            </h5>
+            <div style={{display: 'flex', alignItems: 'flex-end'}}>
+              <Subject></Subject>
+              <TOC data={this.state.contents}></TOC>
+            </div>
           </div>
           <div style={{paddingTop: '75px'}}>
           <Routes> 
@@ -81,12 +81,10 @@ class App extends Component {
             <Route path="/MyPage" element={<MyPage/>}/>
             <Route path="/Login" element={<Login/>}/>
             <Route path="/Register" element={<Register/>}/>
-            <Route path="/Study/Custom" element={<Custom/>}/>
-            <Route path="/Study/Default" element={<Default/>}/>
-            <Route path="/Study/Default/Step1" element={<Step1/>}/>
-            <Route path="/Study/Default/Step2" element={<Step2/>}/>
-            <Route path="/Study/Default/Step3" element={<Step3/>}/>
-            <Route path="/Study/Default/Step4" element={<Step4/>}/>
+            <Route path="/Study/Step1" element={<Step1/>}/>
+            <Route path="/Study/Step2" element={<Step2/>}/>
+            <Route path="/Study/Step3" element={<Step3/>}/>
+            <Route path="/Study/Step4" element={<Step4/>}/>
           </Routes>
           </div>
         </div>
