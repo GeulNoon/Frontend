@@ -38,7 +38,7 @@ class Step1 extends Component {
   render() {
     return (
       <div style={{display:'flex'}}>
-        <NavigationBar list={this.state.contents}/>
+        <NavigationBar list={this.state.contents} prev={"Study"}/>
         <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw'}}>
           <div style={{width: '80vw'}}>          
             <Subject title="1단계: 전문보기" sub="기사의 전문을 읽어봅시다."></Subject>

@@ -11,6 +11,12 @@ import Step1 from './screens/Step1';
 import Step2 from './screens/Step2';
 import Step3 from './screens/Step3';
 import Step4 from './screens/Step4';
+import ReviewStep1 from './screens/ReviewStep1';
+import ReviewStep2 from './screens/ReviewStep2';
+import ReviewStep3 from './screens/ReviewStep3';
+import ReviewStep4 from './screens/ReviewStep4';
+import Answer from './screens/Answer';
+import More from './screens/More';
 
 class Subject extends Component{
   render(){
@@ -36,7 +42,7 @@ class TOC extends Component{
       list.push(
           <h4 style={{display: 'inline', fontSize: '14px'}} key={data.id}>
             <NavLink 
-              style={({ isActive }) => ({ color: isActive ? 'grey' : 'black', textDecoration: 'none' })} 
+              style={({ isActive }) => ({ color: isActive ? '#a2bea2' : 'black', textDecoration: 'none' })} 
               to={{pathname: `${data.id}`}}>{data.title} 
             </NavLink>
           </h4>);
@@ -76,7 +82,7 @@ class App extends Component {
           <Routes> 
             <Route exact path="*" element={<Home/>}/> 
             <Route path="/Study/*" element={<Study/>}/>
-            <Route path="/Review" element={<Review/>}/>
+            <Route path="/Review/*" element={<Review/>}/>
             <Route path="/Result" element={<Result/>}/>
             <Route path="/MyPage" element={<MyPage/>}/>
             <Route path="/Login" element={<Login/>}/>
@@ -85,6 +91,12 @@ class App extends Component {
             <Route path="/Study/Step2" element={<Step2/>}/>
             <Route path="/Study/Step3" element={<Step3/>}/>
             <Route path="/Study/Step4" element={<Step4/>}/>
+            <Route path="/Review/ReviewStep1" element={<ReviewStep1/>}/>
+            <Route path="/Review/ReviewStep2" element={<ReviewStep2/>}/>
+            <Route path="/Review/ReviewStep3" element={<ReviewStep3/>}/>
+            <Route path="/Review/ReviewStep4" element={<ReviewStep4/>}/>
+            <Route path="/Review/Answer" element={<Answer/>}/>
+            <Route path="/Result/More" element={<More/>}/>
           </Routes>
           </div>
         </div>

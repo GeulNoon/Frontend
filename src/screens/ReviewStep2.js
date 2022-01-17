@@ -30,25 +30,13 @@ const Button = styled.div`
   border: 1px solid grey;
 `;
 
-class Subject extends Component{
-  render(){
-    return (
-      <header>
-        <h1>{this.props.title}</h1>
-        {this.props.sub}
-      </header>
-    );
-  }
-}
-
-
-class Step2 extends Component {
+class ReviewStep2 extends Component {
   state = {
     contents: [
-      {id: 'Step1', title: '1단계', desc: '전문보기', type: 1},
-      {id: 'Step2', title: '2단계', desc: '요약하기', type: 0},
-      {id: 'Step3', title: '3단계', desc: '어휘풀기', type: 1},
-      {id: 'Step4', title: '4단계', desc: '결과보기', type: 1},
+      {id: 'ReviewStep1', title: '1단계', desc: '전문보기', type: 1},
+      {id: 'ReviewStep2', title: '2단계', desc: '요약하기', type: 0},
+      {id: 'ReviewStep3', title: '3단계', desc: '어휘풀기', type: 1},
+      {id: 'ReviewStep4', title: '4단계', desc: '결과보기', type: 1},
     ],
     isSelected: true
   }
@@ -63,10 +51,10 @@ class Step2 extends Component {
     }
     return (
       <div style={{display:'flex'}}>
-        <NavigationBar list={this.state.contents} prev={"Study"}/>
+        <NavigationBar list={this.state.contents}  prev={"Review"}/>
         <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw'}}>
-          <div style={{width: '80vw'}}>          
-            <Subject title="2단계: 문단 요약하기" sub="문단별 주요 내용을 한 문장으로 요약해봅시다."></Subject>
+          <div style={{width: '80vw', marginBottom: '20px'}}>          
+            <div className='pointer'>틀린 문제</div>
           </div>
           <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
             <TextBox>문단 내용</TextBox>
@@ -82,4 +70,4 @@ class Step2 extends Component {
   }
 }
 
-export default Step2;
+export default ReviewStep2;

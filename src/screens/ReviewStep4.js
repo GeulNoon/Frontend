@@ -34,19 +34,19 @@ class Subject extends Component{
   }
 }
 
-class Step4 extends Component {
+class ReviewStep4 extends Component {
   state = {
     contents: [
-      {id: 'Step1', title: '1단계', desc: '전문보기', type: 1},
-      {id: 'Step2', title: '2단계', desc: '요약하기', type: 1},
-      {id: 'Step3', title: '3단계', desc: '어휘풀기', type: 1},
-      {id: 'Step4', title: '4단계', desc: '결과보기', type: 0},
+      {id: 'ReviewStep1', title: '1단계', desc: '전문보기', type: 1},
+      {id: 'ReviewStep2', title: '2단계', desc: '요약하기', type: 1},
+      {id: 'ReviewStep3', title: '3단계', desc: '어휘풀기', type: 1},
+      {id: 'ReviewStep4', title: '4단계', desc: '결과보기', type: 0},
     ]
   }
   render() {
     return (
       <div style={{display:'flex'}}>
-        <NavigationBar list={this.state.contents} prev={"Study"}/>
+        <NavigationBar list={this.state.contents}  prev={"Review"}/>
         <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw'}}>
           <div style={{width: '80vw'}}>
             <div style={{display: 'flex', alignItems: 'center'}}>
@@ -71,4 +71,4 @@ class Step4 extends Component {
   }
 }
 
-export default Step4;
+export default ReviewStep4;

@@ -32,7 +32,7 @@ class TOC extends Component{
       if(data.type === 1){
         list.push(
               <NavLink  key={data.id} style={{ color: 'black', textDecoration: 'none' }} 
-              to={{pathname: `/Study/${data.id}`}}>
+              to={{pathname: `/${this.props.prev}/${data.id}`}}>
               <Button>
               {data.title}<br/>{data.desc} 
               </Button>
@@ -56,7 +56,7 @@ class TOC extends Component{
 
 class NavigationBar extends Component {
     render() {
-    const {list} = this.props;
+    const {list, prev} = this.props;
       return (
           <div style={{width: '10vw',height: '90%',backgroundColor: '#a2bea2', 
           display: 'flex',flexDirection: 'column', 
@@ -73,7 +73,7 @@ class NavigationBar extends Component {
               }}>
               기사 제목
             </div>
-            <TOC data={list}></TOC>
+            <TOC data={list} prev={prev}></TOC>
         </div>
       );
     }
