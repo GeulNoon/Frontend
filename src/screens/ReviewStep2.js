@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import { DragBlock } from '../components/DragBlock';
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import NextIcon from "../image/NextIcon.png";
 
 const TextBox = styled.div`
   display: flex;
@@ -63,6 +65,11 @@ class ReviewStep2 extends Component {
               <Button onClick={()=>{ this.setState({isSelected: false}); }} > 직접입력 </Button>
             </div>
             {Input}
+          </div>
+          <div style={{width: '80vw', display: 'flex', justifyContent: 'end'}}>
+            <NavLink to="/Review/ReviewStep3">
+              <img alt="" src ={NextIcon} width='37.5px' height='37.5px'/>               
+            </NavLink>
           </div>
         </div>
       </div>

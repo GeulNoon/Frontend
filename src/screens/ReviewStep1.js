@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import NextIcon from "../image/NextIcon.png";
 
 const TextBox = styled.div`
   display: flex;
@@ -32,6 +34,11 @@ class ReviewStep1 extends Component {
             <div className='pointer'>틀린 문제</div>
           </div>
           <TextBox>기사 전문</TextBox>
+          <div style={{width: '80vw', display: 'flex', justifyContent: 'end'}}>
+            <NavLink to="/Review/ReviewStep2">
+              <img alt="" src ={NextIcon} width='37.5px' height='37.5px'/>               
+            </NavLink>
+          </div>
         </div>
       </div>
     );
