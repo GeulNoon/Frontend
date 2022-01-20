@@ -70,7 +70,7 @@ class Result extends Component {
               <LineCharts/>
             </div>
           </div>
-          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',width: '300px', paddingTop: '20px'}}>
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',width: '300px', paddingTop: '50px'}}>
             <div style={{display: 'flex', alignItems: 'center', justifyContent:'center', width: '250px', height: '30px', borderRadius: '10px', backgroundColor: '#eff0ef'}}>
               <h6>학습이력</h6>
             </div>
