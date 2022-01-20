@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import NextIcon from "../image/NextIcon.png";
+
 
 const TextBox = styled.div`
   display: flex;
@@ -44,6 +47,11 @@ class Step1 extends Component {
             <Subject title="1단계: 전문보기" sub="기사의 전문을 읽어봅시다."></Subject>
           </div>
           <TextBox>기사 전문</TextBox>
+          <div style={{width: '80vw', display: 'flex', justifyContent: 'end'}}>
+            <NavLink to="/Study/Step2">
+              <img alt="" src ={NextIcon} width='37.5px' height='37.5px'/>               
+            </NavLink>
+          </div>
         </div>
       </div>
     );

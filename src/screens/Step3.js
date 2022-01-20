@@ -3,6 +3,8 @@ import NavigationBar from '../components/NavigationBar';
 import Choice from '../components/Choice';
 import MultipleChoice from '../components/MutipleChoice';
 import ShortAnswer from '../components/ShortAnswer';
+import { NavLink } from "react-router-dom";
+import NextIcon from "../image/NextIcon.png";
 
 class Subject extends Component{
   render(){
@@ -36,6 +38,11 @@ class Step3 extends Component {
             <Choice/>
             <MultipleChoice/>
             <ShortAnswer/>
+          </div>
+          <div style={{width: '80vw', display: 'flex', justifyContent: 'end'}}>
+            <NavLink to="/Study/Step4">
+              <img alt="" src ={NextIcon} width='37.5px' height='37.5px'/>               
+            </NavLink>
           </div>
         </div>
       </div>
