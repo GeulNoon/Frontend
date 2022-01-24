@@ -1,9 +1,12 @@
+//요약하기 순서배열 문제
 import React, { useState } from 'react';
 import '../App.css';
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
+//블럭 요소
 const MovableItem = ({name, setItems, item}) => {
+    //다른 박스로 블럭 옮길 때 기존 박스에서 해당 블럭 제거 후 다른 박스 가장 뒤에 배치
     const changeItemColumn = (currentItem, columnName) => {
         const newList = item.filter((it) => it.name !== currentItem.name);
         setItems(newList);
@@ -50,6 +53,7 @@ const MovableItem = ({name, setItems, item}) => {
     )
 }
 
+//블럭 담는 박스
 const Column = ({children, className, title}) => {
     const [, drop] = useDrop({
         accept: 'Our first type',
@@ -65,6 +69,7 @@ const Column = ({children, className, title}) => {
 }
 
 export const DragBlock = () => {
+    //임시 데이터(요약문 결과 입력)
     const [items, setItems] = useState([
         {id: 1, name: 'Item 1', column: 'Example'},
         {id: 2, name: 'Item 2', column: 'Example'},
@@ -75,6 +80,7 @@ export const DragBlock = () => {
         {id: 7, name: 'Item 7', column: 'Example'},
         {id: 8, name: 'Item 8', column: 'Example'},
     ]);
+    //입력받은 데이터 토대로 드래그 가능한 블럭 생성
     const returnItemsForColumn = (columnName) => {
         return items
         .filter((item)=>item.column === columnName)

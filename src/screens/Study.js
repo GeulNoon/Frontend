@@ -1,13 +1,16 @@
+//학습하기 도입 화면
 import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
+//전체 화면 감싸는 박스
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
+//좌측 요소 박스(학습하기 제목, 제목 입력창 등)
 const LeftWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -16,6 +19,7 @@ const LeftWrapper = styled.div`
   margin-right: 10px;
 `;
 
+//우측 요소 박스(지문 내용 입력창, 학습시작 버튼 등)
 const RightWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,6 +29,7 @@ const RightWrapper = styled.div`
   margin-left: 10px;
 `;
 
+//지문 내용 입력창
 const BorderInput = styled.textarea`
   height: 350px;
   width: 560px;
@@ -34,6 +39,7 @@ const BorderInput = styled.textarea`
   font-size: 12px;
 `;
 
+//좌측 하단 저작권 설명 박스
 const ContentWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -49,6 +55,7 @@ const ContentWrapper = styled.div`
   margin-top: 30px;
 `;
 
+//학습시작 버튼
 const Button = styled.div`
   display: flex;
   align-items: center;
@@ -65,7 +72,8 @@ const Button = styled.div`
   border: none;
 `;
 
-class SubjectMain extends Component{
+//학습하기 제목 글씨
+class Subject extends Component{
   render(){
     return (
       <header>
@@ -76,26 +84,19 @@ class SubjectMain extends Component{
   }
 }
 
-class Subject extends Component{
-  render(){
-    return (
-      <header>
-        <h3>{this.props.title}</h3>
-      </header>
-    );
-  }
-}
-
+//메인 함수
 class Study extends Component {
   state = {
-    titleinput: '',
-    contentinput: ''
-  }
+    titleinput: '', //제목 입력값
+    contentinput: '' //내용 입력값
+  } 
+  //제목 입력창에 내용 입력시 해당 내용을 제목 입력값에 저장
   handleChange_title = (e) => {
     this.setState({
       titleinput: e.target.value
     })
   }
+  //지문 내용 입력창에 내용 입력시 해당 내용을 내용 입력값에 저장
   handleChange_content = (e) => {
     this.setState({
       contentinput: e.target.value
@@ -104,6 +105,7 @@ class Study extends Component {
   render() {
     const { titleinput, contentinput } = this.state;
     let Warning = null;
+    //제목, 내용 입력 여부에 따라 경고문(Warning) 출력
     if(contentinput === '') {
       Warning = "내용을 입력해주세요!"
     } else if (titleinput === '') {
@@ -112,10 +114,14 @@ class Study extends Component {
     return (
       <Wrapper>
           <LeftWrapper>
-            <SubjectMain/>
+            <Subject/>
             <div style={{display: 'flex', alignItems:'center'}}>
               <h4 style={{marginRight: '20px'}}>지문 제목</h4>
-              <input placeholder="제목을 입력해주세요" style={{width: '180px',marginBottom:'0px',padding:'5px'}} value = {this.state.titleinput} onChange={this.handleChange_title}></input>
+              <input placeholder="제목을 입력해주세요" 
+                style={{width: '180px',marginBottom:'0px',padding:'5px'}} 
+                value = {this.state.titleinput} 
+                onChange={this.handleChange_title}>
+              </input> {/*제목 입력창*/}
             </div>
               <ContentWrapper>
               {`글눈 서비스는\n교육을 목적으로 한 비영리 사이트로,\n모든 지문을 상업적으로\n게재하지 않습니다.`}
@@ -123,7 +129,7 @@ class Study extends Component {
           </LeftWrapper>
           <RightWrapper>
             <div style={{display: 'flex', alignItems: 'center'}}>
-              <Subject title="지문 내용"></Subject>
+              <h3>지문 내용</h3>
             </div>
             <BorderInput placeholder="내용을 입력해주세요" value = {this.state.contentinput} onChange={this.handleChange_content}/>
             {Warning}
@@ -132,7 +138,7 @@ class Study extends Component {
                 <Button>
                   학습 시작
                 </Button>
-            </NavLink>
+            </NavLink>{/*학습시작 버튼(클릭 시 문제풀기 화면(전문보기)으로 이동)*/}
           </RightWrapper>
       </Wrapper>
     );

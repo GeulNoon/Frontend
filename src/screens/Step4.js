@@ -1,8 +1,13 @@
+//학습하기의 문제풀기:결과보기
 import React, { Component } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import styled from "styled-components";
 import '../App.css';
+import { NavLink } from "react-router-dom";
+import HomeIcon from '../image/HomeIcon.png';
+import ReviewIcon from '../image/ReviewIcon.png';
 
+//요약문 및 어휘문제 전반적인 해설 박스
 const TextBox = styled.div`
   display: flex;
   align-items: center;
@@ -13,6 +18,8 @@ const TextBox = styled.div`
   padding: 10px;
   margin-bottom: 10px;
 `;
+
+//'어휘문제 정답' 인덱스의 정답 박스
 const AnswerBox = styled.div`
   display: flex;
   align-items: center;
@@ -23,6 +30,14 @@ const AnswerBox = styled.div`
   margin-bottom: 10px;
 `;
 
+//홈, 오답노트 아이콘 박스
+const IconBox =  styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+//지문이해도 텍스트(name(사용자 이름)을 요소로 전달받음)
 class Subject extends Component{
   render(){
     return (
@@ -34,6 +49,7 @@ class Subject extends Component{
   }
 }
 
+//메인함수
 class Step4 extends Component {
   state = {
     contents: [
@@ -46,16 +62,26 @@ class Step4 extends Component {
   render() {
     return (
       <div style={{display:'flex'}}>
-        <NavigationBar list={this.state.contents} prev={"Study"}/>
+        <NavigationBar list={this.state.contents} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
         <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw'}}>
           <div style={{width: '80vw'}}>
-            <div style={{display: 'flex', alignItems: 'center'}}>
-              <Subject name="이화연"></Subject>
-              <div style={{width: '80px', height: '80px', 
-              display: 'flex', alignItems: 'center',
-              justifyContent: 'center', backgroundColor: '#94c973',
-              borderRadius: '50%', fontSize: '32px'}}>
-                92%
+            <div style={{display: 'flex'}}>
+              <div style={{display: 'flex', alignItems: 'center',width: '70vw'}}>
+                <Subject name="이화연"></Subject>
+                <div style={{width: '80px', height: '80px', 
+                display: 'flex', alignItems: 'center',
+                justifyContent: 'center', backgroundColor: '#94c973',
+                borderRadius: '50%', fontSize: '32px'}}>
+                  92%
+                </div> {/*지문이해도 값*/}
+              </div>
+              <div style={{display: 'flex', alignItems: 'center',justifyContent: 'space-between', width: '10vw'}}>
+                <NavLink to="/" style={{color: 'black', textDecoration: 'none'}}>
+                  <IconBox><img alt="" src ={HomeIcon} width='50px' height='50px' />홈</IconBox> {/*홈 아이콘*/}
+                </NavLink>
+                <NavLink to="/Review" style={{color: 'black', textDecoration: 'none'}}>
+                  <IconBox><img alt="" src ={ReviewIcon} width='50px' height='50px' />오답노트</IconBox> {/*오답노트 아이콘*/}
+                </NavLink>
               </div>
             </div>
             <div className='pointer'>요약문 정답</div>

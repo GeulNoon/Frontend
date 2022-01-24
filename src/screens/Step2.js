@@ -1,3 +1,4 @@
+//학습하기의 문제풀기:요약하기
 import React, { Component } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import { DragBlock } from '../components/DragBlock';
@@ -5,6 +6,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import NextIcon from "../image/NextIcon.png";
 
+//문단내용 박스
 const TextBox = styled.div`
   display: flex;
   align-items: center;
@@ -16,6 +18,7 @@ const TextBox = styled.div`
   border: none;
 `;
 
+//순서배열, 직접작성 선택 버튼
 const Button = styled.div`
   display: flex;
   align-items: center;
@@ -32,6 +35,7 @@ const Button = styled.div`
   border: 1px solid grey;
 `;
 
+//요약하기 제목 글씨(title(제목)과 sub(설명)을 요소로 전달받음)
 class Subject extends Component{
   render(){
     return (
@@ -43,7 +47,7 @@ class Subject extends Component{
   }
 }
 
-
+//메인함수
 class Step2 extends Component {
   state = {
     contents: [
@@ -55,8 +59,9 @@ class Step2 extends Component {
     isSelected: true
   }
   render() {
-    const { isSelected } = this.state;
+    const { isSelected } = this.state; /*순서배열, 직접작성 중 선택 여부*/
     let Input = null;
+    /*isSelected가 true일 시 순서배열, 아닐 시 직접작성*/
     if (isSelected) {
       Input = <DragBlock/>;
     } else {
@@ -65,7 +70,7 @@ class Step2 extends Component {
     }
     return (
       <div style={{display:'flex'}}>
-        <NavigationBar list={this.state.contents} prev={"Study"}/>
+        <NavigationBar list={this.state.contents} prev={"Study"}/>  {/*화면 좌측 단계이동 바*/}
         <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw'}}>
           <div style={{width: '80vw'}}>          
             <Subject title="2단계: 문단 요약하기" sub="문단별 주요 내용을 한 문장으로 요약해봅시다."></Subject>
@@ -81,7 +86,7 @@ class Step2 extends Component {
           <div style={{width: '80vw', display: 'flex', justifyContent: 'end'}}>
             <NavLink to="/Study/Step3">
               <img alt="" src ={NextIcon} width='37.5px' height='37.5px'/>               
-            </NavLink>
+            </NavLink> {/*다음 단계 버튼*/}
           </div>
         </div>
       </div>

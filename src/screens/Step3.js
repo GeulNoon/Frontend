@@ -1,3 +1,4 @@
+//학습하기의 문제풀기:어휘풀기
 import React, { Component } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import Choice from '../components/Choice';
@@ -6,6 +7,7 @@ import ShortAnswer from '../components/ShortAnswer';
 import { NavLink } from "react-router-dom";
 import NextIcon from "../image/NextIcon.png";
 
+//어휘문제 제목 글씨(title(제목)과 sub(설명)을 요소로 전달받음)
 class Subject extends Component{
   render(){
     return (
@@ -17,6 +19,7 @@ class Subject extends Component{
   }
 }
 
+//메인함수
 class Step3 extends Component {
   state = {
     contents: [
@@ -29,20 +32,20 @@ class Step3 extends Component {
   render() {
     return (
       <div style={{display:'flex'}}>
-        <NavigationBar list={this.state.contents} prev={"Study"}/>
+        <NavigationBar list={this.state.contents} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
         <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw'}}>
           <div style={{width: '80vw'}}>
             <Subject title="3단계: 지문 속 어휘 공부하기" sub="다양한 어휘 문제를 풀며 본문 속 어휘의 정확한 뜻을 습득해봅시다."></Subject>
           </div>
           <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
-            <Choice/>
-            <MultipleChoice/>
-            <ShortAnswer/>
+            <Choice/> {/*객관식 문제*/}
+            <MultipleChoice/> {/*동음이의어 문제*/}
+            <ShortAnswer/> {/*주관식 문제*/}
           </div>
           <div style={{width: '80vw', display: 'flex', justifyContent: 'end'}}>
             <NavLink to="/Study/Step4">
               <img alt="" src ={NextIcon} width='37.5px' height='37.5px'/>               
-            </NavLink>
+            </NavLink> {/*다음 단계 버튼*/}
           </div>
         </div>
       </div>

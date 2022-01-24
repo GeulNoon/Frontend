@@ -1,10 +1,11 @@
+//학습하기의 문제풀기:전문보기
 import React, { Component } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import NextIcon from "../image/NextIcon.png";
 
-
+//전문 박스
 const TextBox = styled.div`
   display: flex;
   align-items: center;
@@ -16,7 +17,7 @@ const TextBox = styled.div`
   border: none;
   margin-bottom: 20px;
 `;
-
+//전문보기 제목 글씨(title(제목)과 sub(설명)을 요소로 전달받음)
 class Subject extends Component{
   render(){
     return (
@@ -28,7 +29,7 @@ class Subject extends Component{
   }
 }
 
-
+//메인함수
 class Step1 extends Component {
   state = {
     contents: [
@@ -41,7 +42,7 @@ class Step1 extends Component {
   render() {
     return (
       <div style={{display:'flex'}}>
-        <NavigationBar list={this.state.contents} prev={"Study"}/>
+        <NavigationBar list={this.state.contents} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
         <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw'}}>
           <div style={{width: '80vw'}}>          
             <Subject title="1단계: 전문보기" sub="기사의 전문을 읽어봅시다."></Subject>
@@ -50,7 +51,7 @@ class Step1 extends Component {
           <div style={{width: '80vw', display: 'flex', justifyContent: 'end'}}>
             <NavLink to="/Study/Step2">
               <img alt="" src ={NextIcon} width='37.5px' height='37.5px'/>               
-            </NavLink>
+            </NavLink> {/*다음 단계 버튼*/}
           </div>
         </div>
       </div>
