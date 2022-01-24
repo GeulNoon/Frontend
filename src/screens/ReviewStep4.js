@@ -1,8 +1,10 @@
+//오답노트의 문제풀기:결과보기
 import React, { Component } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import styled from "styled-components";
 import '../App.css';
 
+//요약문 및 어휘문제 전반적인 해설 박스
 const TextBox = styled.div`
   display: flex;
   align-items: center;
@@ -13,6 +15,8 @@ const TextBox = styled.div`
   padding: 10px;
   margin-bottom: 10px;
 `;
+
+//'어휘문제 정답' 인덱스의 정답 박스
 const AnswerBox = styled.div`
   display: flex;
   align-items: center;
@@ -22,7 +26,7 @@ const AnswerBox = styled.div`
   padding-right: 10px;
   margin-bottom: 10px;
 `;
-
+//지문이해도 텍스트(name(사용자 이름)을 요소로 전달받음)
 class Subject extends Component{
   render(){
     return (
@@ -33,7 +37,7 @@ class Subject extends Component{
     );
   }
 }
-
+//메인함수
 class ReviewStep4 extends Component {
   state = {
     contents: [
@@ -46,7 +50,7 @@ class ReviewStep4 extends Component {
   render() {
     return (
       <div style={{display:'flex'}}>
-        <NavigationBar list={this.state.contents}  prev={"Review"}/>
+        <NavigationBar list={this.state.contents}  prev={"Review"}/> {/*화면 좌측 단계이동 바*/}
         <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw'}}>
           <div style={{width: '80vw'}}>
             <div style={{display: 'flex', alignItems: 'center'}}>
@@ -56,7 +60,7 @@ class ReviewStep4 extends Component {
               justifyContent: 'center', backgroundColor: '#94c973',
               borderRadius: '50%', fontSize: '32px'}}>
                 92%
-              </div>
+              </div>{/*지문이해도 값*/}
             </div>
             <div className='pointer'>요약문 정답</div>
             <TextBox>창조 도시는 인재들을 위한 문화 및 거주 환경의 창조성이 풍부하며, 혁신적이고도 유연한 경제 시스템을 구비하고 있는 도시이다.</TextBox>

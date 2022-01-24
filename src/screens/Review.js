@@ -1,7 +1,9 @@
+//오답노트 화면
 import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
+//테두리가 있는 박스 디자인(큰 틀)
 const BorderWrapper = styled.div`
   width: 850px;
   border: 1px solid #5b6d5b;
@@ -9,6 +11,7 @@ const BorderWrapper = styled.div`
   padding: 20px;
 `;
 
+//문제풀기, 해설보기 버튼 디자인
 const Button = styled.div`
   display: flex;
   align-items: center;
@@ -26,6 +29,7 @@ const Button = styled.div`
   border-radius: 3px;
 `;
 
+//제목(틀린문제 다시풀기) 글씨
 class Subject extends Component{
   render(){
     return (
@@ -36,6 +40,7 @@ class Subject extends Component{
   }
 }
 
+//학습이력 요소(제목과 문제풀기, 해설보기 버튼으로 이뤄져있음)
 class Contents extends Component{
   render(){
     return (
@@ -62,6 +67,7 @@ class Contents extends Component{
   }
 }
 
+//메인 함수
 class Review extends Component {
   render() {
     return (
@@ -69,6 +75,7 @@ class Review extends Component {
         <div style={{width: '900px'}}>
           <Subject title="틀린문제 다시풀기"></Subject>
           <BorderWrapper>
+            {/*제목을 title로 전달*/}
             <Contents title="영국 총리 '봉쇄 중 술파티' 사과 안 통하나…가족 확진까지"/>
             <Contents title="영국 총리 '봉쇄 중 술파티' 사과 안 통하나…가족 확진까지"/>
           </BorderWrapper>
