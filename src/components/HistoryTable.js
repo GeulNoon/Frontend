@@ -1,3 +1,4 @@
+//학습하기의 더보기 학습이력 테이블
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
@@ -15,6 +16,7 @@ import { unstable_createMuiStrictModeTheme } from '@material-ui/core/styles';
 const theme = unstable_createMuiStrictModeTheme();
 //npm install @material-ui/core recharts
 
+//임시 데이터
 const users = [
   {
     'id': 1,
@@ -59,6 +61,7 @@ function HistoryTable() {
             </TableRow>
           </TableHead>
           <TableBody>
+            {/*학습 이력 요소*/}
             {users
               .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
               .map(({ id, title, date, step2, step3 }, i) => (
@@ -69,7 +72,7 @@ function HistoryTable() {
                   <TableCell align="left">
                     <NavLink style={{ color: 'black'}} to={{pathname: `/Study/Step4`}}>
                       {title}
-                    </NavLink>
+                    </NavLink> {/*제목 클릭시 학습결과 화면으로 이동*/}
                 </TableCell>
                   <TableCell align="center">{date}</TableCell>
                   <TableCell align="center">{step2}</TableCell>

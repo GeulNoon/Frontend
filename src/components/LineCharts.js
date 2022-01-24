@@ -1,31 +1,33 @@
+//학습결과 정답률 그래프
 import React from 'react';
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
+//임시 데이터
 const data = [
   {
     name: '11/14',
-    uv: 4000,
-    pv: 2400,
+    Step2: 80,
+    Step3: 75,
   },
   {
     name: '11/15',
-    uv: 3000,
-    pv: 1398,
+    Step2: 77,
+    Step3: 100,
   },
   {
     name: '11/16',
-    uv: 2000,
-    pv: 9800,
+    Step2: 85,
+    Step3: 50,
   },
   {
     name: '11/17',
-    uv: 2780,
-    pv: 3908,
+    Step2: 96,
+    Step3: 80,
   },
   {
     name: '11/18',
-    uv: 1890,
-    pv: 4800,
+    Step2: 90,
+    Step3: 80,
   },
 ];
 
@@ -39,8 +41,8 @@ const LineCharts = () => {
         >
           <XAxis dataKey="name" tick={{ fill: 'black' }}/>
           <Tooltip />
-          <Line type="linear" dataKey="pv" stroke="#a41f1f" />
-          <Line type="linear" dataKey="uv" stroke="#3b583b" />
+          <Line type="linear" dataKey="Step2" stroke="#a41f1f" />
+          <Line type="linear" dataKey="Step3" stroke="#3b583b" />
         </LineChart>
       </ResponsiveContainer>
     );

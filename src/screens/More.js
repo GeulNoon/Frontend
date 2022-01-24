@@ -1,5 +1,8 @@
+//학습결과의 더보기 화면
 import React, { Component } from 'react';
 import HistoryTable from '../components/HistoryTable';
+
+//메인함수
 class More extends Component {
   render() {
     return (
@@ -10,7 +13,7 @@ class More extends Component {
             backgroundColor: '#eff0ef', marginBottom: '20px'}}>
             <h5>학습이력</h5>
           </div>
-          <HistoryTable/>
+          <HistoryTable/>{/*학습이력 목록*/}
         </div>
       </div>
     );

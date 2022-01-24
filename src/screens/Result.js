@@ -1,3 +1,4 @@
+//학습결과 화면
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { NavLink } from "react-router-dom";
@@ -7,6 +8,7 @@ import ResultIcon3 from '../image/ResultIcon3.png'
 import BarCharts from '../components/BarCharts';
 import LineCharts from '../components/LineCharts';
 
+//화면 상단의 전체학습, 평균어휘 정답률, 평균 지문 이해도 박스 디자인
 const ResultSummWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -18,6 +20,7 @@ const ResultSummWrapper = styled.div`
   background-color: #eff0ef;
 `;
 
+//화면 상단 3개 박스
 class ResultSumm extends Component{
   render(){
     return (
@@ -32,6 +35,7 @@ class ResultSumm extends Component{
   }
 }
 
+//제목(학습통계) 글씨
 class Subject extends Component{
   render(){
     return (
@@ -42,6 +46,7 @@ class Subject extends Component{
   }
 }
 
+//학습이력 요소(제목(title), 날짜(date)로 이루어져있음)
 class History extends Component{
   render(){
     return (
@@ -53,6 +58,7 @@ class History extends Component{
   }
 }
 
+//메인 함수
 class Result extends Component {
   render() {
     return (
@@ -66,8 +72,8 @@ class Result extends Component {
           <div style={{width: '600px'}}>
             <Subject title="학습 통계"></Subject>
             <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center',width: '600px', height: '230px'}}>
-              <BarCharts/>
-              <LineCharts/>
+              <BarCharts/>{/*우측 그래프*/}
+              <LineCharts/>{/*좌측 그래프*/}
             </div>
           </div>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',width: '300px', paddingTop: '50px'}}>
@@ -80,7 +86,7 @@ class Result extends Component {
             <h6 style={{width: '250px', margin: '0px', textAlign: 'right'}}>
               <NavLink style={{ color: 'grey'}} to="More">
               더보기...
-              </NavLink>
+              </NavLink> {/*더보기 버튼(클릭 시 더보기 화면으로 이동)*/}
             </h6>
           </div>
         </div>

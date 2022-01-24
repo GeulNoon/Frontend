@@ -1,6 +1,8 @@
+//학습결과 학습횟수 그래프
 import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
+//임시 데이터
 const data = [
   {
     name: '11/14',
