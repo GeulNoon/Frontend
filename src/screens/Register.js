@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import "../styles.css";
 import user from "../image/user.png";
+import axios from "axios"
+import {useNavigate} from 'react-router-dom';
 
 function Register() {
+  const navigate = useNavigate();
+  const selectList = [{id: 1, title: "초등학교"}, 
+                      {id: 2, title: "중학교"}, 
+                      {id: 3, title: "고등학교"},
+                      {id: 4, title: "대학교"}, 
+                      {id: 5, title: "직장인"}, 
+                      {id: 6, title: "기타"}];
+  const [Selected, setSelected] = useState("");
+
+  const handleSelect = (e) => {
+    setSelected(e.target.value);
+  };
+
   return (
   <Formik
-    initialValues={{ email: "", password: "", nickname: ""}}
-
+    initialValues={{ email: "", password: "", confirmPassword: "", nickname: "", grade: ""}}
     onSubmit={(values, { setSubmitting }) => {
       setTimeout(() => {
-        console.log("Logging in", values);
+        axios({
+          method: "post",
+          url: "http://127.0.0.1:8000/api/signup",
+          headers: { "Content-Type": "application/json" },
+          data: { "email": values['email'],"name": values['nickname'], "password": values['password'], "affiliation": Selected, "age": values['grade']},
+        }).then(() => navigate('/Study'))
+        .catch(error => {
+          alert('회원가입 실패!\n이메일 중복 여부를 확인해주세요.')
+        });
         setSubmitting(false);
       }, 500);
     }}
@@ -113,14 +135,13 @@ function Register() {
               <div className="container3">
                 <div className="container4">
                   <label htmlFor="email">소속</label>
-                    <select>
-			                <option key="Elementary" value="Elementary">초등학교 </option>
-                      <option key="Middle" value="Middle">중학교</option>
-		      	          <option key="High" value="High">고등학교</option>
-                      <option key="University" value="University">대학교</option>
-                      <option key="Worker" value="Worker">직장인</option>
-                      <option key="etc" value="etc">기타</option>
-	      	          </select>
+                  <select onChange={handleSelect} value={Selected}>
+                    {selectList.map((item) => (
+                      <option value={item.id} key={item.id}>
+                        {item.title}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className="container5">
                   <label htmlFor="email">학년</label>

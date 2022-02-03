@@ -3,6 +3,7 @@ import { NavLink} from 'react-router-dom'
 import { Formik } from "formik";
 import * as Yup from "yup";
 import "../styles.css";
+import axios from "axios";
 
 function Login() {
   return (
@@ -11,7 +12,20 @@ function Login() {
 
     onSubmit={(values, { setSubmitting }) => {
       setTimeout(() => {
-        console.log("Logging in", values);
+        axios({
+          method: "post",
+          url: "http://127.0.0.1:8000/api/login",
+          headers: { "Content-Type": "application/json" },
+          data: { "email": values['email'],"password": values['password']},
+        }).then((res)=> {
+          if (!res.data['result']){
+            alert('로그인 실패!')
+          }
+          else{
+            sessionStorage.setItem('user', values['email'])
+            window.location.replace("/")
+          }
+        })
         setSubmitting(false);
       }, 500);
     }}

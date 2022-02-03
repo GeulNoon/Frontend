@@ -21,6 +21,11 @@ const Button = styled.div`
 //메인 함수(div는 요소 배치을 위해 불가피하게 많이 사용하게 되었습니다...기능과 크게 상관이 없어 무시해도 괜찮습니다)
 class MyPage extends Component {
   render() {
+    let userinfo = null;
+    if(sessionStorage.getItem('user') === null)
+      userinfo = "비회원"
+    else
+      userinfo = sessionStorage.getItem('user')
     return (
       <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '450px'}}>
         <div style={{display: 'flex', width: '800px'}}>
@@ -39,7 +44,7 @@ class MyPage extends Component {
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around',width: '500px', height: '300px',borderTop: '1px solid #e5e5e5'}}>
               <div style={{display: 'flex', width: '500px', alignItems: 'center'}}>
                 <h5 style={{margin: '0px', width: '100px'}}>이메일</h5>
-                <input readOnly value={"이메일"} style={{margin: '0px'}}/> {/*이메일 창, 쓰기 불가능*/}
+                <input readOnly value={userinfo} style={{margin: '0px'}}/> {/*이메일 창, 쓰기 불가능*/}
               </div>
               <div style={{display: 'flex', width: '500px', alignItems: 'center'}}>
                 <h5 style={{margin: '0px', width: '100px'}}>닉네임</h5>

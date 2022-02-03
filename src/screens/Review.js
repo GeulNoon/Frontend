@@ -69,6 +69,21 @@ class Contents extends Component{
 
 //메인 함수
 class Review extends Component {
+  state = {
+      posts: []
+  };
+
+  async componentDidMount() {
+      try {
+          const res = await fetch('http://127.0.0.1:8000/api/');
+          const posts = await res.json();
+          this.setState({
+              posts
+          });
+      } catch (e) {
+          console.log(e);
+      }
+  }
   render() {
     return (
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
@@ -78,6 +93,14 @@ class Review extends Component {
             {/*제목을 title로 전달*/}
             <Contents title="영국 총리 '봉쇄 중 술파티' 사과 안 통하나…가족 확진까지"/>
             <Contents title="영국 총리 '봉쇄 중 술파티' 사과 안 통하나…가족 확진까지"/>
+            <div>
+                {this.state.posts.map(item => (
+                    <div key={item.email}>
+                        <h1>{item.email}</h1>
+                        <span>{item.name}</span>
+                    </div>
+                ))}
+            </div>
           </BorderWrapper>
         </div>
       </div>

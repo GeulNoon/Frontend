@@ -66,13 +66,22 @@ class App extends Component {
     ]
   }
   render() {
+    let signinButton = null;
+    if(sessionStorage.getItem('user') === null)
+      signinButton = <NavLink style={{}} to="/Login" >
+        <button style={{border: 'none', backgroundColor: 'white', color: 'grey', }}>로그인</button>    
+        </NavLink>
+    else
+      signinButton = <button style={{border: 'none', backgroundColor: 'white', color: 'grey', }}
+          onClick={() => {sessionStorage.removeItem('user'); window.location.replace("/")}}>로그아웃
+        </button>    
     return (
       <BrowserRouter> 
         <div>
           <div style={{position: 'fixed', height: '75px', width: '100%', backgroundColor: 'white', zIndex: 1}}>
-            <h5 style={{margin: 0, textAlign: 'right'}}>
-              <NavLink style={{color: 'grey', textDecoration: 'none'}} to="/Login" >로그인</NavLink>
-            </h5>
+            <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+              {signinButton}
+            </div>
             <div style={{display: 'flex', alignItems: 'flex-end'}}>
               <Subject></Subject>
               <TOC data={this.state.contents}></TOC>
