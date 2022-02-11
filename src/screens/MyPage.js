@@ -53,8 +53,6 @@ class MyPage extends Component {
               <div style={{display: 'flex', width: '500px', alignItems: 'center'}}>
                 <h5 style={{margin: '0px', width: '100px'}}>소속</h5>
                 <input readOnly value={"소속"} style={{margin: '0px'}}/> {/*소속 창, 쓰기 불가능*/}
-                <h5 style={{margin: '0px', width: '100px', marginLeft: '5px'}}>학년</h5>
-                <input readOnly value={"학년"} style={{margin: '0px'}}/> {/*학년 창, 쓰기 불가능*/}
               </div>
               <div style={{display: 'flex', width: '500px', justifyContent: 'end'}}>
                 <Button>회원정보 수정</Button> {/*회원정보 수정 버튼, 아직 아무 기능 X*/}

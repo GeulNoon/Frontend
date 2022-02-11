@@ -24,7 +24,7 @@ class Subject extends Component{
     return (
       <header style={{display: 'inline'}}>
         <h1 style={{display: 'inline'}}>
-            <NavLink style={{color: 'black', textDecoration: 'none', marginRight: 160}} 
+            <NavLink style={{color: 'black', textDecoration: 'none', marginRight: 160, marginLeft: 20}} 
             to="/" >글눈
             </NavLink>
         </h1>
@@ -69,10 +69,10 @@ class App extends Component {
     let signinButton = null;
     if(sessionStorage.getItem('user') === null)
       signinButton = <NavLink style={{}} to="/Login" >
-        <button style={{border: 'none', backgroundColor: 'white', color: 'grey', }}>로그인</button>    
+        <button style={{border: 'none', backgroundColor: 'white', color: 'grey', marginRight:20,}}>로그인</button>    
         </NavLink>
     else
-      signinButton = <button style={{border: 'none', backgroundColor: 'white', color: 'grey', }}
+      signinButton = <button style={{border: 'none', backgroundColor: 'white', color: 'grey', marginRight:20,}}
           onClick={() => {sessionStorage.removeItem('user'); window.location.replace("/")}}>로그아웃
         </button>    
     return (
