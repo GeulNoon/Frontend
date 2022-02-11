@@ -1,11 +1,8 @@
-//학습하기의 문제풀기:결과보기
+//오답노트의 문제풀기:결과보기
 import React, { Component } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import styled from "styled-components";
 import '../App.css';
-import { NavLink } from "react-router-dom";
-import HomeIcon from '../image/HomeIcon.png';
-import ReviewIcon from '../image/ReviewIcon.png';
 
 //요약문 및 어휘문제 전반적인 해설 박스
 const TextBox = styled.div`
@@ -29,14 +26,6 @@ const AnswerBox = styled.div`
   padding-right: 10px;
   margin-bottom: 10px;
 `;
-
-//홈, 오답노트 아이콘 박스
-const IconBox =  styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 //지문이해도 텍스트(name(사용자 이름)을 요소로 전달받음)
 class Subject extends Component{
   render(){
@@ -48,41 +37,30 @@ class Subject extends Component{
     );
   }
 }
-
 //메인함수
-class Step4 extends Component {
+class ReviewStep4 extends Component {
   state = {
     contents: [
-      {id: 'Step1', title: '1단계', desc: '전문보기', type: 1},
-      {id: 'Step2', title: '2단계', desc: '요약하기', type: 1},
-      {id: 'Step3', title: '3단계', desc: '어휘풀기', type: 1},
-      {id: 'Step4', title: '4단계', desc: '결과보기', type: 0},
+      {id: 'ReviewStep1', title: '1단계', desc: '전문보기', type: 1},
+      {id: 'ReviewStep2', title: '2단계', desc: '요약하기', type: 1},
+      {id: 'ReviewStep3', title: '3단계', desc: '어휘풀기', type: 1},
+      {id: 'ReviewStep4', title: '4단계', desc: '결과보기', type: 0},
     ]
   }
   render() {
     return (
       <div style={{display:'flex'}}>
-        <NavigationBar list={this.state.contents} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
+        <NavigationBar list={this.state.contents}  prev={"Review"}/> {/*화면 좌측 단계이동 바*/}
         <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw'}}>
           <div style={{width: '80vw'}}>
-            <div style={{display: 'flex'}}>
-              <div style={{display: 'flex', alignItems: 'center',width: '70vw'}}>
-                <Subject name="이화연"></Subject>
-                <div style={{width: '80px', height: '80px', 
-                display: 'flex', alignItems: 'center',
-                justifyContent: 'center', backgroundColor: '#94c973',
-                borderRadius: '50%', fontSize: '32px'}}>
-                  92%
-                </div> {/*지문이해도 값*/}
-              </div>
-              <div style={{display: 'flex', alignItems: 'center',justifyContent: 'space-between', width: '10vw'}}>
-                <NavLink to="/" style={{color: 'black', textDecoration: 'none'}}>
-                  <IconBox><img alt="" src ={HomeIcon} width='50px' height='50px' />홈</IconBox> {/*홈 아이콘*/}
-                </NavLink>
-                <NavLink to="/Review" style={{color: 'black', textDecoration: 'none'}}>
-                  <IconBox><img alt="" src ={ReviewIcon} width='50px' height='50px' />오답노트</IconBox> {/*오답노트 아이콘*/}
-                </NavLink>
-              </div>
+            <div style={{display: 'flex', alignItems: 'center'}}>
+              <Subject name="이화연"></Subject>
+              <div style={{width: '80px', height: '80px', 
+              display: 'flex', alignItems: 'center',
+              justifyContent: 'center', backgroundColor: '#94c973',
+              borderRadius: '50%', fontSize: '32px'}}>
+                92%
+              </div>{/*지문이해도 값*/}
             </div>
             <div className='pointer'>요약문 정답</div>
             <TextBox>창조 도시는 인재들을 위한 문화 및 거주 환경의 창조성이 풍부하며, 혁신적이고도 유연한 경제 시스템을 구비하고 있는 도시이다.</TextBox>
@@ -97,4 +75,4 @@ class Step4 extends Component {
   }
 }
 
-export default Step4;
+export default ReviewStep4;

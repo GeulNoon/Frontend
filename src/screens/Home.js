@@ -1,7 +1,9 @@
+//처음들어 갔을 때 기본 화면(홈화면)
 import React ,{Component} from 'react';
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
+//중앙에 배치된 4개의 버튼 디자인
 const Button = styled.button`
   width: 200px;
   height: 200px;
@@ -17,6 +19,7 @@ const Button = styled.button`
   margin: 50px;
 `;
 
+//4개 버튼 안에 누르면 해당 링크로 가는 NavLink를 배치하여 배열에 저장
 class TOC extends Component{
   render(){
     var list = [];
@@ -37,8 +40,10 @@ class TOC extends Component{
   }
 }
 
+//메인 함수
 class Home extends Component {
   state = {
+    //TOC에 전달해줄 요소
     contents: [
       {id: 'Study', title: '학습하기', desc: '학습하기 기능', color: '#5b6d5b'},
       {id: 'Review', title: '오답노트', desc: '오답노트 기능', color: '#94c973'},
@@ -49,7 +54,7 @@ class Home extends Component {
 
   render() {
     return (
-        <div style={{display: 'flex', alignItems:'center', height: '80vh'}}>
+        <div style={{display: 'flex', alignItems:'center', justifyContent: 'space-around', height: '80vh'}}>
         <TOC data={this.state.contents}></TOC>
         </div>
     )

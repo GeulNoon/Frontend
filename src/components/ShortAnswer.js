@@ -1,8 +1,9 @@
+//어휘풀기 주관식 문제(핵심 키워드 쓰기)
 import React, { Component } from 'react';
 
 class ShortAnswer extends Component {
     state = {
-        example: ["나는","_","를 ","_","좋아한다"],
+        example: ["나는","_","를 ","_","좋아한다"], //예시 지문
       }
     render() {
       return (
@@ -21,7 +22,7 @@ class ShortAnswer extends Component {
                     value === '_' ? <input key = {i} placeholder='단어 입력' 
                     style={{width: '60px', height: '20px', marginBottom: '0px', borderRadius: '0px', padding: '5px'}}/>
                     :value
-                ))}
+                ))} {/*전달받은 값이 빈칸(_)일 시 입력창 출력*/}
             </div>
           </div>
       );
