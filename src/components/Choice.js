@@ -1,18 +1,15 @@
 //어휘풀기 객관식 문제(뜻 매칭 등)
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { RadioGroup, FormControl, FormControlLabel, Radio } from '@mui/material';
 
-class Choice extends Component {
+const Choice = (props) => {
     //임시 데이터
-    state = {
-        selectList: ["1","2","3","4","5"],
-        example: ["창조", "전망", "가치", "도시", "인재"],
-      }
+    const [selectList] = useState(["1","2","3","4","5"]);
+    const [example] = useState(["창조", "전망", "가치", "도시", "인재"]);
     //선택한 번호 콘솔창에 출력(선택한 값 저장용 함수)
-    handleChange = (e) => {
-        console.log(`선택한 값 : ${e.target.value}`);
+    const handleChange = (e) => {
+        props.setAnswer(props.answer.map(ans => ans.id === props.id ? {...ans, value: e.target.value} : ans))
     }; 
-    render() {
       return (
           <div style={{marginTop: 10, marginBottom:10}}>
             다음 단어 중 빈칸에 들어갈 수 있는 단어를 고르시오. {/*문제 제시문*/}
@@ -36,11 +33,11 @@ class Choice extends Component {
                     aria-label="select"
                     defaultValue=""
                     name="radio-buttons-group"
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                 >
-                    {this.state.selectList.map((value, i) => (
+                    {selectList.map((value, i) => (
                     <div style={{width: '100px'}} key={i}>
-                        <FormControlLabel value={value} control={<Radio color='success' />} label={value+'. '+this.state.example[i]} />
+                        <FormControlLabel value={value} control={<Radio color='success' />} label={value+'. '+example[i]} />
                     </div>
                     ))}
                 </RadioGroup>
@@ -48,7 +45,6 @@ class Choice extends Component {
             </div>
           </div>
       );
-    }
   }
   
   export default Choice;

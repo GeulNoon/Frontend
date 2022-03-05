@@ -5,7 +5,7 @@ import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 //블럭 요소
-const MovableItem = ({name, setItems, item}) => {
+const MovableItem = ({name, setItems, setTexts,item}) => {
     //다른 박스로 블럭 옮길 때 기존 박스에서 해당 블럭 제거 후 다른 박스 가장 뒤에 배치
     const changeItemColumn = (currentItem, columnName) => {
         const newList = item.filter((it) => it.name !== currentItem.name);
@@ -16,6 +16,10 @@ const MovableItem = ({name, setItems, item}) => {
             column: columnName,
         }
         setItems(newList.concat(newItem))
+        setTexts(newList.concat(newItem).filter((i)=>i.column === 'Answer')
+        .map((i) => (
+            i.name.concat(" ")
+        )))
         /*
         setItems((prevState) => {
             return prevState.map(e => {
@@ -68,7 +72,7 @@ const Column = ({children, className, title}) => {
     )
 }
 
-export const DragBlock = () => {
+export const DragBlock = (props) => {
     //임시 데이터(요약문 결과 입력)
     const [items, setItems] = useState([
         {id: 1, name: 'Item 1', column: 'Example'},
@@ -85,11 +89,19 @@ export const DragBlock = () => {
         return items
         .filter((item)=>item.column === columnName)
         .map((item) => (
-            <MovableItem key={item.id} name={item.name} setItems={setItems} item={items}/>
+            <MovableItem key={item.id} name={item.name} setItems={setItems} setTexts={props.setText} item={items}/>
         ))
     }
+    /*
+    const getTextFromAnswer = () =>{
+        props.setText(items.filter((item)=>item.column === 'Answer')
+        .map((item) => (
+            item.name.concat(" ")
+        )))
+    }
+    */
     return (
-        <div className="container">
+        <div className="container" style={{ alignItems: 'flex-end'}}>
             {/* Wrap components that will be "draggable" and "droppable" */}
             <DndProvider backend={HTML5Backend}>
                 <Column title='Example' className='column first-column'>
