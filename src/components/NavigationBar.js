@@ -58,6 +58,7 @@ class TOC extends Component{
 class NavigationBar extends Component {
     render() {
     const {list, prev} = this.props;
+    const {title} = this.props;
       return (
           <div style={{width: '10vw',height: '90%',backgroundColor: '#a2bea2', 
           display: 'flex',flexDirection: 'column', 
@@ -67,12 +68,14 @@ class NavigationBar extends Component {
               alignItems:'center', 
               justifyContent: 'center', 
               height: 100, 
-              width: '9vw', 
+              width: '8vw', 
               border: '2px solid black',
-              marginTop: '5vh',
-              marginBottom: '10vh'
+              marginTop: '8vh',
+              marginBottom: '10vh',
+              padding: '0px 10px 0px',
+              fontWeight: 'bold',
               }}>
-              기사 제목
+              {title}
             </div>
             <TOC data={list} prev={prev}></TOC>
         </div>

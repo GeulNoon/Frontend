@@ -47,7 +47,7 @@ const MovableItem = ({name, setItems, item}) => {
     const opacity = isDragging ? 0.4 : 1;
 
     return (
-        <div ref={drag} className='movable-item' style={{  opacity }}>
+        <div ref={drag} className='movable-item' style={{ opacity }}>
             {name}
         </div>
     )
@@ -68,18 +68,19 @@ const Column = ({children, className, title}) => {
     )
 }
 
-export const DragBlock = () => {
+export const DragBlock = (data) => {
     //임시 데이터(요약문 결과 입력)
-    const [items, setItems] = useState([
-        {id: 1, name: 'Item 1', column: 'Example'},
-        {id: 2, name: 'Item 2', column: 'Example'},
-        {id: 3, name: 'Item 3', column: 'Example'},
-        {id: 4, name: 'Item 4', column: 'Example'},
-        {id: 5, name: 'Item 5', column: 'Example'},
-        {id: 6, name: 'Item 6', column: 'Example'},
-        {id: 7, name: 'Item 7', column: 'Example'},
-        {id: 8, name: 'Item 8', column: 'Example'},
-    ]);
+    let arr = [];
+    const sum = data['data'];
+    for (let i = 0; i < sum.length; i++) {
+        arr.push({
+            id: i,
+            name: sum[i],
+            column: 'Example'
+        });
+    }
+
+    const [items, setItems] = useState(arr);
     //입력받은 데이터 토대로 드래그 가능한 블럭 생성
     const returnItemsForColumn = (columnName) => {
         return items
@@ -87,6 +88,7 @@ export const DragBlock = () => {
         .map((item) => (
             <MovableItem key={item.id} name={item.name} setItems={setItems} item={items}/>
         ))
+        
     }
     return (
         <div className="container">
