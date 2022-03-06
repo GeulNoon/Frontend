@@ -1,7 +1,8 @@
 //내정보 화면
-import React, { Component } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import user from "../image/user.png";
 import styled from 'styled-components';
+import axios from "axios"
 
 //회원정보 수정, 회원 탈퇴 버튼 디자인
 const Button = styled.div`
@@ -19,13 +20,14 @@ const Button = styled.div`
 `;
 
 //메인 함수(div는 요소 배치을 위해 불가피하게 많이 사용하게 되었습니다...기능과 크게 상관이 없어 무시해도 괜찮습니다)
-class MyPage extends Component {
-  render() {
-    let userinfo = null;
-    if(sessionStorage.getItem('user') === null)
-      userinfo = "비회원"
-    else
-      userinfo = sessionStorage.getItem('user')
+function MyPage () {
+    const [User, setUser] = useState(' ');
+    useEffect(async () => {
+      const response = await axios.get(`http://127.0.0.1:8000/api/MyPage`, {params: {'email': sessionStorage.getItem('user')}});
+      setUser(response.data);
+      console.log(response.data);
+    },[]);
+
     return (
       <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '450px'}}>
         <div style={{display: 'flex', width: '800px'}}>
@@ -44,17 +46,15 @@ class MyPage extends Component {
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around',width: '500px', height: '300px',borderTop: '1px solid #e5e5e5'}}>
               <div style={{display: 'flex', width: '500px', alignItems: 'center'}}>
                 <h5 style={{margin: '0px', width: '100px'}}>이메일</h5>
-                <input readOnly value={userinfo} style={{margin: '0px'}}/> {/*이메일 창, 쓰기 불가능*/}
+                <input readOnly value={sessionStorage.getItem('user')} style={{margin: '0px'}}/> {/*이메일 창, 쓰기 불가능*/}
               </div>
               <div style={{display: 'flex', width: '500px', alignItems: 'center'}}>
                 <h5 style={{margin: '0px', width: '100px'}}>닉네임</h5>
-                <input readOnly value={"닉네임"} style={{margin: '0px'}}/> {/*닉네임 창, 쓰기 불가능*/}
+                <input readOnly value={User.nickname} style={{margin: '0px'}}/> {/*닉네임 창, 쓰기 불가능*/}
               </div>
               <div style={{display: 'flex', width: '500px', alignItems: 'center'}}>
-                <h5 style={{margin: '0px', width: '100px'}}>소속</h5>
-                <input readOnly value={"소속"} style={{margin: '0px'}}/> {/*소속 창, 쓰기 불가능*/}
-                <h5 style={{margin: '0px', width: '100px', marginLeft: '5px'}}>학년</h5>
-                <input readOnly value={"학년"} style={{margin: '0px'}}/> {/*학년 창, 쓰기 불가능*/}
+                <h5 style={{margin: '0px', width: '100px'}}>생년월일</h5>
+                <input readOnly value={User.birthyear} style={{margin: '0px'}}/> {/*소속 창, 쓰기 불가능*/}
               </div>
               <div style={{display: 'flex', width: '500px', justifyContent: 'end'}}>
                 <Button>회원정보 수정</Button> {/*회원정보 수정 버튼, 아직 아무 기능 X*/}
@@ -65,7 +65,6 @@ class MyPage extends Component {
         </div>
       </div>
     );
-  }
 }
 
 export default MyPage;

@@ -43,7 +43,7 @@
 }
 
 .column {
-  height: 100px;
+  height: 400px;
   width: 80vw;
   margin: 20px;
   display: flex;
@@ -63,13 +63,14 @@
 
 .movable-item {
   background-color: #ffffff;
-  height: 30px;
-  width: 75px;
+  height: 40px;
+  width: 170px;
   margin: 10px auto;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 2px solid grey;
+  text-align: center;
 }
 
 .pointer {

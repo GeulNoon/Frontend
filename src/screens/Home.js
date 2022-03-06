@@ -54,7 +54,7 @@ class Home extends Component {
 
   render() {
     return (
-        <div style={{display: 'flex', alignItems:'center', height: '80vh'}}>
+        <div style={{display: 'flex', alignItems:'center', justifyContent: 'space-around', height: '80vh'}}>
         <TOC data={this.state.contents}></TOC>
         </div>
     )

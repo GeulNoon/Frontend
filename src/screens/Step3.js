@@ -47,7 +47,7 @@ const Step3  = () => {
   const [answer, setAnswer] = useState([
     {id: 1, value: ''},
     {id: 2, value: ''},
-  ]);
+  ]); //사용자가 입력한 답. 문제 마다 value에 저장
     return (
       <div style={{display:'flex'}}>
         <NavigationBar list={contents} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
@@ -58,7 +58,7 @@ const Step3  = () => {
           <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
             <Choice  answer = {answer} setAnswer = {setAnswer} id = {1}/> {/*객관식 문제*/}
             <MultipleChoice answer = {answer} setAnswer = {setAnswer} id = {2}/> {/*동음이의어 문제*/}
-            {answer.map(ans => ans.value)}
+            {answer.map(ans => ans.value)} {/*사용자 답 확인하기 위해 임시로 넣었습니다*/}
           </div>
           <div style={{width: '80vw', display: 'flex', flexDirection: 'column', alignItems: 'flex-end'}}>
             <SubmitButton>제출하기</SubmitButton>

@@ -17,6 +17,8 @@ import ReviewStep3 from './screens/ReviewStep3';
 import ReviewStep4 from './screens/ReviewStep4';
 import Answer from './screens/Answer';
 import More from './screens/More';
+import PrivateRoute from './components/PrivateRoute'
+import PublicRoute from './components/PublicRoute'
 
 class Subject extends Component{
   render(){
@@ -24,7 +26,7 @@ class Subject extends Component{
     return (
       <header style={{display: 'inline'}}>
         <h1 style={{display: 'inline'}}>
-            <NavLink style={{color: 'black', textDecoration: 'none', marginRight: 160}} 
+            <NavLink style={{color: 'black', textDecoration: 'none', marginRight: 160, marginLeft: 20}} 
             to="/" >글눈
             </NavLink>
         </h1>
@@ -69,10 +71,10 @@ class App extends Component {
     let signinButton = null;
     if(sessionStorage.getItem('user') === null)
       signinButton = <NavLink style={{}} to="/Login" >
-        <button style={{border: 'none', backgroundColor: 'white', color: 'grey', }}>로그인</button>    
+        <button style={{border: 'none', backgroundColor: 'white', color: 'grey', marginRight:20,}}>로그인</button>    
         </NavLink>
     else
-      signinButton = <button style={{border: 'none', backgroundColor: 'white', color: 'grey', }}
+      signinButton = <button style={{border: 'none', backgroundColor: 'white', color: 'grey', marginRight:20,}}
           onClick={() => {sessionStorage.removeItem('user'); window.location.replace("/")}}>로그아웃
         </button>    
     return (
@@ -89,23 +91,23 @@ class App extends Component {
           </div>
           <div style={{paddingTop: '75px'}}>
           <Routes> 
-            <Route exact path="*" element={<Home/>}/> 
-            <Route path="/Study/*" element={<Study/>}/>
-            <Route path="/Review/*" element={<Review/>}/>
-            <Route path="/Result" element={<Result/>}/>
-            <Route path="/MyPage" element={<MyPage/>}/>
-            <Route path="/Login" element={<Login/>}/>
-            <Route path="/Register" element={<Register/>}/>
-            <Route path="/Study/Step1" element={<Step1/>}/>
-            <Route path="/Study/Step2" element={<Step2/>}/>
-            <Route path="/Study/Step3" element={<Step3/>}/>
-            <Route path="/Study/Step4" element={<Step4/>}/>
-            <Route path="/Review/ReviewStep1" element={<ReviewStep1/>}/>
-            <Route path="/Review/ReviewStep2" element={<ReviewStep2/>}/>
-            <Route path="/Review/ReviewStep3" element={<ReviewStep3/>}/>
-            <Route path="/Review/ReviewStep4" element={<ReviewStep4/>}/>
-            <Route path="/Review/Answer" element={<Answer/>}/>
-            <Route path="/Result/More" element={<More/>}/>
+          <Route exact path="*" element={<Home/>}/> 
+          <Route path="/Study/*" element={<PrivateRoute><Study/></PrivateRoute>}/>
+            <Route path="/Review/*" element={<PrivateRoute><Review/></PrivateRoute>}/>
+            <Route path="/Result" element={<PrivateRoute><Result/></PrivateRoute>}/>
+            <Route path="/MyPage" element={<PrivateRoute><MyPage/></PrivateRoute>}/>
+            <Route path="/Login" element={<PublicRoute><Login/></PublicRoute>}/>
+            <Route path="/Register" element={<PublicRoute><Register/></PublicRoute>}/>
+            <Route path="/Study/Step1" element={<PrivateRoute><Step1/></PrivateRoute>}/>
+            <Route path="/Study/Step2" element={<PrivateRoute><Step2/></PrivateRoute>}/>
+            <Route path="/Study/Step3" element={<PrivateRoute><Step3/></PrivateRoute>}/>
+            <Route path="/Study/Step4" element={<PrivateRoute><Step4/></PrivateRoute>}/>
+            <Route path="/Review/ReviewStep1" element={<PrivateRoute><ReviewStep1/></PrivateRoute>}/>
+            <Route path="/Review/ReviewStep2" element={<PrivateRoute><ReviewStep2/></PrivateRoute>}/>
+            <Route path="/Review/ReviewStep3" element={<PrivateRoute><ReviewStep3/></PrivateRoute>}/>
+            <Route path="/Review/ReviewStep4" element={<PrivateRoute><ReviewStep4/></PrivateRoute>}/>
+            <Route path="/Review/Answer" element={<PrivateRoute><Answer/></PrivateRoute>}/>
+            <Route path="/Result/More" element={<PrivateRoute><More/></PrivateRoute>}/>
           </Routes>
           </div>
         </div>
@@ -113,4 +115,5 @@ class App extends Component {
     )
   }
 }
+
 export default App;
