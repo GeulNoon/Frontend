@@ -6,6 +6,8 @@ import '../App.css';
 import { NavLink } from "react-router-dom";
 import HomeIcon from '../image/HomeIcon.png';
 import ReviewIcon from '../image/ReviewIcon.png';
+import Right from '../image/Right.png';
+import Wrong from '../image/Wrong.png';
 
 //요약문 및 어휘문제 전반적인 해설 박스
 const TextBox = styled.div`
@@ -49,9 +51,27 @@ class Subject extends Component{
   }
 }
 
+function ContentBox(props) {
+    return (
+      <div style={{position: "relative"}}>
+        <div style={{position: "absolute", left: "-20px", top: "-15px"}}>
+          {props.isCorrect ? 
+          <img alt="" src ={Right} width='50px' height='50px' /> : 
+          <img alt="" src ={Wrong} width='50px' height='50px' />}
+        </div>
+        {props.question}
+        <TextBox>{props.content}</TextBox>
+        <div style={{display: "flex", justifyContent: 'center', width: "80vw-10px", marginBottom: '10px'}}>
+          {props.choice}
+        </div>
+        <TextBox>{props.comment}</TextBox>
+      </div>
+    );
+}
+
 //메인함수
-class Step4 extends Component {
-  state = {
+function Step4() {
+  const state = {
     contents: [
       {id: 'Step1', title: '1단계', desc: '전문보기', type: 1},
       {id: 'Step2', title: '2단계', desc: '요약하기', type: 1},
@@ -59,10 +79,9 @@ class Step4 extends Component {
       {id: 'Step4', title: '4단계', desc: '결과보기', type: 0},
     ]
   }
-  render() {
     return (
       <div style={{display:'flex'}}>
-        <NavigationBar list={this.state.contents} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
+        <NavigationBar list={state.contents} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
         <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw'}}>
           <div style={{width: '80vw'}}>
             <div style={{display: 'flex'}}>
@@ -86,15 +105,15 @@ class Step4 extends Component {
             </div>
             <div className='pointer'>요약문 정답</div>
             <TextBox>창조 도시는 인재들을 위한 문화 및 거주 환경의 창조성이 풍부하며, 혁신적이고도 유연한 경제 시스템을 구비하고 있는 도시이다.</TextBox>
-            <TextBox>창조 도시의 주된 동력을 창조 산업으로 보는 관점에서는 창조 산업이 도시에 인적·사회적·문화적·경제적 다양성을 불어넣음으로써 도시의 재구조화를 가져오고 나아가 부가가치와 고용을 창출한다고 주장한다.</TextBox>
             <AnswerBox><div className='pointer' style={{marginRight: '20px'}}>어휘문제 정답</div>
               1. ③ 2. (1)-(C), (2)-(D), (3)-(A), (4)-(E), (5)-(B)  3. ④  4. 해설참조
             </AnswerBox>
+            <ContentBox question = "1. 문제" content = "문제 내용" choice = "문제 보기" comment = "문제 해설" isCorrect = {0} />
+            <ContentBox question = "2. 문제" content = "문제 내용" choice = "문제 보기" comment = "문제 해설" isCorrect = {1} />
           </div>
         </div>
       </div>
     );
-  }
 }
 
 export default Step4;
