@@ -6,11 +6,11 @@ import { RadioGroup, FormControl, FormControlLabel, Radio } from '@mui/material'
 const MultipleChoice = (props) => {
     //임시 데이터(동음이의어 뜻 개수에 따라 수가 바뀌어야 함)
     const [selectList, setSelectList] = useState([
-        {id: 'A', value: ''},
-        {id: 'B', value: ''},
-        {id: 'C', value: ''},
-        {id: 'D', value: ''},
-        {id: 'E', value: ''},
+        {id: 'A', value: '0'},
+        {id: 'B', value: '0'},
+        {id: 'C', value: '0'},
+        {id: 'D', value: '0'},
+        {id: 'E', value: '0'},
       ]);
     ///선택한 번호 콘솔창에 출력(선택한 값 저장용 함수)
     const handleChange = (e) => {
