@@ -1,5 +1,5 @@
 //학습결과 화면
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import styled from 'styled-components';
 import { NavLink } from "react-router-dom";
 import ResultIcon1 from '../image/ResultIcon1.png'
@@ -18,6 +18,21 @@ const ResultSummWrapper = styled.div`
   border: none;
   border-radius: 20px;
   background-color: #eff0ef;
+`;
+
+const Button = styled.div`
+  display: flex;
+  font-weight: norwmal;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 25px;
+  font-size: 12px;
+  color: black;
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 20px;
+  margin-left: 5px;
 `;
 
 //화면 상단 3개 박스
@@ -59,8 +74,8 @@ class History extends Component{
 }
 
 //메인 함수
-class Result extends Component {
-  render() {
+function Result() {
+    const [option, setOption] = useState(0);
     return (
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center',width: '900px', height: '150px'}}>
@@ -71,9 +86,14 @@ class Result extends Component {
         <div style={{display: 'flex', width: '900px', height: '300px'}}>
           <div style={{width: '600px'}}>
             <Subject title="학습 통계"></Subject>
+            <div style={{display: 'flex', justifyContent: 'flex-end', width: '540px'}}>
+              <Button onClick={()=>{ setOption(0); }} style = {{backgroundColor: (option === 0) ? '#5b6d5b':'white', color: (option === 0) ? 'white':'black'}}> 일별 </Button>
+              <Button onClick={()=>{ setOption(1); }} style = {{backgroundColor: (option === 1) ? '#5b6d5b':'white', color: (option === 1) ? 'white':'black'}}> 주별 </Button>
+              <Button onClick={()=>{ setOption(2); }} style = {{backgroundColor: (option === 2) ? '#5b6d5b':'white', color: (option === 2) ? 'white':'black'}}> 월별 </Button>
+            </div>
             <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center',width: '600px', height: '230px'}}>
-              <BarCharts/>{/*우측 그래프*/}
-              <LineCharts/>{/*좌측 그래프*/}
+              <BarCharts option={option}/>{/*우측 그래프, option값 전달*/}
+              <LineCharts option={option}/>{/*좌측 그래프, option값 전달*/}
             </div>
           </div>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',width: '300px', paddingTop: '50px'}}>
@@ -92,7 +112,6 @@ class Result extends Component {
         </div>
       </div>
     );
-  }
 }
 
 export default Result;

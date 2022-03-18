@@ -31,7 +31,7 @@ const data = [
   },
 ];
 
-const LineCharts = () => {
+const LineCharts = (props) => {
     return (
       <ResponsiveContainer width="30%" height="80%">
         <LineChart
