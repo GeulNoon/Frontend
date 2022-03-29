@@ -27,7 +27,7 @@ const data = [
 
 ];
 
-const BarCharts = () => {
+const BarCharts = (props) => {
     const [focusBar, setFocusBar] = useState(null);
     return (
       <ResponsiveContainer width="30%" height="80%">

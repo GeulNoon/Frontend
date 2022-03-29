@@ -19,7 +19,7 @@ function Register() {
             url: "http://127.0.0.1:8000/api/signup",
             headers: { "Content-Type": "application/json" },
             data: { "email": values['email'],"nickname": values['nickname'], "password": values['password'], "birthyear": values['birthyear']},
-          }).then(() => navigate('/Study'))
+          }).then(() => navigate('/'))
           .catch(error => {
             alert('회원가입 실패!\n이메일 중복 여부를 확인해주세요.')
           });

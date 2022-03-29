@@ -1,18 +1,26 @@
 //어휘풀기 동음이의어 뜻 매칭 문제
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { RadioGroup, FormControl, FormControlLabel, Radio } from '@mui/material';
 //npm install @mui/material @emotion/react @emotion/styled
 
-class MultipleChoice extends Component {
+const MultipleChoice = (props) => {
     //임시 데이터(동음이의어 뜻 개수에 따라 수가 바뀌어야 함)
-    state = {
-        selectList: ["A","B","C","D","E"],
-      }
+    const [selectList, setSelectList] = useState([
+        {id: 'A', value: '0'},
+        {id: 'B', value: '0'},
+        {id: 'C', value: '0'},
+        {id: 'D', value: '0'},
+        {id: 'E', value: '0'},
+      ]);
     ///선택한 번호 콘솔창에 출력(선택한 값 저장용 함수)
-    handleChange = (e) => {
-        console.log(`선택한 값 : ${e.target.value}`);
+    const handleChange = (e) => {
+        //console.log(`선택한 값 : ${e.target.name}${e.target.value}`);
+        setSelectList(selectList.map(sl => sl.id === e.target.name ? {...sl, value: e.target.value} : sl))
+        props.setAnswer(props.answer.map(ans => ans.id === props.id 
+            ? {...ans, value: selectList.map(sl => sl.id === e.target.name ? {...sl, value: e.target.value} : sl)
+                                        .map(sl => sl.value)}
+            : ans))
     };
-    render() {
       return (
           <div style={{marginTop: 10, marginBottom:10}}>
             <div style={{
@@ -45,18 +53,18 @@ class MultipleChoice extends Component {
                     alignItems: 'center',
                     marginLeft: 50,
                 }}>
-                {this.state.selectList.map((j) => (
-                    <FormControl key={j} component="fieldset">
+                {selectList.map((j) => (
+                    <FormControl key={j.id} component="fieldset">
                         <RadioGroup
                         row
                         aria-label="select"
                         defaultValue=""
-                        name="radio-buttons-group"
-                        onChange={this.handleChange}
+                        name={j.id}
+                        onChange={handleChange}
                         >  
-                            {this.state.selectList.map((value, i) => (
+                            {selectList.map((value, i) => (
                                 <div key={i} style={{width: '50px'}}>
-                                    <FormControlLabel value={value} control={<Radio color= "success" size="small" />} label={value} />
+                                    <FormControlLabel value={value.id} control={<Radio color= "success" size="small" onChange={handleChange} />} label={value.id} />
                                 </div>
                             ))}
                         </RadioGroup>
@@ -66,7 +74,6 @@ class MultipleChoice extends Component {
             </div>
           </div>
       );
-    }
   }
   
   export default MultipleChoice;

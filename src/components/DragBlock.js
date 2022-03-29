@@ -5,7 +5,7 @@ import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 //블럭 요소
-const MovableItem = ({name, setItems, item}) => {
+const MovableItem = ({name, setItems, setTexts ,item}) => {
     //다른 박스로 블럭 옮길 때 기존 박스에서 해당 블럭 제거 후 다른 박스 가장 뒤에 배치
     const changeItemColumn = (currentItem, columnName) => {
         const newList = item.filter((it) => it.name !== currentItem.name);
@@ -16,6 +16,10 @@ const MovableItem = ({name, setItems, item}) => {
             column: columnName,
         }
         setItems(newList.concat(newItem))
+        setTexts(newList.concat(newItem).filter((i)=>i.column === 'Answer')
+        .map((i) => (
+            i.name.concat(" ")
+        )))
         /*
         setItems((prevState) => {
             return prevState.map(e => {
@@ -68,16 +72,17 @@ const Column = ({children, className, title}) => {
     )
 }
 
-export const DragBlock = (data) => {
+export const DragBlock = ({data, setText}) => {
     //임시 데이터(요약문 결과 입력)
     let arr = [];
-    const sum = data['data'];
+    const sum = {data}['data']; //중괄호 중요!
     for (let i = 0; i < sum.length; i++) {
         arr.push({
             id: i,
             name: sum[i],
             column: 'Example'
         });
+
     }
 
     const [items, setItems] = useState(arr);
@@ -86,7 +91,7 @@ export const DragBlock = (data) => {
         return items
         .filter((item)=>item.column === columnName)
         .map((item) => (
-            <MovableItem key={item.id} name={item.name} setItems={setItems} item={items}/>
+            <MovableItem key={item.id} name={item.name} setItems={setItems} setTexts={setText} item={items}/>
         ))
         
     }
