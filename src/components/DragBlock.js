@@ -82,6 +82,7 @@ export const DragBlock = ({data, setText}) => {
             name: sum[i],
             column: 'Example'
         });
+
     }
 
     const [items, setItems] = useState(arr);

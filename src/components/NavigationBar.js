@@ -60,7 +60,7 @@ class NavigationBar extends Component {
     const {list, prev} = this.props;
     const {title} = this.props;
       return (
-          <div style={{width: '10vw',height: '90%',backgroundColor: '#a2bea2', 
+          <div style={{width: '10vw',height: '95%',backgroundColor: '#a2bea2', 
           display: 'flex',flexDirection: 'column', 
           alignItems: 'center', position: 'fixed'}}>
             <div style={{
@@ -70,8 +70,8 @@ class NavigationBar extends Component {
               height: 100, 
               width: '8vw', 
               border: '2px solid black',
-              marginTop: '8vh',
-              marginBottom: '10vh',
+              marginTop: '14vh',
+              marginBottom: '15vh',
               padding: '0px 10px 0px',
               fontWeight: 'bold',
               }}>

@@ -9,8 +9,8 @@ import {useNavigate} from 'react-router-dom';
 function Study() {
     const navigate = useNavigate();
     return (
-      <Formik
-          initialValues={{ title: "", content: "", email: ''}}
+      <Formik 
+          initialValues={{ title: "", content: "", email: ""}}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
               axios({
@@ -71,14 +71,14 @@ function Study() {
               value = {values.content} 
               onChange={handleChange}
             />
-            {/*제 로컬에서 버튼 작동이 안돼 임시적으로 수정했습니다!*/}
-            <Button type='submit' disabled={isSubmitting} onClick={submitForm}>학습 시작</Button>
+            <EnterButton type="submit" disabled={isSubmitting}>학습 시작</EnterButton> 
           </RightWrapper>
       </Wrapper>
       </form>
     )
     }}
     </Formik>
+    
     );
 };
 
@@ -100,6 +100,7 @@ const LeftWrapper = styled.div`
   height: 85vh;
   width: 300px;
   margin-right: 10px;
+  margin-Top: 30px;
 `;
 
 //우측 요소 박스(지문 내용 입력창, 학습시작 버튼 등)
@@ -139,19 +140,18 @@ const ContentWrapper = styled.div`
 `;
 
 //학습시작 버튼
-const Button = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
+const EnterButton = styled.button`
   width: 175px;
   height: 25px;
-  font-size: 14px;
+  margin-top: 20px;
+  background-color: rgb(91, 109, 91);
   color: white;
-  background-color: #5b6d5b;
+  border: 1px solid rgb(91, 109, 91);
+  background-color: 250ms;
+  display: block;
   :hover {
-    background-color: #5b6d5b;
-    opacity: 0.7;
+    cursor: pointer;
+    background-color: white;
+    color: rgb(91, 109, 91);
   }
-  border: none;
-`;
+  `;

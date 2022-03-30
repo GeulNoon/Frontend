@@ -1,5 +1,5 @@
 //학습하기의 문제풀기:결과보기
-import React, { Component } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import styled from "styled-components";
 import '../App.css';
@@ -8,6 +8,7 @@ import HomeIcon from '../image/HomeIcon.png';
 import ReviewIcon from '../image/ReviewIcon.png';
 import Right from '../image/Right.png';
 import Wrong from '../image/Wrong.png';
+import axios from "axios"
 
 //요약문 및 어휘문제 전반적인 해설 박스
 const TextBox = styled.div`
@@ -69,8 +70,12 @@ function ContentBox(props) {
     );
 }
 
+
 //메인함수
-function Step4() {
+function Step4 () {
+  const [Article_comprehension, setArticle_comprehension] = useState(' ');
+  const [Title, setTitle] = useState(' ');
+  const [Summary, setSummary] = useState(' ');
   const state = {
     contents: [
       {id: 'Step1', title: '1단계', desc: '전문보기', type: 1},
@@ -79,10 +84,18 @@ function Step4() {
       {id: 'Step4', title: '4단계', desc: '결과보기', type: 0},
     ]
   }
+    
+  useEffect(async () => {
+    const response = await axios.get(`http://127.0.0.1:8000/api/Step4`);
+    setTitle(response.data['title']);
+    setArticle_comprehension(response.data['article_comprehension']);
+    setSummary(response.data['summary'])
+  },[]);
+    
     return (
       <div style={{display:'flex'}}>
-        <NavigationBar list={state.contents} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
-        <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw'}}>
+        <NavigationBar list={state.contents} title = {Title} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
+        <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw', marginTop: '3vw'}}>
           <div style={{width: '80vw'}}>
             <div style={{display: 'flex'}}>
               <div style={{display: 'flex', alignItems: 'center',width: '70vw'}}>
@@ -91,7 +104,7 @@ function Step4() {
                 display: 'flex', alignItems: 'center',
                 justifyContent: 'center', backgroundColor: '#94c973',
                 borderRadius: '50%', fontSize: '32px'}}>
-                  92%
+                  {Article_comprehension}%
                 </div> {/*지문이해도 값*/}
               </div>
               <div style={{display: 'flex', alignItems: 'center',justifyContent: 'space-between', width: '10vw'}}>
@@ -104,7 +117,7 @@ function Step4() {
               </div>
             </div>
             <div className='pointer'>요약문 정답</div>
-            <TextBox>창조 도시는 인재들을 위한 문화 및 거주 환경의 창조성이 풍부하며, 혁신적이고도 유연한 경제 시스템을 구비하고 있는 도시이다.</TextBox>
+            <TextBox>{Summary}</TextBox>
             <AnswerBox><div className='pointer' style={{marginRight: '20px'}}>어휘문제 정답</div>
               1. ③ 2. (1)-(C), (2)-(D), (3)-(A), (4)-(E), (5)-(B)  3. ④  4. 해설참조
             </AnswerBox>

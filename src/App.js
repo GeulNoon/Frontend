@@ -19,6 +19,7 @@ import Answer from './screens/Answer';
 import More from './screens/More';
 import PrivateRoute from './components/PrivateRoute'
 import PublicRoute from './components/PublicRoute'
+import logo from './image/logo.png'
 
 class Subject extends Component{
   render(){
@@ -26,8 +27,9 @@ class Subject extends Component{
     return (
       <header style={{display: 'inline'}}>
         <h1 style={{display: 'inline'}}>
-            <NavLink style={{color: 'black', textDecoration: 'none', marginRight: 160, marginLeft: 20}} 
-            to="/" >글눈
+            <NavLink style={{color: 'black', textDecoration: 'none', marginRight: 150}} 
+            to="/" >
+              <a href="" className = 'logo'><img className='logo' src={logo} style={{width: '170px'}}/></a>
             </NavLink>
         </h1>
       </header>
@@ -42,7 +44,7 @@ class TOC extends Component{
     while (i<this.props.data.length){
       var data = this.props.data[i];
       list.push(
-          <h4 style={{display: 'inline', fontSize: '14px'}} key={data.id}>
+          <h4 style={{display: 'inline', fontSize: '18px'}} key={data.id}>
             <NavLink 
               style={({ isActive }) => ({ color: isActive ? '#a2bea2' : 'black', textDecoration: 'none' })} 
               to={{pathname: `${data.id}`}}>{data.title} 
@@ -51,7 +53,7 @@ class TOC extends Component{
       i = i+1;
     }
     return (
-      <div style={{display: 'flex', justifyContent: 'space-between', width: '70%', height: '40px'}}>
+      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '70%', height: '40px'}}>
         {list}
       </div>
     );
@@ -74,17 +76,17 @@ class App extends Component {
         <button style={{border: 'none', backgroundColor: 'white', color: 'grey', marginRight:20,}}>로그인</button>    
         </NavLink>
     else
-      signinButton = <button style={{border: 'none', backgroundColor: 'white', color: 'grey', marginRight:20,}}
+      signinButton = <button style={{border: 'none', backgroundColor: 'white', color: 'grey', marginRight:20}}
           onClick={() => {sessionStorage.removeItem('user'); window.location.replace("/")}}>로그아웃
         </button>    
     return (
       <BrowserRouter> 
         <div>
           <div style={{position: 'fixed', height: '75px', width: '100%', backgroundColor: 'white', zIndex: 1}}>
-            <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+            <div style={{display: 'flex', justifyContent: 'flex-end', marginTop: '10px', marginRight: '5px'}}>
               {signinButton}
             </div>
-            <div style={{display: 'flex', alignItems: 'flex-end'}}>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '10px', backgroundColor: 'white'}}>
               <Subject></Subject>
               <TOC data={this.state.contents}></TOC>
             </div>

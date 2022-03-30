@@ -104,7 +104,7 @@ function Step1 () {
     return (
       <div style={{display:'flex'}}>
         <NavigationBar list={state.contents} title = {Article.title} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
-        <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw'}}>
+        <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw', marginTop: '3vw'}}>
           <div style={{width: '80vw'}}>          
             <Subject title="1단계: 전문보기" sub="기사의 전문을 읽어봅시다."></Subject>
           </div>

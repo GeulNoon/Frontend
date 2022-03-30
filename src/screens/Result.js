@@ -86,7 +86,7 @@ function Result() {
       fetchData();
     },[]);
 
-    return (
+   return (
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center',width: '900px', height: '150px'}}>
           <ResultSumm title="전체 학습" value="7" icon={ResultIcon1}/>

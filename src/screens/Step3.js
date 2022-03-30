@@ -38,20 +38,22 @@ class Subject extends Component{
 
 //메인함수
 const Step3  = () => {
-  const [contents] = useState([
-    {id: 'Step1', title: '1단계', desc: '전문보기', type: 1},
-    {id: 'Step2', title: '2단계', desc: '요약하기', type: 1},
-    {id: 'Step3', title: '3단계', desc: '어휘풀기', type: 0},
-    {id: 'Step4', title: '4단계', desc: '결과보기', type: 1},
-  ]);
+  const state = {
+    contents: [
+      {id: 'Step1', title: '1단계', desc: '전문보기', type: 1},
+      {id: 'Step2', title: '2단계', desc: '요약하기', type: 1},
+      {id: 'Step3', title: '3단계', desc: '어휘풀기', type: 0},
+      {id: 'Step4', title: '4단계', desc: '결과보기', type: 1},
+    ],
+};
   const [answer, setAnswer] = useState([
     {id: 1, value: ''},
     {id: 2, value: ''},
   ]); //사용자가 입력한 답. 문제 마다 value에 저장
     return (
       <div style={{display:'flex'}}>
-        <NavigationBar list={contents} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
-        <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw'}}>
+        <NavigationBar list={state.contents} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
+        <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw', marginTop: '3vw'}}>
           <div style={{width: '80vw'}}>
             <Subject title="3단계: 지문 속 어휘 공부하기" sub="다양한 어휘 문제를 풀며 본문 속 어휘의 정확한 뜻을 습득해봅시다."></Subject>
           </div>
