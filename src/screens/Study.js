@@ -1,5 +1,5 @@
 //학습하기 도입 화면
-import React, { Component } from 'react';
+import React, { useEffect, Component } from 'react';
 import { Formik } from "formik";
 import styled from "styled-components";
 import axios from "axios"
@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom';
 
 //메인 함수
 function Study() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
     return (
       <Formik 
           initialValues={{ title: "", content: "", email: ""}}
@@ -18,7 +18,11 @@ function Study() {
                 url: "http://127.0.0.1:8000/api/study",
                 headers: { "Content-Type": "application/json" },
                 data: { "title": values['title'],"content": values['content'], email: sessionStorage.getItem('user')},
-              }).then(() => navigate('/Study/Step1'))
+              }).then(response => {
+              sessionStorage.setItem('s_id', response.data['s_id'])
+              sessionStorage.setItem('a_id', response.data['a_id'])
+              navigate('/Study/Step1')
+              })
               .catch(error => {
                 alert('기사 등록 실패')
               });

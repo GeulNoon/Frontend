@@ -86,7 +86,7 @@ function Step2 () {
   }
 
   useEffect(async () => {
-    const response = await axios.get(`http://127.0.0.1:8000/api/Step2`);
+    const response = await axios.get(`http://127.0.0.1:8000/api/Step2`, {params: {'a_id': sessionStorage.getItem('a_id')}});
     setTitle(response.data['title']);
     setSummary(response.data['summary'])
   },[]);
@@ -120,6 +120,7 @@ function Step2 () {
             method: "put",
             url: "http://127.0.0.1:8000/api/Step2/",
             headers: { "Content-Type": "application/json" },
+            params: {'s_id': sessionStorage.getItem('s_id')},
             data: { "user_summary": text},
           }).catch(error => { alert('실패')
           });

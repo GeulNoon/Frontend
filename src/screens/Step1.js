@@ -64,7 +64,7 @@ function Step1 () {
   }
 
   useEffect(async () => {
-    const response = await axios.get(`http://127.0.0.1:8000/api/Step1`);
+    const response = await axios.get(`http://127.0.0.1:8000/api/Step1`, {params: {'a_id': sessionStorage.getItem('a_id')}});
     setArticle(response.data);
     console.log(Article.content);
   },[]);
