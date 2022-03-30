@@ -1,5 +1,5 @@
 //학습하기의 더보기 학습이력 테이블
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import {
   Table,
@@ -13,30 +13,21 @@ import {
 } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { unstable_createMuiStrictModeTheme } from '@material-ui/core/styles';
+import axios from "axios";
 const theme = unstable_createMuiStrictModeTheme();
 //npm install @material-ui/core recharts
-
-//임시 데이터
-const users = [
-  {
-    'id': 1,
-    'title': "2015년도 고3 9월 모의고사 31번-34번 지문",
-    'date': "2021/11/28",
-    'step2': "85%",
-    'step3': "3/4"
-  },
-  {
-    'id': 2,
-    'title': "2009년도 수능 24번-26번 지문",
-    'date': "2021/11/28",
-    'step2': "85%",
-    'step3': "3/4"
-  }
-]
 
 function HistoryTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [title, setTitle] = useState([]);
+  useEffect(() => {
+    async function fetchData(){
+    const response = await axios.get(`http://127.0.0.1:8000/api/getMoreHistory`, {params: {'email': sessionStorage.getItem('user')}});
+    setTitle(response.data.title);
+    }
+    fetchData();
+  },[]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -62,28 +53,28 @@ function HistoryTable() {
           </TableHead>
           <TableBody>
             {/*학습 이력 요소*/}
-            {users
+            {title
               .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
-              .map(({ id, title, date, step2, step3 }, i) => (
-                <TableRow key={id}>
+              .map((i,j) => (
+                <TableRow key={i[0]}>
                   <TableCell component="th" scope="row">
-                    {page * rowsPerPage + i + 1}
+                    {page * rowsPerPage + j + 1}
                   </TableCell>
                   <TableCell align="left">
                     <NavLink style={{ color: 'black'}} to={{pathname: `/Study/Step4`}}>
-                      {title}
+                      {i[0]}
                     </NavLink> {/*제목 클릭시 학습결과 화면으로 이동*/}
                 </TableCell>
-                  <TableCell align="center">{date}</TableCell>
-                  <TableCell align="center">{step2}</TableCell>
-                  <TableCell align="center">{step3}</TableCell>
+                  <TableCell align="center">{i[1]}</TableCell>
+                  <TableCell align="center">{i[2]}</TableCell>
+                  <TableCell align="center">{i[3]}</TableCell>
                 </TableRow>
               ))}
           </TableBody>
           <TableFooter>
             <TableRow>
               <TablePagination
-                count={users.length}
+                count={title.length}
                 page={page}
                 rowsPerPage={rowsPerPage}
                 onPageChange={handleChangePage}
