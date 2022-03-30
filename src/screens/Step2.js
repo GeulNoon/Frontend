@@ -91,6 +91,9 @@ function Step2 () {
     setSummary(response.data['summary'])
   },[]);
 
+  const handleInputChange = (e) => {
+    setText(e.target.value)
+  }
 
   let Input = null;
   /*isSelected가 true일 시 순서배열, 아닐 시 직접작성*/

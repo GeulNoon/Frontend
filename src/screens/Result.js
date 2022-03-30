@@ -1,5 +1,5 @@
 //학습결과 화면
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { NavLink } from "react-router-dom";
 import ResultIcon1 from '../image/ResultIcon1.png'
@@ -7,6 +7,7 @@ import ResultIcon2 from '../image/ResultIcon2.png'
 import ResultIcon3 from '../image/ResultIcon3.png'
 import BarCharts from '../components/BarCharts';
 import LineCharts from '../components/LineCharts';
+import axios from "axios";
 
 //화면 상단의 전체학습, 평균어휘 정답률, 평균 지문 이해도 박스 디자인
 const ResultSummWrapper = styled.div`
@@ -76,7 +77,16 @@ class History extends Component{
 //메인 함수
 function Result() {
     const [option, setOption] = useState(0);
-    return (
+    const [title, setTitle] = useState([]);
+    useEffect(() => {
+      async function fetchData(){
+      const response = await axios.get(`http://127.0.0.1:8000/api/getHistory`, {params: {'email': sessionStorage.getItem('user')}});
+      setTitle(response.data.title);
+      }
+      fetchData();
+    },[]);
+
+   return (
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center',width: '900px', height: '150px'}}>
           <ResultSumm title="전체 학습" value="7" icon={ResultIcon1}/>
@@ -100,9 +110,7 @@ function Result() {
             <div style={{display: 'flex', alignItems: 'center', justifyContent:'center', width: '250px', height: '30px', borderRadius: '10px', backgroundColor: '#eff0ef'}}>
               <h6>학습이력</h6>
             </div>
-            <History title="2015년도 9월 고3 9월 모의고사 31번-34번 지문" date="2021/11/28"/>
-            <History title="2009년도 수능 24번-26번 지문 " date="2021/11/28"/>
-            <History title="2018년도 고3 6월 모의고사 27번-30번 지문" date="2021/11/27"/>
+            {title.map((i) => <History key={i[0]} title={i[0]} date={i[1]}/>)}
             <h6 style={{width: '250px', margin: '0px', textAlign: 'right'}}>
               <NavLink style={{ color: 'grey'}} to="More">
               더보기...

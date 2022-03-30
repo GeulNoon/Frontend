@@ -12,19 +12,19 @@ function Study() {
       <Formik 
           initialValues={{ title: "", content: "", email: ""}}
           onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            axios({
-              method: "post",
-              url: "http://127.0.0.1:8000/api/study",
-              headers: { "Content-Type": "application/json" },
-              data: { "title": values['title'], "content": values['content'], "email": sessionStorage.getItem('user')},
-            }).then(() =>
-              navigate('/Study/Step1'))
-            .catch(error => { alert('기사 등록 실패')
-            });
-            setSubmitting(false);
-          }, 500);
-        }}
+            setTimeout(() => {
+              axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/study",
+                headers: { "Content-Type": "application/json" },
+                data: { "title": values['title'],"content": values['content'], email: sessionStorage.getItem('user')},
+              }).then(() => navigate('/Study/Step1'))
+              .catch(error => {
+                alert('기사 등록 실패')
+              });
+              setSubmitting(false);
+            }, 500);
+          }}
         >
           {props => {
             const {
