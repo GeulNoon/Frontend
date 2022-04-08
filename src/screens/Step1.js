@@ -11,8 +11,7 @@ const TextBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80vw;
-  height: 80vh;
+  width: 50vw;
   background-color: #e5e5e5;
   font-size: 20px;
   border: none;
@@ -67,6 +66,7 @@ function Step1 () {
     const response = await axios.get(`http://127.0.0.1:8000/api/Step1`, {params: {'a_id': sessionStorage.getItem('a_id')}});
     setArticle(response.data);
     console.log(Article.content);
+    console.log(Article.issubmitted);
   },[]);
 
   const [word, setWord] = useState('');
@@ -94,6 +94,7 @@ function Step1 () {
         method: "post",
         url: "http://127.0.0.1:8000/api/getAnswer/",
         headers: { "Content-Type": "application/json" },
+        params: {'a_id': sessionStorage.getItem('a_id')},
         data: { "question": question},
       }).then((res)=> setAnswer(res["data"]["answer"], setIsAnswerVisible(1))
       ).catch(error => {
@@ -109,34 +110,36 @@ function Step1 () {
             <Subject title="1단계: 전문보기" sub="기사의 전문을 읽어봅시다."></Subject>
           </div>
           <div style={{display:'flex'}}>
-            <div style={{width: '40vw'}}>
-              <h3>단어 검색</h3>
-              <div style={{display:"flex", alignItems: 'center', marginBottom: '10px'}}>
-                <input type="text" placeholder='지문 속 궁금한 단어를 검색해봅시다.' onChange={(event) => setWord(event.target.value)} style={{width:"200px", marginBottom:"0px", marginRight: "10px"}}/>
-                <Button onClick={onSubmitSearch}>검색</Button>
+            <TextBox>{Article.content}</TextBox>
+            <div>
+              <div style={{width: '30vw'}}>
+                <h3>단어 검색</h3>
+                <div style={{display:"flex", alignItems: 'center', marginBottom: '10px'}}>
+                  <input type="text" placeholder='지문 속 궁금한 단어를 검색해봅시다.' onChange={(event) => setWord(event.target.value)} style={{width:"200px", marginBottom:"0px", marginRight: "10px"}}/>
+                  <Button onClick={onSubmitSearch}>검색</Button>
+                </div>
+                {isVisible ? 
+                <div style={{border: "1px solid #5b6d5b"}}>
+                  <Button onClick={()=>{setIsVisible(0)}}>X</Button>
+                  {result.map((def,index) => <p key={def}>{index+1}. {def}</p>)}
+                </div> :
+                null}
               </div>
-              {isVisible ? 
-              <div style={{border: "1px solid #5b6d5b"}}>
-                <Button onClick={()=>{setIsVisible(0)}}>X</Button>
-                {result.map((def,index) => <p key={def}>{index+1}. {def}</p>)}
-              </div> :
-              null}
-            </div>
-            <div style={{width: '40vw'}}>
-            <h3>질의 응답</h3>
-              <div style={{display:"flex", alignItems: 'center', marginBottom: '10px'}}>
-                <input type="text" placeholder='지문 속 궁금한 내용을 검색해봅시다.' onChange={(event) => setQuestion(event.target.value)} style={{width:"200px", marginBottom:"0px", marginRight: "10px"}}/>
-                <Button onClick={onSubmitQuestion}>검색</Button>
+              <div style={{width: '30vw'}}>
+              <h3>질의 응답</h3>
+                <div style={{display:"flex", alignItems: 'center', marginBottom: '10px'}}>
+                  <input type="text" placeholder='지문 속 궁금한 내용을 검색해봅시다.' onChange={(event) => setQuestion(event.target.value)} style={{width:"200px", marginBottom:"0px", marginRight: "10px"}}/>
+                  <Button onClick={onSubmitQuestion}>검색</Button>
+                </div>
+                {isAnswerVisible ? 
+                <div style={{border: "1px solid #5b6d5b"}}>
+                  <Button onClick={()=>{setIsAnswerVisible(0)}}>X</Button>
+                  {answer}
+                </div> :
+                null}
               </div>
-              {isAnswerVisible ? 
-              <div style={{border: "1px solid #5b6d5b"}}>
-                <Button onClick={()=>{setIsAnswerVisible(0)}}>X</Button>
-                {answer}
-              </div> :
-              null}
             </div>
           </div>
-          <TextBox>{Article.content}</TextBox>
           <div style={{width: '80vw', display: 'flex', justifyContent: 'end'}}>
             <NavLink to="/Study/Step2">
               <img alt="" src ={NextIcon} width='37.5px' height='37.5px'/>               

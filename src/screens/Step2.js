@@ -71,6 +71,7 @@ function Step2 () {
   const [isSelected, SetSelected] = useState(false); /*순서배열, 직접작성 중 선택 여부*/
   const [text, setText] = useState(""); //사용자가 입력한 답
   const navigate = useNavigate();
+  const [isSubmitted, SetIsSubmitted] = useState(false)
 
   const state = {
     contents: [
@@ -88,7 +89,8 @@ function Step2 () {
   useEffect(async () => {
     const response = await axios.get(`http://127.0.0.1:8000/api/Step2`, {params: {'a_id': sessionStorage.getItem('a_id')}});
     setTitle(response.data['title']);
-    setSummary(response.data['summary'])
+    setSummary(response.data['summary']);
+    SetIsSubmitted(response.data['issubmitted']);
   },[]);
 
   const handleInputChange = (e) => {
@@ -122,7 +124,9 @@ function Step2 () {
             headers: { "Content-Type": "application/json" },
             params: {'s_id': sessionStorage.getItem('s_id')},
             data: { "user_summary": text},
-          }).catch(error => { alert('실패')
+          }).then(
+            alert('제출 성공!')
+          ).catch(error => { alert('실패')
           });
         }, 500);
       }}
@@ -156,7 +160,7 @@ function Step2 () {
               {text} {/*사용자 답 확인하기 위해 임시로 넣었습니다*/}
             </div>
             <div style={{width: '80vw', display: 'flex', flexDirection: 'column', alignItems: 'flex-end'}}>
-              <SubmitButton type="submit" disabled={isSubmitting}>제출하기</SubmitButton>
+              <SubmitButton type="submit" disabled={isSubmitted}>제출하기</SubmitButton>
               <NavLink to="/Study/Step3">
                 <img alt="" src ={NextIcon} width='37.5px' height='37.5px'/>               
             </NavLink> {/*다음 단계 버튼*/}

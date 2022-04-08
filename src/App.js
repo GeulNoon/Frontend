@@ -29,7 +29,7 @@ class Subject extends Component{
         <h1 style={{display: 'inline'}}>
             <NavLink style={{color: 'black', textDecoration: 'none', marginRight: 150}} 
             to="/" >
-              <a href="" className = 'logo'><img className='logo' src={logo} style={{width: '170px'}}/></a>
+              <img alt="" className='logo' src={logo} style={{width: '170px'}}/>
             </NavLink>
         </h1>
       </header>
@@ -82,7 +82,7 @@ class App extends Component {
     return (
       <BrowserRouter> 
         <div>
-          <div style={{position: 'fixed', height: '75px', width: '100%', backgroundColor: 'white', zIndex: 1}}>
+          <div style={{position: 'fixed', height: '10vh', width: '100%', backgroundColor: 'white', zIndex: 1}}>
             <div style={{display: 'flex', justifyContent: 'flex-end', marginTop: '10px', marginRight: '5px'}}>
               {signinButton}
             </div>
@@ -91,7 +91,7 @@ class App extends Component {
               <TOC data={this.state.contents}></TOC>
             </div>
           </div>
-          <div style={{paddingTop: '75px'}}>
+          <div style={{paddingTop: '15vh'}}>
           <Routes> 
           <Route exact path="*" element={<Home/>}/> 
           <Route path="/Study/*" element={<PrivateRoute><Study/></PrivateRoute>}/>
