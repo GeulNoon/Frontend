@@ -1,6 +1,6 @@
 //학습하기의 더보기 학습이력 테이블
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
 import {
   Table,
   TableBody,
@@ -14,10 +14,23 @@ import {
 import { ThemeProvider } from "@material-ui/core/styles";
 import { unstable_createMuiStrictModeTheme } from '@material-ui/core/styles';
 import axios from "axios";
+import styled from "styled-components";
+
+const Button = styled.div`
+  display: inline-flex;
+  font-weight: norwmal;
+  font-size: 14px;
+  color: black;
+  background-color: white;
+  border-bottom: 1px solid grey;
+  cursor: pointer;
+`;
+
 const theme = unstable_createMuiStrictModeTheme();
 //npm install @material-ui/core recharts
 
 function HistoryTable() {
+  const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [title, setTitle] = useState([]);
@@ -38,6 +51,12 @@ function HistoryTable() {
     setPage(0);
   };
 
+  const navigateToStudy = (s_id, a_id) =>{
+    sessionStorage.setItem('s_id', s_id)
+    sessionStorage.setItem('a_id', a_id)
+    navigate('/Study/Step4')
+  };
+
   return (
     <ThemeProvider theme = {theme}>
       <TableContainer>
@@ -56,14 +75,12 @@ function HistoryTable() {
             {title
               .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
               .map((i,j) => (
-                <TableRow key={i[0]}>
+                <TableRow key={i[4]}>
                   <TableCell component="th" scope="row">
                     {page * rowsPerPage + j + 1}
                   </TableCell>
                   <TableCell align="left">
-                    <NavLink style={{ color: 'black'}} to={{pathname: `/Study/Step4`}}>
-                      {i[0]}
-                    </NavLink> {/*제목 클릭시 학습결과 화면으로 이동*/}
+                    <Button onClick={()=> navigateToStudy(i[5],i[4])}>{i[0]}</Button> {/*제목 클릭시 학습결과 화면으로 이동*/}
                 </TableCell>
                   <TableCell align="center">{i[1]}</TableCell>
                   <TableCell align="center">{i[2]}</TableCell>

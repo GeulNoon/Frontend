@@ -60,19 +60,18 @@ class NavigationBar extends Component {
     const {list, prev} = this.props;
     const {title} = this.props;
       return (
-          <div style={{width: '10vw',height: '95%',backgroundColor: '#a2bea2', 
+          <div style={{width: '10vw',height: '90vh',backgroundColor: '#a2bea2', 
           display: 'flex',flexDirection: 'column', 
           alignItems: 'center', position: 'fixed'}}>
             <div style={{
               display: 'flex', 
               alignItems:'center', 
-              justifyContent: 'center', 
-              height: 100, 
-              width: '8vw', 
+              justifyContent: 'center',
+              height: '80px',
+              width: '80px',
               border: '2px solid black',
-              marginTop: '14vh',
-              marginBottom: '15vh',
-              padding: '0px 10px 0px',
+              marginTop: '10vh',
+              marginBottom: '10vh',
               fontWeight: 'bold',
               }}>
               {title}
