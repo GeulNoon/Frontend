@@ -16,20 +16,29 @@ import { unstable_createMuiStrictModeTheme } from "@material-ui/core/styles";
 import axios from "axios";
 import styled from "styled-components";
 
+//문제풀기, 해설보기 버튼 디자인
 const Button = styled.div`
-  display: inline-flex;
-  font-weight: norwmal;
-  font-size: 14px;
-  color: black;
-  background-color: white;
-  border-bottom: 1px solid grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75px;
+  height: 25px;
+  font-size: 11px;
+  color: white;
+  background-color: #5b6d5b;
+  :hover {
+    background-color: #5b6d5b;
+    opacity: 0.7;
+  }
+  border: none;
+  border-radius: 3px;
   cursor: pointer;
 `;
 
 const theme = unstable_createMuiStrictModeTheme();
 //npm install @material-ui/core recharts
 
-function HistoryTable() {
+function ReviewList() {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -66,11 +75,9 @@ function HistoryTable() {
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell>번호</TableCell>
               <TableCell align="left">지문</TableCell>
-              <TableCell align="center">학습 날짜</TableCell>
-              <TableCell align="center">지문 이해도</TableCell>
-              <TableCell align="center">어휘퀴즈 정답</TableCell>
+              <TableCell align="left">문제 풀기</TableCell>
+              <TableCell align="left">해설 보기</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -79,17 +86,19 @@ function HistoryTable() {
               .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
               .map((i, j) => (
                 <TableRow key={i[4]}>
-                  <TableCell component="th" scope="row">
-                    {page * rowsPerPage + j + 1}
-                  </TableCell>
                   <TableCell align="left">
+                    <h4>{i[0]}</h4>
+                  </TableCell>
+                  <TableCell align="center">
                     <Button onClick={() => navigateToStudy(i[5], i[4])}>
-                      {i[0]}
+                      문제풀기
                     </Button>
                   </TableCell>
-                  <TableCell align="center">{i[1]}</TableCell>
-                  <TableCell align="center">{i[2]}</TableCell>
-                  <TableCell align="center">{i[3]}</TableCell>
+                  <TableCell align="center">
+                    <Button onClick={() => navigateToStudy(i[5], i[4])}>
+                      해설보기
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
           </TableBody>
@@ -110,4 +119,4 @@ function HistoryTable() {
   );
 }
 
-export default HistoryTable;
+export default ReviewList;

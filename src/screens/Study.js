@@ -17,7 +17,7 @@ function Study() {
                 method: "post",
                 url: "http://127.0.0.1:8000/api/study",
                 headers: { "Content-Type": "application/json" },
-                data: { "title": values['title'],"content": values['content'], email: sessionStorage.getItem('user')},
+                data: { "title": values['title'],"content": values['content'], "email": sessionStorage.getItem('user')},
               }).then(response => {
               sessionStorage.setItem('s_id', response.data['s_id'])
               sessionStorage.setItem('a_id', response.data['a_id'])

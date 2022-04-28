@@ -43,9 +43,10 @@
 }
 
 .column {
-  height: 400px;
+  height: auto;
   width: 80vw;
   margin: 20px;
+  padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,18 +59,20 @@
 }
 
 .second-column {
-  background-color: #f6f6f6;
+  background-color: #a2bea2;
+  min-height: 50px;
 }
 
 .movable-item {
   background-color: #ffffff;
-  height: 40px;
-  width: 170px;
+  height: 30px;
+  width: 160px;
   margin: 10px auto;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 2px solid grey;
+  font-size: small;
   text-align: center;
 }
 
