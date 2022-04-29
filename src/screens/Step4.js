@@ -81,7 +81,8 @@ function Step4 () {
       {id: 'Step1', title: '1단계', desc: '전문보기', type: 1},
       {id: 'Step2', title: '2단계', desc: '요약하기', type: 1},
       {id: 'Step3', title: '3단계', desc: '어휘풀기', type: 1},
-      {id: 'Step4', title: '4단계', desc: '결과보기', type: 0},
+      {id: 'Step5', title: '4단계', desc: '빈칸풀기', type: 1},
+      {id: 'Step4', title: '5단계', desc: '결과보기', type: 0},
     ]
   }
 
@@ -95,6 +96,7 @@ function Step4 () {
     const response = await axios.get(`http://127.0.0.1:8000/api/Step4`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
     setArticle_comprehension(response.data['article_comprehension']);
     setSummary(response.data['summary'])
+    console.log(response.data['keyword'])
   },[]);
     
     return (
