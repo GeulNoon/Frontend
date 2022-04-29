@@ -87,8 +87,13 @@ function Step2 () {
   }
 
   useEffect(async () => {
-    const response = await axios.get(`http://127.0.0.1:8000/api/Step2`, {params: {'a_id': sessionStorage.getItem('a_id')}});
+    const response = await axios.get(`http://127.0.0.1:8000/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
     setTitle(response.data['title']);
+    console.log(Title);
+  },[]);
+
+  useEffect(async () => {
+    const response = await axios.get(`http://127.0.0.1:8000/api/Step2`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
     setSummary(response.data['summary']);
     SetIsSubmitted(response.data['issubmitted']);
   },[]);

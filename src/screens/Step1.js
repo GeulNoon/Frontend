@@ -52,7 +52,9 @@ class Subject extends Component{
 
 //메인함수
 function Step1 () {
-  const [Article, setArticle] = useState(' ');
+  const [Title, setTitle] = useState(' ');
+  const [Content, setContent] = useState(' ');
+  const [Submiited, setSubmitted] = useState(' ');
   const state = {
     contents: [
       {id: 'Step1', title: '1단계', desc: '전문보기', type: 0},
@@ -63,10 +65,16 @@ function Step1 () {
   }
 
   useEffect(async () => {
-    const response = await axios.get(`http://127.0.0.1:8000/api/Step1`, {params: {'a_id': sessionStorage.getItem('a_id')}});
-    setArticle(response.data);
-    console.log(Article.content);
-    console.log(Article.issubmitted);
+    const response = await axios.get(`http://127.0.0.1:8000/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
+    setTitle(response.data['title']);
+    console.log(Title);
+  },[]);
+
+  useEffect(async () => {
+    const response = await axios.get(`http://127.0.0.1:8000/api/Step1`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
+    setContent(response.data["content"]);
+    setSubmitted(response.data["issubmitted"]);
+    console.log([Submiited.issubmitted]);
   },[]);
 
   const [word, setWord] = useState('');
@@ -104,13 +112,13 @@ function Step1 () {
   }
     return (
       <div style={{display:'flex'}}>
-        <NavigationBar list={state.contents} title = {Article.title} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
+        <NavigationBar list={state.contents} title = {Title} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
         <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw', marginTop: '3vw'}}>
           <div style={{width: '80vw'}}>          
             <Subject title="1단계: 전문보기" sub="기사의 전문을 읽어봅시다."></Subject>
           </div>
           <div style={{display:'flex'}}>
-            <TextBox>{Article.content}</TextBox>
+            <TextBox>{Content}</TextBox>
             <div>
               <div style={{width: '30vw'}}>
                 <h3>단어 검색</h3>

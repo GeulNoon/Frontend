@@ -1,11 +1,12 @@
 //학습하기의 문제풀기:어휘풀기
-import React, { Component, useState } from "react";
+import React, { useState, useEffect, Component } from 'react';
 import NavigationBar from "../components/NavigationBar";
 import Choice from "../components/Choice";
 import MultipleChoice from "../components/MutipleChoice";
 import { NavLink } from "react-router-dom";
 import NextIcon from "../image/NextIcon.png";
 import styled from "styled-components";
+import axios from "axios"
 
 const SubmitButton = styled.button`
   display: flex;
@@ -40,19 +41,28 @@ class Subject extends Component {
 const Step3 = () => {
   const state = {
     contents: [
-      { id: "Step1", title: "1단계", desc: "전문보기", type: 1 },
-      { id: "Step2", title: "2단계", desc: "요약하기", type: 1 },
-      { id: "Step3", title: "3단계", desc: "어휘풀기", type: 0 },
-      { id: "Step4", title: "4단계", desc: "결과보기", type: 1 },
-    ],
+      {id: 'Step1', title: '1단계', desc: '전문보기', type: 1},
+      {id: 'Step2', title: '2단계', desc: '요약하기', type: 1},
+      {id: 'Step3', title: '3단계', desc: '어휘풀기', type: 0},
+      {id: 'Step5', title: '4단계', desc: '빈칸풀기', type: 1},
+      {id: 'Step4', title: '5단계', desc: '결과보기', type: 1},
+    ]
   };
+
+  const [Title, setTitle] = useState('');
+  useEffect(async () => {
+    const response = await axios.get(`http://127.0.0.1:8000/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
+    setTitle(response.data['title']);
+    console.log(Title);
+  },[]);
+
   const [answer, setAnswer] = useState([
     { id: 1, value: "" },
     { id: 2, value: "" },
   ]); //사용자가 입력한 답. 문제 마다 value에 저장
   return (
     <div style={{ display: "flex" }}>
-      <NavigationBar list={state.contents} prev={"Study"} />{" "}
+      <NavigationBar list={state.contents} title={Title} prev={"Study"} />{" "}
       {/*화면 좌측 단계이동 바*/}
       <div
         style={{
