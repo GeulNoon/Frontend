@@ -114,7 +114,7 @@ function Result() {
             <div style={{display: 'flex', alignItems: 'center', justifyContent:'center', width: '250px', height: '30px', borderRadius: '10px', backgroundColor: '#eff0ef'}}>
               <h6>학습이력</h6>
             </div>
-            {title.map((i) => <History key={i[0]} title={i[0]} date={i[1]}/>)}
+            {title.map((i,j) => <History key={j} title={i[0]} date={i[1]}/>)}
             <h6 style={{width: '250px', margin: '0px', textAlign: 'right'}}>
               <NavLink style={{ color: 'grey'}} to="More">
               더보기...
