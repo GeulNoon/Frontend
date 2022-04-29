@@ -62,10 +62,15 @@ function ContentBox(props) {
         </div>
         {props.question}
         <TextBox>{props.content}</TextBox>
-        <div style={{display: "flex", justifyContent: 'center', width: "80vw-10px", marginBottom: '10px'}}>
-          {props.choice}
+        <div style={{display: "flex", justifyContent: 'space-around', width: "50vw", marginLeft: '15vw', marginRight: '15vw', marginBottom: '10px'}}>
+          {/*{props.choice}*/}
+          <p>1. 창조</p>
+          <p style={{color: 'green'}}>2. 전망</p>
+          <p style={{color: 'red'}}>3. 가치</p>
+          <p>4. 도시</p>
+          <p>5. 인재</p>
         </div>
-        <TextBox>{props.comment}</TextBox>
+        <TextBox style={{whiteSpace: 'pre-wrap'}}>{props.comment}</TextBox>
       </div>
     );
 }
@@ -126,9 +131,13 @@ function Step4 () {
             <div className='pointer'>요약문 정답</div>
             <TextBox>{Summary}</TextBox>
             <AnswerBox><div className='pointer' style={{marginRight: '20px'}}>어휘문제 정답</div>
-              1. ③ 2. (1)-(C), (2)-(D), (3)-(A), (4)-(E), (5)-(B)  3. ④  4. 해설참조
+              1. ③ 2. (1)-(C), (2)-(D), (3)-(A), (4)-(E), (5)-(B)  3. ④
             </AnswerBox>
-            <ContentBox question = "1. 문제" content = "문제 내용" choice = "문제 보기" comment = "문제 해설" isCorrect = {0} />
+            <ContentBox question = "1. 다음 단어 중 빈칸에 들어갈 수 있는 단어를 고르시오." 
+            content = "진수는 미래에 대해 낙관적인 _____를 가지고 있다." 
+            //choice = {"1. 창조 2. 전망 3. 가치 4. 도시 5. 인재"}
+            comment = {"창조: 전에 없던 것을 처음으로 만들거나 새롭게 이룩함.\n전망: 어떤 곳을 멀리 바라봄. 또는 멀리 바라보이는 경치. \n가치: 값이나 귀중한 정도.\n도시: 정치, 경제, 문화의 중심이 되고 사람이 많이 사는 지역.\n인재: 학식과 능력을 갖추어 사회적으로 크게 쓸모가 있는 사람"}
+            isCorrect = {0} />
             <ContentBox question = "2. 문제" content = "문제 내용" choice = "문제 보기" comment = "문제 해설" isCorrect = {1} />
           </div>
         </div>

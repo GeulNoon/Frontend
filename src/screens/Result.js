@@ -14,8 +14,8 @@ const ResultSummWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 250px;
-  height: 125px;
+  width: 15vw;
+  height: 20vh;
   border: none;
   border-radius: 20px;
   background-color: #eff0ef;
@@ -41,8 +41,8 @@ class ResultSumm extends Component{
   render(){
     return (
       <ResultSummWrapper>
-        <div style={{width: '120px'}}>
-          <h5 style={{margin: '0px', marginBottom: '7px'}}>{this.props.title}</h5>
+        <div style={{width: '9vw'}}>
+          <h5 style={{margin: '0px', marginBottom: '15px'}}>{this.props.title}</h5>
           <h2 style={{margin: '0px'}}>{this.props.value}</h2>
         </div>
         <img alt="" src ={this.props.icon} width='45px' height='45px'/>
@@ -95,6 +95,7 @@ function Result() {
         <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center',width: '900px', height: '150px'}}>
           <ResultSumm title="전체 학습" value={total_study} icon={ResultIcon1}/>
           <ResultSumm title="평균 어휘 정답률" value="71.4%" icon={ResultIcon2}/>
+          <ResultSumm title="평균 빈칸 정답률" value="83.5%" icon={ResultIcon2}/>
           <ResultSumm title="평균 지문 이해도" value={avg_article_comprehension + '%'} icon={ResultIcon3}/>
         </div>
         <div style={{display: 'flex', width: '900px', height: '300px'}}>

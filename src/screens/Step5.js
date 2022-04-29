@@ -10,9 +10,9 @@ const TextBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 70vw;
+  width: 80vw;
   background-color: #e5e5e5;
-  font-size: 20px;
+  font-size: 18px;
   border: none;
   margin-bottom: 20px;
   padding: 10px;
@@ -21,9 +21,9 @@ const TextBox = styled.div`
 `;
 
 const TextInput = styled.input`
-    width: 100px;
+    width: 80px;
     height: 20px;
-    margin: 5px;
+    margin: 10px;
 `;
 
 const Button = styled.div`
@@ -41,6 +41,7 @@ const Button = styled.div`
   }
   border: none;
   border-radius: 3px;
+  margin: 10px;
 `;
 
 //전문보기 제목 글씨(title(제목)과 sub(설명)을 요소로 전달받음)
@@ -108,10 +109,12 @@ function Step5 () {
           <div style={{display:'flex', flexDirection:'column'}}>
             <TextBox>{Content}</TextBox>
             각 번호에 해당하는 단어를 적어주세요.
-            <div style={{display:'flex', width: '80vw', flexFlow:'wrap'}}>
+            <div style={{display:'flex', width: '80vw', flexFlow:'wrap', justifyContent: 'space-between'}}>
               {wordValue.map(word => <TextInput key={word.id} placeholder={word.id+1+"."} onChange={handleChange} name={word.id}/>)}
             </div>
-            <Button onClick={submitAnswer}>제출하기</Button>
+            <div style={{width: '80vw', display: 'flex', justifyContent: 'end'}}>
+              <Button onClick={submitAnswer}>제출하기</Button>
+            </div>
           </div>
           <div style={{width: '80vw', display: 'flex', justifyContent: 'end'}}>
             <NavLink to="/Study/Step2">

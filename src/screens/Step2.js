@@ -163,7 +163,6 @@ function Step2 () {
                 <Button onClick={()=>{ SetSelected(false); }} style = {{backgroundColor: (isSelected === false) ? '#5b6d5b':'white', color: (isSelected === false) ? 'white':'black'}}> 직접입력 </Button>
               </div>
               {Input}
-              {text} {/*사용자 답 확인하기 위해 임시로 넣었습니다*/}
             </div>
             <div style={{width: '80vw', display: 'flex', flexDirection: 'column', alignItems: 'flex-end'}}>
               <SubmitButton type="submit" disabled={isSubmitted}>제출하기</SubmitButton>

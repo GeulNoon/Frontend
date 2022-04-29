@@ -59,6 +59,7 @@ const Step3 = () => {
   const [answer, setAnswer] = useState([
     { id: 1, value: "" },
     { id: 2, value: "" },
+    { id: 3, value: "" },
   ]); //사용자가 입력한 답. 문제 마다 value에 저장
   return (
     <div style={{ display: "flex" }}>
@@ -91,6 +92,7 @@ const Step3 = () => {
           {/*객관식 문제*/}
           <MultipleChoice answer={answer} setAnswer={setAnswer} id={2} />{" "}
           {/*동음이의어 문제*/}
+          <Choice answer={answer} setAnswer={setAnswer} id={3} />
           {answer.map((ans) => ans.value)}{" "}
           {/*사용자 답 확인하기 위해 임시로 넣었습니다*/}
         </div>

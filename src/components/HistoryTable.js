@@ -69,8 +69,9 @@ function HistoryTable() {
               <TableCell>번호</TableCell>
               <TableCell align="left">지문</TableCell>
               <TableCell align="center">학습 날짜</TableCell>
-              <TableCell align="center">지문 이해도</TableCell>
-              <TableCell align="center">어휘퀴즈 정답</TableCell>
+              <TableCell align="center">요약하기 지문 이해도</TableCell>
+              <TableCell align="center">어휘풀기 점수</TableCell>
+              <TableCell align="center">빈칸풀기 점수</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -89,6 +90,7 @@ function HistoryTable() {
                   </TableCell>
                   <TableCell align="center">{i[1]}</TableCell>
                   <TableCell align="center">{i[2]}</TableCell>
+                  <TableCell align="center">{i[3]}</TableCell>
                   <TableCell align="center">{i[3]}</TableCell>
                 </TableRow>
               ))}

@@ -67,12 +67,13 @@ class NavigationBar extends Component {
               display: 'flex', 
               alignItems:'center', 
               justifyContent: 'center',
-              height: '80px',
-              width: '80px',
+              height: '15vh',
+              width: '8vw',
               border: '2px solid black',
               marginTop: '10vh',
               marginBottom: '5vh',
               fontWeight: 'bold',
+              textAlign: 'center'
               }}>
               {title}
             </div>
