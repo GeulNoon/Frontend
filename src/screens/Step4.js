@@ -81,6 +81,9 @@ function Step4 () {
   const [Article_comprehension, setArticle_comprehension] = useState(' ');
   const [Title, setTitle] = useState(' ');
   const [Summary, setSummary] = useState(' ');
+  const [KeywordScore, setKeywordScore] = useState(0);
+  const [keywordAnswer, setKeywordAnswer] = useState([]);
+  const [keywordUser, setKeywordUser] = useState([]);
   const state = {
     contents: [
       {id: 'Step1', title: '1단계', desc: '전문보기', type: 1},
@@ -101,7 +104,9 @@ function Step4 () {
     const response = await axios.get(`http://127.0.0.1:8000/api/Step4`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
     setArticle_comprehension(response.data['article_comprehension']);
     setSummary(response.data['summary'])
-    console.log(response.data['keyword'])
+    setKeywordScore(response.data['keyword_score'])
+    setKeywordAnswer(response.data['keyword_answer'])
+    setKeywordUser(response.data['keyword_user_answer']['answer'])
   },[]);
     
     return (
@@ -130,7 +135,7 @@ function Step4 () {
             </div>
             <div className='pointer'>요약문 정답</div>
             <TextBox>{Summary}</TextBox>
-            <AnswerBox><div className='pointer' style={{marginRight: '20px'}}>어휘문제 정답</div>
+            <AnswerBox><div className='pointer' style={{marginRight: '20px'}}>어휘풀기 정답</div>
               1. ③ 2. (1)-(C), (2)-(D), (3)-(A), (4)-(E), (5)-(B)  3. ④
             </AnswerBox>
             <ContentBox question = "1. 다음 단어 중 빈칸에 들어갈 수 있는 단어를 고르시오." 
@@ -139,6 +144,14 @@ function Step4 () {
             comment = {"창조: 전에 없던 것을 처음으로 만들거나 새롭게 이룩함.\n전망: 어떤 곳을 멀리 바라봄. 또는 멀리 바라보이는 경치. \n가치: 값이나 귀중한 정도.\n도시: 정치, 경제, 문화의 중심이 되고 사람이 많이 사는 지역.\n인재: 학식과 능력을 갖추어 사회적으로 크게 쓸모가 있는 사람"}
             isCorrect = {0} />
             <ContentBox question = "2. 문제" content = "문제 내용" choice = "문제 보기" comment = "문제 해설" isCorrect = {1} />
+            <AnswerBox><div className='pointer' style={{marginRight: '20px'}}>빈칸풀기 정답</div>
+              {KeywordScore}점:
+              {keywordAnswer.map((word,i) =>i+1+"."+word+" ")}
+            </AnswerBox>
+            <TextBox>
+              사용자 답:
+              {keywordUser.map((word,i) =>i+1+"."+word['value']+" ")}
+            </TextBox>
           </div>
         </div>
       </div>
