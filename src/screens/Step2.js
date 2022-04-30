@@ -78,8 +78,9 @@ function Step2 () {
       {id: 'Step1', title: '1단계', desc: '전문보기', type: 1},
       {id: 'Step2', title: '2단계', desc: '요약하기', type: 0},
       {id: 'Step3', title: '3단계', desc: '어휘풀기', type: 1},
-      {id: 'Step4', title: '4단계', desc: '결과보기', type: 1},
-    ],
+      {id: 'Step5', title: '4단계', desc: '빈칸풀기', type: 1},
+      {id: 'Step4', title: '5단계', desc: '결과보기', type: 1},
+    ]
 };
 
   const handleChange = (e) => {
@@ -162,7 +163,6 @@ function Step2 () {
                 <Button onClick={()=>{ SetSelected(false); }} style = {{backgroundColor: (isSelected === false) ? '#5b6d5b':'white', color: (isSelected === false) ? 'white':'black'}}> 직접입력 </Button>
               </div>
               {Input}
-              {text} {/*사용자 답 확인하기 위해 임시로 넣었습니다*/}
             </div>
             <div style={{width: '80vw', display: 'flex', flexDirection: 'column', alignItems: 'flex-end'}}>
               <SubmitButton type="submit" disabled={isSubmitted}>제출하기</SubmitButton>

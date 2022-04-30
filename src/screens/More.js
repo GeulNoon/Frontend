@@ -10,7 +10,7 @@ class More extends Component {
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: '900px'}}>
           <div style={{display: 'flex', alignItems: 'center', justifyContent:'center', 
             width: '700px', height: '40px', borderRadius: '10px', 
-            backgroundColor: '#eff0ef', marginBottom: '20px'}}>
+            backgroundColor: '#eff0ef', marginBottom: '20px', marginTop: '5vh'}}>
             <h5>학습이력</h5>
           </div>
           <HistoryTable/>{/*학습이력 목록*/}

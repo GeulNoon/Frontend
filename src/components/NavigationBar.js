@@ -5,23 +5,23 @@ import styled from "styled-components";
 
 const Button = styled.button`
   width: 10vw;
-  font-size: 20px;
+  font-size: 18px;
   background-color: #a2bea2;
   :hover {
     background-color: #a2bea2;
     opacity: 0.7;
   }
-  margin-bottom: 5vh;
+  margin-bottom: 3vh;
   border: none;
 `;
 
 const Selected = styled.button`
   width: 10vw;
   color: white;
-  font-size: 20px;
+  font-size: 18px;
   background-color: #5b6d5b;
   border: none;
-  margin-bottom: 5vh;
+  margin-bottom: 3vh;
 `;
 
 class TOC extends Component{
@@ -67,12 +67,13 @@ class NavigationBar extends Component {
               display: 'flex', 
               alignItems:'center', 
               justifyContent: 'center',
-              height: '80px',
-              width: '80px',
+              height: '15vh',
+              width: '8vw',
               border: '2px solid black',
               marginTop: '10vh',
-              marginBottom: '10vh',
+              marginBottom: '5vh',
               fontWeight: 'bold',
+              textAlign: 'center'
               }}>
               {title}
             </div>

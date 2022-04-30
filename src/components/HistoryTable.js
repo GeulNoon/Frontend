@@ -69,8 +69,9 @@ function HistoryTable() {
               <TableCell>번호</TableCell>
               <TableCell align="left">지문</TableCell>
               <TableCell align="center">학습 날짜</TableCell>
-              <TableCell align="center">지문 이해도</TableCell>
-              <TableCell align="center">어휘퀴즈 정답</TableCell>
+              <TableCell align="center">요약하기 지문 이해도</TableCell>
+              <TableCell align="center">어휘풀기 점수</TableCell>
+              <TableCell align="center">빈칸풀기 점수</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -78,18 +79,19 @@ function HistoryTable() {
             {title
               .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
               .map((i, j) => (
-                <TableRow key={i[4]}>
+                <TableRow key={i[5]}>
                   <TableCell component="th" scope="row">
                     {page * rowsPerPage + j + 1}
                   </TableCell>
                   <TableCell align="left">
-                    <Button onClick={() => navigateToStudy(i[5], i[4])}>
+                    <Button onClick={() => navigateToStudy(i[6], i[5])}>
                       {i[0]}
                     </Button>
                   </TableCell>
                   <TableCell align="center">{i[1]}</TableCell>
                   <TableCell align="center">{i[2]}</TableCell>
                   <TableCell align="center">{i[3]}</TableCell>
+                  <TableCell align="center">{i[4]}</TableCell>
                 </TableRow>
               ))}
           </TableBody>

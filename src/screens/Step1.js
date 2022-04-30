@@ -13,7 +13,7 @@ const TextBox = styled.div`
   justify-content: center;
   width: 50vw;
   background-color: #e5e5e5;
-  font-size: 20px;
+  font-size: 18px;
   border: none;
   margin-bottom: 20px;
   padding: 10px;
@@ -60,7 +60,8 @@ function Step1 () {
       {id: 'Step1', title: '1단계', desc: '전문보기', type: 0},
       {id: 'Step2', title: '2단계', desc: '요약하기', type: 1},
       {id: 'Step3', title: '3단계', desc: '어휘풀기', type: 1},
-      {id: 'Step4', title: '4단계', desc: '결과보기', type: 1},
+      {id: 'Step5', title: '4단계', desc: '빈칸풀기', type: 1},
+      {id: 'Step4', title: '5단계', desc: '결과보기', type: 1},
     ]
   }
 
@@ -119,8 +120,8 @@ function Step1 () {
           </div>
           <div style={{display:'flex'}}>
             <TextBox>{Content}</TextBox>
-            <div>
-              <div style={{width: '30vw'}}>
+            <div style = {{marginLeft: '3vw'}}>
+              <div style={{width: '25vw'}}>
                 <h3>단어 검색</h3>
                 <div style={{display:"flex", alignItems: 'center', marginBottom: '10px'}}>
                   <input type="text" placeholder='지문 속 궁금한 단어를 검색해봅시다.' onChange={(event) => setWord(event.target.value)} style={{width:"200px", marginBottom:"0px", marginRight: "10px"}}/>
@@ -128,12 +129,14 @@ function Step1 () {
                 </div>
                 {isVisible ? 
                 <div style={{border: "1px solid #5b6d5b"}}>
-                  <Button onClick={()=>{setIsVisible(0)}}>X</Button>
+                  <div style={{width: '25vw', display:"flex", justifyContent: 'end'}}>
+                    <Button style={{width: '20px', marginRight: '2px'}} onClick={()=>{setIsVisible(0)}}>X</Button>
+                  </div>
                   {result.map((def,index) => <p key={def}>{index+1}. {def}</p>)}
                 </div> :
                 null}
               </div>
-              <div style={{width: '30vw'}}>
+              <div style={{width: '25vw'}}>
               <h3>질의 응답</h3>
                 <div style={{display:"flex", alignItems: 'center', marginBottom: '10px'}}>
                   <input type="text" placeholder='지문 속 궁금한 내용을 검색해봅시다.' onChange={(event) => setQuestion(event.target.value)} style={{width:"200px", marginBottom:"0px", marginRight: "10px"}}/>
@@ -141,7 +144,9 @@ function Step1 () {
                 </div>
                 {isAnswerVisible ? 
                 <div style={{border: "1px solid #5b6d5b"}}>
-                  <Button onClick={()=>{setIsAnswerVisible(0)}}>X</Button>
+                  <div style={{width: '25vw', display:"flex", justifyContent: 'end'}}>
+                    <Button style={{width: '20px', marginRight: '2px'}} onClick={()=>{setIsAnswerVisible(0)}}>X</Button>
+                  </div>
                   {answer}
                 </div> :
                 null}

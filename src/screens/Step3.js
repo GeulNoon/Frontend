@@ -41,11 +41,12 @@ class Subject extends Component {
 const Step3 = () => {
   const state = {
     contents: [
-      { id: "Step1", title: "1단계", desc: "전문보기", type: 1 },
-      { id: "Step2", title: "2단계", desc: "요약하기", type: 1 },
-      { id: "Step3", title: "3단계", desc: "어휘풀기", type: 0 },
-      { id: "Step4", title: "4단계", desc: "결과보기", type: 1 },
-    ],
+      {id: 'Step1', title: '1단계', desc: '전문보기', type: 1},
+      {id: 'Step2', title: '2단계', desc: '요약하기', type: 1},
+      {id: 'Step3', title: '3단계', desc: '어휘풀기', type: 0},
+      {id: 'Step5', title: '4단계', desc: '빈칸풀기', type: 1},
+      {id: 'Step4', title: '5단계', desc: '결과보기', type: 1},
+    ]
   };
 
   const [Title, setTitle] = useState('');
@@ -58,6 +59,7 @@ const Step3 = () => {
   const [answer, setAnswer] = useState([
     { id: 1, value: "" },
     { id: 2, value: "" },
+    { id: 3, value: "" },
   ]); //사용자가 입력한 답. 문제 마다 value에 저장
   return (
     <div style={{ display: "flex" }}>
@@ -90,6 +92,7 @@ const Step3 = () => {
           {/*객관식 문제*/}
           <MultipleChoice answer={answer} setAnswer={setAnswer} id={2} />{" "}
           {/*동음이의어 문제*/}
+          <Choice answer={answer} setAnswer={setAnswer} id={3} />
           {answer.map((ans) => ans.value)}{" "}
           {/*사용자 답 확인하기 위해 임시로 넣었습니다*/}
         </div>

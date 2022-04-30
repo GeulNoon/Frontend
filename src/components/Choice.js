@@ -12,7 +12,7 @@ const Choice = (props) => {
     }; 
       return (
           <div style={{marginTop: 10, marginBottom:10}}>
-            다음 단어 중 빈칸에 들어갈 수 있는 단어를 고르시오. {/*문제 제시문*/}
+            1. 다음 단어 중 빈칸에 들어갈 수 있는 단어를 고르시오. {/*문제 제시문*/}
             <div style={{width: '80vw', 
                 height: '10vh',
                 display:'flex', 
