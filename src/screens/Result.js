@@ -81,17 +81,24 @@ function Result() {
     const [total_study, setTotal_study] = useState(0);
     const [avg_article_comprehension, setAvg_article_comprehension] = useState(0);
     const [avg_keyword_score, setAvg_keyword_score] = useState(0);
+    const [statistics, setStatistics] = useState([]);
     useEffect(() => {
       async function fetchData(){
       const response = await axios.get(`http://127.0.0.1:8000/api/getHistory`, {params: {'email': sessionStorage.getItem('user')}});
+      const stat = await axios.get(`http://127.0.0.1:8000/api/getStatistics`, {params: {'email': sessionStorage.getItem('user'), 'option': option}});  
       setTitle(response.data.title);
       setTotal_study(response.data['total_study']);
       setAvg_article_comprehension(response.data['avg_article_comprehension'])
-      setAvg_keyword_score(response.data['avg_keyword_score'])                                    
-      }
+      setAvg_keyword_score(response.data['avg_keyword_score'])  
+      setStatistics(stat.data)                         
+      } 
       fetchData();
     },[]);
-
+    const changeOption = async(i) => {
+      setOption(i)
+      const stat = await axios.get(`http://127.0.0.1:8000/api/getStatistics`, {params: {'email': sessionStorage.getItem('user'), 'option': i}});
+      setStatistics(stat.data) 
+    }
    return (
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center',width: '900px', height: '150px'}}>
@@ -104,13 +111,13 @@ function Result() {
           <div style={{width: '600px'}}>
             <Subject title="학습 통계"></Subject>
             <div style={{display: 'flex', justifyContent: 'flex-end', width: '540px'}}>
-              <Button onClick={()=>{ setOption(0); }} style = {{backgroundColor: (option === 0) ? '#5b6d5b':'white', color: (option === 0) ? 'white':'black'}}> 일별 </Button>
-              <Button onClick={()=>{ setOption(1); }} style = {{backgroundColor: (option === 1) ? '#5b6d5b':'white', color: (option === 1) ? 'white':'black'}}> 주별 </Button>
-              <Button onClick={()=>{ setOption(2); }} style = {{backgroundColor: (option === 2) ? '#5b6d5b':'white', color: (option === 2) ? 'white':'black'}}> 월별 </Button>
+              <Button onClick={()=>{ changeOption(0); }} style = {{backgroundColor: (option === 0) ? '#5b6d5b':'white', color: (option === 0) ? 'white':'black'}}> 일별 </Button>
+              <Button onClick={()=>{ changeOption(1); }} style = {{backgroundColor: (option === 1) ? '#5b6d5b':'white', color: (option === 1) ? 'white':'black'}}> 주별 </Button>
+              <Button onClick={()=>{ changeOption(2); }} style = {{backgroundColor: (option === 2) ? '#5b6d5b':'white', color: (option === 2) ? 'white':'black'}}> 월별 </Button>
             </div>
             <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center',width: '600px', height: '230px'}}>
-              <BarCharts option={option}/>{/*우측 그래프, option값 전달*/}
-              <LineCharts option={option}/>{/*좌측 그래프, option값 전달*/}
+              <BarCharts option={option} data={statistics.study_count}/>{/*우측 그래프, option값 전달*/}
+              <LineCharts option={option} data={statistics.study_avg}/>{/*좌측 그래프, option값 전달*/}   
             </div>
           </div>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',width: '300px', paddingTop: '50px'}}>

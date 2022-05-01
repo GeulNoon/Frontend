@@ -34,7 +34,7 @@ const BarCharts = (props) => {
         <BarChart
           width={100}
           height={300}
-          data={data}
+          data={props.data}
           onMouseMove={state => {
             if (state.isTooltipActive) {
               setFocusBar(state.activeTooltipIndex);
@@ -43,9 +43,9 @@ const BarCharts = (props) => {
             }
           }}
         >
-          <XAxis dataKey="name" tick={{ fill: 'black' }}/>
+          <XAxis dataKey="day" tick={{ fill: 'black' }}/>
           <Tooltip cursor={{ fill: "white"}} />
-          <Bar dataKey="value">
+          <Bar dataKey="cnt" name="학습 횟수">
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={focusBar === index ? '#3f613f' : '#eff0ef'} />
           ))}
