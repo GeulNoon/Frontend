@@ -42,13 +42,13 @@ const LineCharts = (props) => {
         <LineChart
           width={500}
           height={300}
-          data={data}
+          data={props.data}
         >
-          <XAxis dataKey="name" tick={{ fill: 'black' }}/>
+          <XAxis dataKey="day" tick={{ fill: 'black' }}/>
           <Tooltip />
-          <Line type="linear" dataKey="Step2" stroke="#a41f1f" />
-          <Line type="linear" dataKey="Step3" stroke="#3b583b" />
-          <Line type="linear" dataKey="Step4" stroke="#00008b" />
+          <Line type="linear" dataKey="avg1" stroke="#a41f1f" name="Step2"/>
+          <Line type="linear" dataKey="avg2" stroke="#3b583b" name="Step3"/>
+          <Line type="linear" dataKey="avg3" stroke="#00008b" name="Step4"/>
         </LineChart>
       </ResponsiveContainer>
     );

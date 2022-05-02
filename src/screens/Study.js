@@ -1,17 +1,19 @@
 //학습하기 도입 화면
-import React, { useEffect, Component } from 'react';
+import React, { useEffect, Component, useState } from 'react';
 import { Formik } from "formik";
 import styled from "styled-components";
 import axios from "axios"
 import {useNavigate} from 'react-router-dom';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 //메인 함수
 function Study() {
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
     return (
       <Formik 
           initialValues={{ title: "", content: "", email: ""}}
           onSubmit={(values, { setSubmitting }) => {
+            setIsLoading(true)
             setTimeout(() => {
               axios({
                 method: "post",
@@ -25,6 +27,7 @@ function Study() {
               })
               .catch(error => {
                 alert('기사 등록 실패')
+                setIsLoading(false)
               });
               setSubmitting(false);
             }, 500);
@@ -42,42 +45,50 @@ function Study() {
               submitForm
             } = props;
         return (
+          isLoading ? 
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '10vh'}}>
+            <div style={{display:'flex', alignItems:'center'}}>
+              <CircularProgress size={30} color={'inherit'}/>
+              <h2 style={{marginLeft: '10px'}}>로딩중...</h2>
+            </div>
+            <h4 style={{color: '#5b6d5b'}}>시간이 조금 걸립니다:)</h4>
+          </div> : 
           <form onSubmit={handleSubmit}>
-          <Wrapper>
-          <LeftWrapper>
-          <header>
-            <h2>학습하기</h2>
-            <h6 style={{color: "#676767"}}>학습대상이 될 기사를 직접 선택할 수 있습니다.</h6>
-          </header>
-            <div style={{display: 'flex', alignItems:'center'}}>
-              <h4 style={{marginRight: '20px'}}>지문 제목</h4>
-              <input
-                name="title"
-                type="title"
-                placeholder="제목을 입력해주세요" 
-                style={{width: '180px',marginBottom:'0px',padding:'5px'}} 
-                value = {values.title} 
+            <Wrapper>
+            <LeftWrapper>
+            <header>
+              <h2>학습하기</h2>
+              <h6 style={{color: "#676767"}}>학습대상이 될 기사를 직접 선택할 수 있습니다.</h6>
+            </header>
+              <div style={{display: 'flex', alignItems:'center'}}>
+                <h4 style={{marginRight: '20px'}}>지문 제목</h4>
+                <input
+                  name="title"
+                  type="title"
+                  placeholder="제목을 입력해주세요" 
+                  style={{width: '180px',marginBottom:'0px',padding:'5px'}} 
+                  value = {values.title} 
+                  onChange={handleChange}
+                />
+              </div>
+                <ContentWrapper>
+                  {`글눈 서비스는\n교육을 목적으로 한 비영리 사이트로,\n모든 지문을 상업적으로\n게재하지 않습니다.`}
+                </ContentWrapper>
+            </LeftWrapper>
+            <RightWrapper>
+              <div style={{display: 'flex', alignItems: 'center'}}>
+                <h3>지문 내용</h3>
+              </div>
+              <BorderInput
+                name="content"
+                type="content"
+                placeholder="내용을 입력해주세요" 
+                value = {values.content} 
                 onChange={handleChange}
               />
-            </div>
-              <ContentWrapper>
-                {`글눈 서비스는\n교육을 목적으로 한 비영리 사이트로,\n모든 지문을 상업적으로\n게재하지 않습니다.`}
-              </ContentWrapper>
-          </LeftWrapper>
-          <RightWrapper>
-            <div style={{display: 'flex', alignItems: 'center'}}>
-              <h3>지문 내용</h3>
-            </div>
-            <BorderInput
-              name="content"
-              type="content"
-              placeholder="내용을 입력해주세요" 
-              value = {values.content} 
-              onChange={handleChange}
-            />
-            <EnterButton type="submit" disabled={isSubmitting}>학습 시작</EnterButton> 
-          </RightWrapper>
-      </Wrapper>
+              <EnterButton type="submit" disabled={isSubmitting}>학습 시작</EnterButton> 
+            </RightWrapper>
+        </Wrapper>
       </form>
     )
     }}
