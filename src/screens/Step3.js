@@ -50,17 +50,48 @@ const Step3 = () => {
   };
 
   const [Title, setTitle] = useState('');
-  const [Quiz1, setQuiz1] = useState({});
-  const [Quiz2, setQuiz2] = useState({});
-  const [Quiz3, setQuiz3] = useState({});
-  const [Quiz4, setQuiz4] = useState({});
+  const [Example1, setExample1] = useState();
+  const [Question1, setQuestion1] = useState();
+  const [Question2, setQuestion2] = useState();
+  const [Question2W, setQuestion2W] = useState();
+  const [Question2S, setQuestion2S] = useState();
+  const [Question4, setQuestion4] = useState();
+  const [Example2, setExample2] = useState();
+  const [Example3, setExample3] = useState();
+  const [Example4, setExample4] = useState();
+
+
   useEffect(async () => {
     const response = await axios.get(`http://127.0.0.1:8000/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
-    const quiz = await axios.get(`http://127.0.0.1:8000/api/Step3`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
     setTitle(response.data['title']);
-    setQuiz1(quiz.data.quiz_1)
     console.log(Title);
   },[]);
+
+  useEffect(async () => {
+    const response = await axios.get(`http://127.0.0.1:8000/api/Step3`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
+    setExample1(response.data['quiz1']['Choice']);
+    setQuestion1(response.data['quiz1']['Test']);
+    setQuestion2(response.data['quiz2']['Test']);
+    setQuestion2W(response.data['quiz2']['Word']);
+    setQuestion2S(response.data['quiz2']['Sentence']);
+    setExample2(response.data['quiz2']);
+    setExample3(response.data['quiz3']);
+    setQuestion4(response.data['quiz4']['Test']);
+    setExample4(response.data['quiz4']['Choice']);
+    console.log(Example1)
+    console.log(Example2)
+    console.log(Example3)
+    console.log(Example4)
+  },[]);
+
+  /*useEffect(() => {
+    const fetchUserData = async () => {
+      const res = await axios.get(`http://127.0.0.1:8000/api/Step3`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
+      setExample1(res.data['quiz']["Choice"]);
+      console.log(Example1)
+    }
+    fetchUserData()
+  },[Example1]);*/
 
   const [answer, setAnswer] = useState([
     { id: 1, value: "" },
@@ -95,12 +126,11 @@ const Step3 = () => {
             alignItems: "center",
           }}
         >
-          <Choice answer={answer} setAnswer={setAnswer} id={1} question={Quiz1.TYPE1} example={Quiz1.TEST1} choice={Quiz1.W2VWORD}/>{" "}
+          <Choice answer={answer} setAnswer={setAnswer} example = {Example1} question = {Question1} id={1} />{" "}
           {/*객관식 문제*/}
-          <MultipleChoice answer={answer} setAnswer={setAnswer} id={2} />{" "}
-          <MultipleChoice answer={answer} setAnswer={setAnswer} id={3} />{" "}
+          <MultipleChoice answer={answer} setAnswer={setAnswer} question = {Question2} word = {Question2W} sentence = {Question2S} id={2} />{" "}
           {/*동음이의어 문제*/}
-          <Choice answer={answer} setAnswer={setAnswer} id={4} />
+          <Choice answer={answer} setAnswer={setAnswer} example = {Example4} question = {Question4} id={3} />
           {answer.map((ans) => ans.value)}{" "}
           {/*사용자 답 확인하기 위해 임시로 넣었습니다*/}
         </div>
