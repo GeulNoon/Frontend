@@ -50,9 +50,15 @@ const Step3 = () => {
   };
 
   const [Title, setTitle] = useState('');
+  const [Quiz1, setQuiz1] = useState({});
+  const [Quiz2, setQuiz2] = useState({});
+  const [Quiz3, setQuiz3] = useState({});
+  const [Quiz4, setQuiz4] = useState({});
   useEffect(async () => {
     const response = await axios.get(`http://127.0.0.1:8000/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
+    const quiz = await axios.get(`http://127.0.0.1:8000/api/Step3`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
     setTitle(response.data['title']);
+    setQuiz1(quiz.data.quiz_1)
     console.log(Title);
   },[]);
 
@@ -60,6 +66,7 @@ const Step3 = () => {
     { id: 1, value: "" },
     { id: 2, value: "" },
     { id: 3, value: "" },
+    { id: 4, value: "" },
   ]); //사용자가 입력한 답. 문제 마다 value에 저장
   return (
     <div style={{ display: "flex" }}>
@@ -88,11 +95,12 @@ const Step3 = () => {
             alignItems: "center",
           }}
         >
-          <Choice answer={answer} setAnswer={setAnswer} id={1} />{" "}
+          <Choice answer={answer} setAnswer={setAnswer} id={1} question={Quiz1.TYPE1} example={Quiz1.TEST1} choice={Quiz1.W2VWORD}/>{" "}
           {/*객관식 문제*/}
           <MultipleChoice answer={answer} setAnswer={setAnswer} id={2} />{" "}
+          <MultipleChoice answer={answer} setAnswer={setAnswer} id={3} />{" "}
           {/*동음이의어 문제*/}
-          <Choice answer={answer} setAnswer={setAnswer} id={3} />
+          <Choice answer={answer} setAnswer={setAnswer} id={4} />
           {answer.map((ans) => ans.value)}{" "}
           {/*사용자 답 확인하기 위해 임시로 넣었습니다*/}
         </div>
@@ -105,7 +113,7 @@ const Step3 = () => {
           }}
         >
           <SubmitButton>제출하기</SubmitButton>
-          <NavLink to="/Study/Step4">
+          <NavLink to="/Study/Step5">
             <img alt="" src={NextIcon} width="37.5px" height="37.5px" />
           </NavLink>{" "}
           {/*다음 단계 버튼*/}

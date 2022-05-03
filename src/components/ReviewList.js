@@ -63,10 +63,24 @@ function ReviewList() {
     setPage(0);
   };
 
-  const navigateToStudy = (s_id, a_id) => {
-    sessionStorage.setItem("s_id", s_id);
-    sessionStorage.setItem("a_id", a_id);
-    navigate("/Study/Step4");
+  const navigateToStudy = (a_id) => {
+    setTimeout(() => {
+      console.log(a_id)
+      axios({
+        method: "put",
+        url: "http://127.0.0.1:8000/api/reviewStudy/",
+        headers: { "Content-Type": "application/json" },
+        data: { "email": sessionStorage.getItem('user'), "a_id": a_id},
+      }).then(response => {
+      console.log(response.data['s_id'])
+      sessionStorage.setItem('s_id', response.data['s_id'])
+      sessionStorage.setItem('a_id', a_id)
+      navigate("/Review/ReviewStep1")
+      })
+      .catch(error => {
+        alert('문제 로드 실패')
+      });
+    }, 500);
   };
 
   return (
@@ -77,7 +91,6 @@ function ReviewList() {
             <TableRow>
               <TableCell align="left">지문</TableCell>
               <TableCell align="left">문제 풀기</TableCell>
-              <TableCell align="left">해설 보기</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -85,18 +98,13 @@ function ReviewList() {
             {title
               .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
               .map((i, j) => (
-                <TableRow key={i[4]}>
+                <TableRow key={j}>
                   <TableCell align="left">
                     <h4>{i[0]}</h4>
                   </TableCell>
                   <TableCell align="center">
-                    <Button onClick={() => navigateToStudy(i[5], i[4])}>
+                    <Button onClick={() => navigateToStudy(i[5])}>
                       문제풀기
-                    </Button>
-                  </TableCell>
-                  <TableCell align="center">
-                    <Button onClick={() => navigateToStudy(i[5], i[4])}>
-                      해설보기
                     </Button>
                   </TableCell>
                 </TableRow>

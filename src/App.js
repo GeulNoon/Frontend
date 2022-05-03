@@ -16,6 +16,7 @@ import ReviewStep1 from './screens/ReviewStep1';
 import ReviewStep2 from './screens/ReviewStep2';
 import ReviewStep3 from './screens/ReviewStep3';
 import ReviewStep4 from './screens/ReviewStep4';
+import ReviewStep5 from './screens/ReviewStep5';
 import Answer from './screens/Answer';
 import More from './screens/More';
 import PrivateRoute from './components/PrivateRoute'
@@ -110,6 +111,7 @@ class App extends Component {
             <Route path="/Review/ReviewStep2" element={<PrivateRoute><ReviewStep2/></PrivateRoute>}/>
             <Route path="/Review/ReviewStep3" element={<PrivateRoute><ReviewStep3/></PrivateRoute>}/>
             <Route path="/Review/ReviewStep4" element={<PrivateRoute><ReviewStep4/></PrivateRoute>}/>
+            <Route path="/Review/ReviewStep5" element={<PrivateRoute><ReviewStep5/></PrivateRoute>}/>
             <Route path="/Review/Answer" element={<PrivateRoute><Answer/></PrivateRoute>}/>
             <Route path="/Result/More" element={<PrivateRoute><More/></PrivateRoute>}/>
           </Routes>
