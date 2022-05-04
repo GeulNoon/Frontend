@@ -63,14 +63,14 @@ function ReviewList() {
     setPage(0);
   };
 
-  const navigateToStudy = (a_id) => {
+  const navigateToStudy = (a_id, s_id) => {
     setTimeout(() => {
       console.log(a_id)
       axios({
         method: "put",
         url: "http://127.0.0.1:8000/api/reviewStudy/",
         headers: { "Content-Type": "application/json" },
-        data: { "email": sessionStorage.getItem('user'), "a_id": a_id},
+        data: { "email": sessionStorage.getItem('user'), "a_id": a_id, "s_id": s_id},
       }).then(response => {
       console.log(response.data['s_id'])
       sessionStorage.setItem('s_id', response.data['s_id'])
@@ -103,7 +103,7 @@ function ReviewList() {
                     <h4>{i[0]}</h4>
                   </TableCell>
                   <TableCell align="center">
-                    <Button onClick={() => navigateToStudy(i[5])}>
+                    <Button onClick={() => navigateToStudy(i[5], i[6])}>
                       문제풀기
                     </Button>
                   </TableCell>
