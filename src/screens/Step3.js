@@ -66,6 +66,7 @@ const Step3 = () => {
   const [Question3A, setQuestion3A] = useState();
   const [Question4, setQuestion4] = useState();
   const [Example4, setExample4] = useState();
+  const [isSubmitted, SetIsSubmitted] = useState(false)
 
 
   useEffect(async () => {
@@ -92,16 +93,24 @@ const Step3 = () => {
     setQuestion3A(response.data['quiz3']['User_answer']);
     setQuestion4(response.data['quiz4']['Test']);
     setExample4(response.data['quiz4']['Choice']);
+    SetIsSubmitted(response.data['issubmitted']);
   },[]);
 
-  /*useEffect(() => {
-    const fetchUserData = async () => {
-      const res = await axios.get(`http://127.0.0.1:8000/api/Step3`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
-      setExample1(res.data['quiz']["Choice"]);
-      console.log(Example1)
-    }
-    fetchUserData()
-  },[Example1]);*/
+  const submitAnswer = () => {
+    setTimeout(() => {
+      axios({
+        method: "put",
+        url: "http://127.0.0.1:8000/api/Step3/",
+        headers: { "Content-Type": "application/json" },
+        params: {'s_id': sessionStorage.getItem('s_id')},
+        data: { "answer": answer},
+      }).catch(error => { alert('실패')
+      }).then(
+        alert('제출 성공!')
+      );
+    }, 500);
+  }
+
 
   const [answer, setAnswer] = useState([
     { id: 1, value: "" },
@@ -136,7 +145,7 @@ const Step3 = () => {
             alignItems: "center",
           }}
         >
-          <Choice answer={answer} setAnswer={setAnswer} example = {Example1} question = {Question1} id={1} />{" "}
+          <Choice type={1} answer={answer} setAnswer={setAnswer} example = {Example1} question = {Question1} id={1} />{" "}
           {/*객관식 문제*/}
           <MultipleChoice answer={answer} 
           setAnswer={setAnswer} 
@@ -159,7 +168,7 @@ const Step3 = () => {
           userAnswer = {Question3A} 
           setUseranswer = {setQuestion3A} />{" "}
           {/*동음이의어 문제*/}
-          <Choice answer={answer} setAnswer={setAnswer} example = {Example4} question = {Question4} id={4} />
+          <Choice type = {3} answer={answer} setAnswer={setAnswer} example = {Example4} question = {Question4} id={4} />
           {answer.map((ans) => ans.value)}{" "}
           {/*사용자 답 확인하기 위해 임시로 넣었습니다*/}
         </div>
@@ -171,7 +180,7 @@ const Step3 = () => {
             alignItems: "flex-end",
           }}
         >
-          <SubmitButton>제출하기</SubmitButton>
+          <SubmitButton onClick={submitAnswer} >제출하기</SubmitButton>
           <NavLink to="/Study/Step5">
             <img alt="" src={NextIcon} width="37.5px" height="37.5px" />
           </NavLink>{" "}

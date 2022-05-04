@@ -50,17 +50,67 @@ const ReviewStep3 = () => {
   };
 
   const [Title, setTitle] = useState('');
-  const [Quiz1, setQuiz1] = useState({});
-  const [Quiz2, setQuiz2] = useState({});
-  const [Quiz3, setQuiz3] = useState({});
-  const [Quiz4, setQuiz4] = useState({});
+  const [Example1, setExample1] = useState();
+  const [Question1, setQuestion1] = useState();
+  const [Question2, setQuestion2] = useState();
+  const [Question2W, setQuestion2W] = useState();
+  const [Question2S, setQuestion2S] = useState();
+  const [Question2C, setQuestion2C] = useState();
+  const [Question2M, setQuestion2M] = useState();
+  const [Question2A, setQuestion2A] = useState();
+  const [Question3, setQuestion3] = useState();
+  const [Question3W, setQuestion3W] = useState();
+  const [Question3S, setQuestion3S] = useState();
+  const [Question3C, setQuestion3C] = useState();
+  const [Question3M, setQuestion3M] = useState();
+  const [Question3A, setQuestion3A] = useState();
+  const [Question4, setQuestion4] = useState();
+  const [Example4, setExample4] = useState();
+  const [isSubmitted, SetIsSubmitted] = useState(false)
+
+
   useEffect(async () => {
     const response = await axios.get(`http://127.0.0.1:8000/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
-    const quiz = await axios.get(`http://127.0.0.1:8000/api/Step3`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
     setTitle(response.data['title']);
-    setQuiz1(quiz.data.quiz_1)
     console.log(Title);
   },[]);
+
+  useEffect(async () => {
+    const response = await axios.get(`http://127.0.0.1:8000/api/Step3`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
+    setExample1(response.data['quiz1']['Choice']);
+    setQuestion1(response.data['quiz1']['Test']);
+    setQuestion2(response.data['quiz2']['Test']);
+    setQuestion2W(response.data['quiz2']['Word']);
+    setQuestion2S(response.data['quiz2']['Sentence']);
+    setQuestion2C(response.data['quiz2']['Choice']);
+    setQuestion2M(response.data['quiz2']['MEAN']);
+    setQuestion2A(response.data['quiz2']['User_answer']);
+    setQuestion3(response.data['quiz3']['Test']);
+    setQuestion3W(response.data['quiz3']['Word']);
+    setQuestion3S(response.data['quiz3']['Sentence']);
+    setQuestion3C(response.data['quiz3']['Choice']);
+    setQuestion3M(response.data['quiz3']['MEAN']);
+    setQuestion3A(response.data['quiz3']['User_answer']);
+    setQuestion4(response.data['quiz4']['Test']);
+    setExample4(response.data['quiz4']['Choice']);
+    SetIsSubmitted(response.data['issubmitted']);
+  },[]);
+
+  const submitAnswer = () => {
+    setTimeout(() => {
+      axios({
+        method: "put",
+        url: "http://127.0.0.1:8000/api/Step3/",
+        headers: { "Content-Type": "application/json" },
+        params: {'s_id': sessionStorage.getItem('s_id')},
+        data: { "answer": answer},
+      }).catch(error => { alert('실패')
+      }).then(
+        alert('제출 성공!')
+      );
+    }, 500);
+  }
+
 
   const [answer, setAnswer] = useState([
     { id: 1, value: "" },
@@ -95,12 +145,30 @@ const ReviewStep3 = () => {
             alignItems: "center",
           }}
         >
-          <Choice answer={answer} setAnswer={setAnswer} id={1} question={Quiz1.TYPE1} example={Quiz1.TEST1} choice={Quiz1.W2VWORD}/>{" "}
+          <Choice type={1} answer={answer} setAnswer={setAnswer} example = {Example1} question = {Question1} id={1} />{" "}
           {/*객관식 문제*/}
-          <MultipleChoice answer={answer} setAnswer={setAnswer} id={2} />{" "}
-          <MultipleChoice answer={answer} setAnswer={setAnswer} id={3} />{" "}
+          <MultipleChoice answer={answer} 
+          setAnswer={setAnswer} 
+          question = {Question2} 
+          word = {Question2W} 
+          sentence = {Question2S} 
+          choice={Question2C} 
+          mean = {Question2M} 
+          id={2} 
+          userAnswer = {Question2A} 
+          setUseranswer = {setQuestion2A} />{" "}
+          <MultipleChoice answer={answer} 
+          setAnswer={setAnswer} 
+          question = {Question3} 
+          word = {Question3W} 
+          sentence = {Question3S} 
+          choice={Question3C} 
+          mean = {Question3M} 
+          id={3} 
+          userAnswer = {Question3A} 
+          setUseranswer = {setQuestion3A} />{" "}
           {/*동음이의어 문제*/}
-          <Choice answer={answer} setAnswer={setAnswer} id={4} />
+          <Choice type = {3} answer={answer} setAnswer={setAnswer} example = {Example4} question = {Question4} id={4} />
           {answer.map((ans) => ans.value)}{" "}
           {/*사용자 답 확인하기 위해 임시로 넣었습니다*/}
         </div>
@@ -112,7 +180,7 @@ const ReviewStep3 = () => {
             alignItems: "flex-end",
           }}
         >
-          <SubmitButton>제출하기</SubmitButton>
+          <SubmitButton onClick={submitAnswer}>제출하기</SubmitButton>
           <NavLink to="/Review/ReviewStep5">
             <img alt="" src={NextIcon} width="37.5px" height="37.5px" />
           </NavLink>{" "}

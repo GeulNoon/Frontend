@@ -2,21 +2,18 @@
 import React ,{Component} from 'react';
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import main from '../image/main.png';
+import main2 from '../image/main2.png';
+import button from '../image/button.png';
 
 //중앙에 배치된 4개의 버튼 디자인
 const Button = styled.button`
-  width: 200px;
-  height: 200px;
-  color: white;
+  width: 90%;
+  height: 80%;
+  color: red;
   font-size: 36px;
   border: none;
-  border-radius: 100px;
-  background-color: ${props => props.color};
-  :hover {
-    background-color: ${props => props.color};
-    opacity: 0.7;
-  }
-  margin: 50px;
+  border-radius: 20px;
 `;
 
 //4개 버튼 안에 누르면 해당 링크로 가는 NavLink를 배치하여 배열에 저장
@@ -54,11 +51,56 @@ class Home extends Component {
 
   render() {
     return (
-        <div style={{display: 'flex', alignItems:'center', justifyContent: 'space-around', height: '80vh'}}>
+        /*<div style={{display: 'flex', alignItems:'center', justifyContent: 'space-around', height: '80vh'}}>
         <TOC data={this.state.contents}></TOC>
-        </div>
+        </div>*/
+        <Wrapper>
+          <LeftWrapper>
+              <img alt="" className='main' src={main} style={{width: '100%', height: '100%'}}/>
+          </LeftWrapper>
+          <RightWrapper>
+			        <img alt="" className='main' src={main2} style={{width: '100%', height: '100%'}}/>
+			        <div class="button" style={{position: 'absolute', top: '58%', left: '37%'}}>
+                <NavLink to="/Study">
+                  <img alt="" src ={button} width='60%' height='60%'/>               
+                                 </NavLink>
+			        </div>
+          </RightWrapper>
+        </Wrapper>
     )
   }
 }
 
 export default Home;
+
+
+/*<Button>
+            <NavLink style={{ color: 'green', textDecoration: 'none' }} to="/Study"> 학습하기</NavLink>
+  </Button>*/
+
+// background-color: #37805b;
+const Wrapper = styled.div`
+  display: flex;
+  height: 85vh;
+`;
+
+//좌측 요소 박스(학습하기 제목, 제목 입력창 등)
+const LeftWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  padding: 10px;
+`;
+
+//우측 요소 박스(지문 내용 입력창, 학습시작 버튼 등)
+const RightWrapper = styled.div`
+  padding: 10px;
+  display: flex;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items : center;
+  position: relative;
+`;

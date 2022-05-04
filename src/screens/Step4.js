@@ -80,6 +80,7 @@ function ContentBox(props) {
 function Step4 () {
   const [Article_comprehension, setArticle_comprehension] = useState(' ');
   const [Title, setTitle] = useState(' ');
+  const [Name, setName] = useState(' ');
   const [Summary, setSummary] = useState(' ');
   const [KeywordScore, setKeywordScore] = useState(0);
   const [keywordAnswer, setKeywordAnswer] = useState([]);
@@ -102,6 +103,7 @@ function Step4 () {
     
   useEffect(async () => {
     const response = await axios.get(`http://127.0.0.1:8000/api/Step4`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
+    setName(response.data['name']);
     setArticle_comprehension(response.data['article_comprehension']);
     setSummary(response.data['summary'])
     setKeywordScore(response.data['keyword_score'])
@@ -116,7 +118,7 @@ function Step4 () {
           <div style={{width: '80vw'}}>
             <div style={{display: 'flex'}}>
               <div style={{display: 'flex', alignItems: 'center',width: '70vw'}}>
-                <Subject name="이화연"></Subject>
+                <Subject name={Name}></Subject>
                 <div style={{width: '80px', height: '80px', 
                 display: 'flex', alignItems: 'center',
                 justifyContent: 'center', backgroundColor: '#94c973',
