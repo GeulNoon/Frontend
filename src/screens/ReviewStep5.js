@@ -57,18 +57,18 @@ class Subject extends Component{
 }
 
 //메인함수
-function Step5 () {
+function ReviewStep5 () {
   const [Title, setTitle] = useState(' ');
   const [Content, setContent] = useState(' ');
   const [wordValue, setWordValue] = useState([]);
 
   const state = {
     contents: [
-      {id: 'Step1', title: '1단계', desc: '전문보기', type: 1},
-      {id: 'Step2', title: '2단계', desc: '요약하기', type: 1},
-      {id: 'Step3', title: '3단계', desc: '어휘풀기', type: 1},
-      {id: 'Step5', title: '4단계', desc: '빈칸풀기', type: 0},
-      {id: 'Step4', title: '5단계', desc: '결과보기', type: 1},
+      {id: 'ReviewStep1', title: '1단계', desc: '전문보기', type: 1},
+      {id: 'ReviewStep2', title: '2단계', desc: '요약하기', type: 1},
+      {id: 'ReviewStep3', title: '3단계', desc: '어휘풀기', type: 1},
+      {id: 'ReviewStep5', title: '4단계', desc: '빈칸풀기', type: 0},
+      {id: 'ReviewStep4', title: '5단계', desc: '결과보기', type: 1},
     ]
   }
   const handleChange = (e) => {
@@ -101,7 +101,7 @@ function Step5 () {
   },[]);
     return (
       <div style={{display:'flex'}}>
-        <NavigationBar list={state.contents} title = {Title} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
+        <NavigationBar list={state.contents} title = {Title} prev={"Review"}/> {/*화면 좌측 단계이동 바*/}
         <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw', marginTop: '3vw'}}>
           <div style={{width: '80vw'}}>          
             <Subject title="4단계: 빈칸문제" sub="본문 속 핵심 단어를 채워봅시다."></Subject>
@@ -117,7 +117,7 @@ function Step5 () {
             </div>
           </div>
           <div style={{width: '80vw', display: 'flex', justifyContent: 'end'}}>
-            <NavLink to="/Study/Step4">
+            <NavLink to="/Review/ReviewStep4">
               <img alt="" src ={NextIcon} width='37.5px' height='37.5px'/>               
               </NavLink> {/*다음 단계 버튼*/}
           </div>
@@ -127,4 +127,4 @@ function Step5 () {
 
 }
 
-export default Step5;
+export default ReviewStep5;

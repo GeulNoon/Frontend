@@ -14,8 +14,8 @@ const ResultSummWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 15vw;
-  height: 20vh;
+  width: 20vw;
+  height: 21vh;
   border: none;
   border-radius: 20px;
   background-color: #eff0ef;
@@ -41,7 +41,7 @@ class ResultSumm extends Component{
   render(){
     return (
       <ResultSummWrapper>
-        <div style={{width: '9vw'}}>
+        <div style={{width: '10vw'}}>
           <h5 style={{margin: '0px', marginBottom: '15px'}}>{this.props.title}</h5>
           <h2 style={{margin: '0px'}}>{this.props.value}</h2>
         </div>
@@ -80,7 +80,7 @@ function Result() {
     const [title, setTitle] = useState([]);
     const [total_study, setTotal_study] = useState(0);
     const [avg_article_comprehension, setAvg_article_comprehension] = useState(0);
-    const [avg_keyword_score, setAvg_keyword_score] = useState(0);
+    const [avg_word_score, setAvg_word_score] = useState(0);
     const [statistics, setStatistics] = useState([]);
     useEffect(() => {
       async function fetchData(){
@@ -89,7 +89,7 @@ function Result() {
       setTitle(response.data.title);
       setTotal_study(response.data['total_study']);
       setAvg_article_comprehension(response.data['avg_article_comprehension'])
-      setAvg_keyword_score(response.data['avg_keyword_score'])  
+      setAvg_word_score(response.data['avg_word_score'])  
       setStatistics(stat.data)                         
       } 
       fetchData();
@@ -103,8 +103,7 @@ function Result() {
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center',width: '900px', height: '150px'}}>
           <ResultSumm title="전체 학습" value={total_study} icon={ResultIcon1}/>
-          <ResultSumm title="평균 어휘 정답률" value="71.4%" icon={ResultIcon2}/>
-          <ResultSumm title="평균 빈칸 정답률" value={avg_keyword_score+'%'} icon={ResultIcon2}/>
+          <ResultSumm title="평균 어휘 정답률" value={avg_word_score+'%'} icon={ResultIcon2}/>
           <ResultSumm title="평균 지문 이해도" value={avg_article_comprehension + '%'} icon={ResultIcon3}/>
         </div>
         <div style={{display: 'flex', width: '900px', height: '300px'}}>

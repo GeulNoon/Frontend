@@ -79,7 +79,7 @@ function HistoryTable() {
             {title
               .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
               .map((i, j) => (
-                <TableRow key={i[5]}>
+                <TableRow key={j}>
                   <TableCell component="th" scope="row">
                     {page * rowsPerPage + j + 1}
                   </TableCell>
