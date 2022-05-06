@@ -14,8 +14,8 @@ const ResultSummWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20vw;
-  height: 21vh;
+  width: 225px;
+  height: 125px;
   border: none;
   border-radius: 20px;
   background-color: #eff0ef;

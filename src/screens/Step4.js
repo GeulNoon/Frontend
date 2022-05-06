@@ -171,6 +171,7 @@ function Step4 () {
   const [Quiz2, setQuiz2] = useState({});
   const [Quiz3, setQuiz3] = useState({});
   const [Quiz4, setQuiz4] = useState({});
+  const [Article_avg_comprehension, setArtivle_avg_comprehension] = useState(0);
   const state = {
     contents: [
       {id: 'Step1', title: '1단계', desc: '전문보기', type: 1},
@@ -200,6 +201,7 @@ function Step4 () {
     setQuiz2(response.data['quiz2'])
     setQuiz3(response.data['quiz3'])
     setQuiz4(response.data['quiz4'])
+    setArtivle_avg_comprehension(response.data['avg_article_comporehension'])
   },[]);
     
     return (
@@ -214,7 +216,7 @@ function Step4 () {
                 display: 'flex', alignItems: 'center',
                 justifyContent: 'center', backgroundColor: '#94c973',
                 borderRadius: '50%', fontSize: '32px'}}>
-                  {Article_comprehension}%
+                  {Article_avg_comprehension}%
                 </div> {/*지문이해도 값*/}
               </div>
               <div style={{display: 'flex', alignItems: 'center',justifyContent: 'space-between', width: '10vw'}}>
@@ -227,7 +229,7 @@ function Step4 () {
               </div>
             </div>
             <div className='pointer'>요약문 정답</div>
-            <TextBox>{Summary}</TextBox>
+            <TextBox>{Article_comprehension}점: {Summary}</TextBox>
             <AnswerBox><div className='pointer' style={{marginRight: '20px'}}>어휘풀기 정답</div>
               정답은 파란색, 사용자 답은 빨간색으로 표시 됩니다.
             </AnswerBox>
