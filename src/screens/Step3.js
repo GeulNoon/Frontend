@@ -180,7 +180,7 @@ const Step3 = () => {
             alignItems: "flex-end",
           }}
         >
-          <SubmitButton onClick={submitAnswer} disabled={isSubmitted}>제출하기</SubmitButton>
+          {!isSubmitted && <div><SubmitButton type="submit" disabled={isSubmitted}>제출하기</SubmitButton></div>}
           <NavLink to="/Study/Step5">
             <img alt="" src={NextIcon} width="37.5px" height="37.5px" />
           </NavLink>{" "}

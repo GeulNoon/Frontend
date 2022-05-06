@@ -1,5 +1,5 @@
 //학습하기의 문제풀기:전문보기
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState, useEffect, Component, useRef } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
@@ -55,6 +55,32 @@ function Step1 () {
   const [Title, setTitle] = useState(' ');
   const [Content, setContent] = useState(' ');
   const [Submiited, setSubmitted] = useState(' ');
+  const [timer, setTimer] = useState(true);
+  const [sec, setSec] = useState(0);
+  const [min, setMin] = useState(2);
+  const time = useRef(120);
+  const timerId = useRef(null)
+  
+  useEffect(() => {
+    if(sessionStorage.getItem('timer') !== 'done'){
+      timerId.current = setInterval(() => {
+        if (time.current === -1) {
+          clearInterval(timerId.current);
+          sessionStorage.setItem('timer', 'done');
+          setTimer(false)
+        }
+        else {
+          setMin(parseInt(time.current / 60));
+          setSec(time.current % 60);
+          time.current -= 1;
+        }
+      }, 1000);
+      return () => clearInterval(timerId.current);
+    }
+    else
+      setTimer(false)
+  });
+
   const state = {
     contents: [
       {id: 'Step1', title: '1단계', desc: '전문보기', type: 0},
@@ -65,17 +91,32 @@ function Step1 () {
     ]
   }
 
-  useEffect(async () => {
+  useEffect(async () => { 
     const response = await axios.get(`http://127.0.0.1:8000/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
     setTitle(response.data['title']);
     console.log(Title);
   },[]);
 
+
+  useEffect(async () => {
+    if(sessionStorage.getItem('s2') === '0') {
+        axios.put(`http://127.0.0.1:8000/api/Step1/`, {a_id: sessionStorage.getItem('a_id')})
+        .then(response => {
+          console.log('ok')
+          sessionStorage.setItem('s2', response.data['s2'])
+    }).catch(error => {
+      // 오류발생시 실행
+    }).then(() => {
+      // 항상 실행
+    });
+  }
+  },[]);
+
+
   useEffect(async () => {
     const response = await axios.get(`http://127.0.0.1:8000/api/Step1`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
     setContent(response.data["content"]);
     setSubmitted(response.data["issubmitted"]);
-    console.log([Submiited.issubmitted]);
   },[]);
 
   const [word, setWord] = useState('');
@@ -111,6 +152,12 @@ function Step1 () {
     });
     }, 500);
   }
+
+  const handleClick = (e) => {
+    if(sessionStorage.getItem('s2') !=='ok' || timer)
+      e.preventDefault()
+  }
+  
     return (
       <div style={{display:'flex'}}>
         <NavigationBar list={state.contents} title = {Title} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
@@ -118,6 +165,7 @@ function Step1 () {
           <div style={{width: '80vw'}}>          
             <Subject title="1단계: 전문보기" sub="기사의 전문을 읽어봅시다."></Subject>
           </div>
+          {timer && <div> {min} 분 {sec} 초</div>}
           <div style={{display:'flex'}}>
             <TextBox>{Content}</TextBox>
             <div style = {{marginLeft: '3vw'}}>
@@ -154,7 +202,7 @@ function Step1 () {
             </div>
           </div>
           <div style={{width: '80vw', display: 'flex', justifyContent: 'end'}}>
-            <NavLink to="/Study/Step2">
+            <NavLink onClick={handleClick}  to="/Study/Step2">
               <img alt="" src ={NextIcon} width='37.5px' height='37.5px'/>               
               </NavLink> {/*다음 단계 버튼*/}
           </div>
