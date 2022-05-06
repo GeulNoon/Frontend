@@ -60,7 +60,7 @@ class Home extends Component {
           </LeftWrapper>
           <RightWrapper>
 			        <img alt="" className='main' src={main2} style={{width: '100%', height: '100%'}}/>
-			        <div class="button" style={{position: 'absolute', top: '58%', left: '37%'}}>
+			        <div className="button" style={{position: 'absolute', top: '58%', left: '37%'}}>
                 <NavLink to="/Study">
                   <img alt="" src ={button} width='60%' height='60%'/>               
                                  </NavLink>

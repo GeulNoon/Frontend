@@ -22,6 +22,17 @@ const TextBox = styled.div`
   margin-bottom: 10px;
 `;
 
+const TextBox2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80vw-20px;
+  background-color: #e5e5e5;
+  border: none;
+  padding: 10px;
+  margin-bottom: 10px;
+`;
+
 //'어휘문제 정답' 인덱스의 정답 박스
 const AnswerBox = styled.div`
   display: flex;
@@ -53,6 +64,14 @@ class Subject extends Component{
 }
 
 function ContentBox(props) {
+    const [Choice, setChoice] = useState([])
+    const [Comment, setComment] = useState({})
+    useEffect(async () => {
+      if(props.choice)
+        setChoice(props.choice);
+      if(props.comment)
+        setComment(props.comment);
+  });
     return (
       <div style={{position: "relative"}}>
         <div style={{position: "absolute", left: "-20px", top: "-15px"}}>
@@ -63,27 +82,95 @@ function ContentBox(props) {
         {props.question}
         <TextBox>{props.content}</TextBox>
         <div style={{display: "flex", justifyContent: 'space-around', width: "50vw", marginLeft: '15vw', marginRight: '15vw', marginBottom: '10px'}}>
-          {/*{props.choice}*/}
-          <p>1. 창조</p>
-          <p style={{color: 'green'}}>2. 전망</p>
-          <p style={{color: 'red'}}>3. 가치</p>
-          <p>4. 도시</p>
-          <p>5. 인재</p>
+            {Choice.map((i,j) => props.answer === i ? 
+            <p key={j} style={{color: 'green'}}>{j+1}. {i}</p> : 
+            ( props.answer_u === i 
+              ? <p key={j} style={{color: 'red'}}>{j+1}. {i}</p> 
+              : <p key={j}>{j+1}. {i}</p> 
+            ))}
         </div>
-        <TextBox style={{whiteSpace: 'pre-wrap'}}>{props.comment}</TextBox>
+        <TextBox style={{whiteSpace: 'pre-wrap'}}>
+          <div>
+            {Object.keys(Comment).map((i,j) => <p key = {j}>{i}:  </p>)}
+          </div>
+          <div>
+            {Object.values(Comment).map((i,j) => <p key={j}>{i}</p>)}
+          </div>
+        </TextBox>
       </div>
     );
 }
 
+function ContentBox2(props) {
+  const [Choice, setChoice] = useState([])
+  const [Comment, setComment] = useState({})
+  const [Answer_u, setAnswer_u] = useState([])
+  const [Answer_u_is_correct, setAnswer_u_is_correct] = useState([])  
+  useEffect(async () => {
+    if(props.choice)
+      setChoice(props.choice);
+    if(props.comment)
+      setComment(props.comment);
+    if(props.answer_u)
+      setAnswer_u(props.answer_u);
+    if(props.answer_u_is_correct)
+      setAnswer_u_is_correct(props.answer_u_is_correct)
+});
+  return (
+    <div style={{position: "relative"}}>
+      <div style={{position: "absolute", left: "-20px", top: "-15px"}}>
+        {props.isCorrect ? 
+        <img alt="" src ={Right} width='50px' height='50px' /> : 
+        <img alt="" src ={Wrong} width='50px' height='50px' />}
+      </div>
+      <TextBox2>
+        <div>
+          {props.sentence}
+        </div>
+        <h4>
+          {props.word}
+        </h4>
+        {Object.keys(Comment).map((i,j) => <p style = {{margin: 0}} key = {j}>{j}. {i}</p>)}
+      </TextBox2>
+      <div style={{marginBottom: '10px'}}>
+        {props.question}
+        <div style={{display: 'flex',justifyContent: 'space-around' ,width: '80vw-20px'}}>
+          <div>
+            {Choice.map((i,j) => <p key = {j}>{j}. {i}</p>)}
+          </div>
+          <div>
+            {Answer_u.map((i,j) => Answer_u_is_correct[j] ? 
+            <p style = {{color: 'green'}} key = {j}>{i}</p> : 
+            <p style = {{color: 'red'}} key = {j}>{i}</p>)}
+          </div>
+        </div>
+      </div>
+      <TextBox style={{whiteSpace: 'pre-wrap'}}>
+        <div>
+          {Object.keys(Comment).map((i,j) => <p key = {j}>{i}:  </p>)}
+        </div>
+        <div>
+          {Object.values(Comment).map((i,j) => <p key={j}>{i}</p>)}
+        </div>
+      </TextBox>
+    </div>
+  );
+}
 
 //메인함수
 function ReviewStep4 () {
   const [Article_comprehension, setArticle_comprehension] = useState(' ');
   const [Title, setTitle] = useState(' ');
+  const [Name, setName] = useState(' ');
   const [Summary, setSummary] = useState(' ');
   const [KeywordScore, setKeywordScore] = useState(0);
   const [keywordAnswer, setKeywordAnswer] = useState([]);
   const [keywordUser, setKeywordUser] = useState([]);
+  const [wordC, setIsWordC] = useState([]);
+  const [Quiz1, setQuiz1] = useState({});
+  const [Quiz2, setQuiz2] = useState({});
+  const [Quiz3, setQuiz3] = useState({});
+  const [Quiz4, setQuiz4] = useState({});
   const state = {
     contents: [
       {id: 'ReviewStep1', title: '1단계', desc: '전문보기', type: 1},
@@ -102,11 +189,17 @@ function ReviewStep4 () {
     
   useEffect(async () => {
     const response = await axios.get(`http://127.0.0.1:8000/api/Step4`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
+    setName(response.data['name']);
     setArticle_comprehension(response.data['article_comprehension']);
     setSummary(response.data['summary'])
     setKeywordScore(response.data['keyword_score'])
     setKeywordAnswer(response.data['keyword_answer'])
     setKeywordUser(response.data['keyword_user_answer']['answer'])
+    setIsWordC(response.data['is_word_correct'])
+    setQuiz1(response.data['quiz1'])
+    setQuiz2(response.data['quiz2'])
+    setQuiz3(response.data['quiz3'])
+    setQuiz4(response.data['quiz4'])
   },[]);
     
     return (
@@ -116,7 +209,7 @@ function ReviewStep4 () {
           <div style={{width: '80vw'}}>
             <div style={{display: 'flex'}}>
               <div style={{display: 'flex', alignItems: 'center',width: '70vw'}}>
-                <Subject name="이화연"></Subject>
+                <Subject name={Name}></Subject>
                 <div style={{width: '80px', height: '80px', 
                 display: 'flex', alignItems: 'center',
                 justifyContent: 'center', backgroundColor: '#94c973',
@@ -136,14 +229,42 @@ function ReviewStep4 () {
             <div className='pointer'>요약문 정답</div>
             <TextBox>{Summary}</TextBox>
             <AnswerBox><div className='pointer' style={{marginRight: '20px'}}>어휘풀기 정답</div>
-              1. ③ 2. (1)-(C), (2)-(D), (3)-(A), (4)-(E), (5)-(B)  3. ④
+              정답은 파란색, 사용자 답은 빨간색으로 표시 됩니다.
             </AnswerBox>
             <ContentBox question = "1. 다음 단어 중 빈칸에 들어갈 수 있는 단어를 고르시오." 
-            content = "진수는 미래에 대해 낙관적인 _____를 가지고 있다." 
-            //choice = {"1. 창조 2. 전망 3. 가치 4. 도시 5. 인재"}
-            comment = {"창조: 전에 없던 것을 처음으로 만들거나 새롭게 이룩함.\n전망: 어떤 곳을 멀리 바라봄. 또는 멀리 바라보이는 경치. \n가치: 값이나 귀중한 정도.\n도시: 정치, 경제, 문화의 중심이 되고 사람이 많이 사는 지역.\n인재: 학식과 능력을 갖추어 사회적으로 크게 쓸모가 있는 사람"}
-            isCorrect = {0} />
-            <ContentBox question = "2. 문제" content = "문제 내용" choice = "문제 보기" comment = "문제 해설" isCorrect = {1} />
+            content = {Quiz1.Test}
+            choice = {Quiz1.Choice}
+            comment = {Quiz1.Mean}
+            answer = {Quiz1.Answer}
+            answer_u = {Quiz1.Answer_u}
+            isCorrect = {wordC[0]} />
+            <ContentBox2 
+            question ={Quiz2.Test}
+            word = {Quiz2.Word}
+            sentence = {Quiz2.Sentence} 
+            comment = {Quiz2.MEAN}
+            choice = {Quiz2.Choice}
+            answer_u = {Quiz2.Answer_u}
+            answer_u_is_correct = {Quiz2.Is_Correct}
+            isCorrect = {wordC[1]}
+            />
+            <ContentBox2 
+            question ={Quiz3.Test}
+            word = {Quiz3.Word}
+            sentence = {Quiz3.Sentence} 
+            comment = {Quiz3.MEAN}
+            choice = {Quiz3.Choice}
+            answer_u = {Quiz3.Answer_u}
+            answer_u_is_correct = {Quiz3.Is_Correct}
+            isCorrect = {wordC[2]}
+            />
+            <ContentBox question = "4. 다음 단어 중 주어진 사전적 의미에 부합하는 단어를 고르시오." 
+            content = {Quiz4.Test}
+            choice = {Quiz4.Choice}
+            comment = {Quiz4.Mean}
+            answer = {Quiz4.Answer}
+            answer_u = {Quiz4.Answer_u}
+            isCorrect = {wordC[3]} />
             <AnswerBox><div className='pointer' style={{marginRight: '20px'}}>빈칸풀기 정답</div>
               {KeywordScore}점:
               {keywordAnswer.map((word,i) =>i+1+"."+word+" ")}
