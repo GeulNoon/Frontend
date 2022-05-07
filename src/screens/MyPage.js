@@ -3,6 +3,7 @@ import React, { useState, useEffect, Component } from 'react';
 import user from "../image/user.png";
 import styled from 'styled-components';
 import axios from "axios"
+import { NavLink } from "react-router-dom";
 
 //회원정보 수정, 회원 탈퇴 버튼 디자인
 const Button = styled.div`
@@ -28,42 +29,51 @@ function MyPage () {
       console.log(response.data);
     },[]);
 
+    const onRemove = () => {
+      if (window.confirm("정말 삭제합니까?")) {
+        axios.delete(`http://127.0.0.1:8000/api/MyPage`, {data: {'email': sessionStorage.getItem('user')}})
+        .then(response => {
+          if(response.data['delete'] === 'ok'){
+            console.log(response.data)
+            alert("삭제되었습니다.")
+            sessionStorage.clear()
+            window.location.replace("/")
+          }}).catch(error => {
+            // 오류발생시 실행
+          });
+      }
+      else {
+        alert("취소합니다.");
+      }
+    };
+
     return (
       <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '450px'}}>
-        <div style={{display: 'flex', width: '800px'}}>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '300px'}}>
             <img alt="" src ={user} width='100px' height='100px' />{/*프로필 사진*/}
-            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '250px', border: '1px solid #e5e5e5', marginTop: '20px'}}>
-              {/*첨부하기 버튼(클릭 시 로컬 폴더 띄움)*/}
-              <label htmlFor="input-file" style={{width: '85px', height: '20px',margin: '10px', color: '#4b754b', cursor: 'pointer'}}>
-                <h5 style={{margin: '0px'}}>사진 변경하기</h5>
-              </label>
-              <input type="file" id="input-file" style={{display: "none"}}/>              
-            </div>
           </div>
           <div style={{width: '500px'}}>
-            <h3>내 정보</h3>
+            <h1>내 정보</h1>
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around',width: '500px', height: '300px',borderTop: '1px solid #e5e5e5'}}>
               <div style={{display: 'flex', width: '500px', alignItems: 'center'}}>
-                <h5 style={{margin: '0px', width: '100px'}}>이메일</h5>
+                <h4 style={{margin: '0px', width: '100px'}}>이메일</h4>
                 <input readOnly value={sessionStorage.getItem('user')} style={{margin: '0px'}}/> {/*이메일 창, 쓰기 불가능*/}
               </div>
               <div style={{display: 'flex', width: '500px', alignItems: 'center'}}>
-                <h5 style={{margin: '0px', width: '100px'}}>닉네임</h5>
+                <h4 style={{margin: '0px', width: '100px'}}>닉네임</h4>
                 <input readOnly value={User.nickname} style={{margin: '0px'}}/> {/*닉네임 창, 쓰기 불가능*/}
               </div>
               <div style={{display: 'flex', width: '500px', alignItems: 'center'}}>
-                <h5 style={{margin: '0px', width: '100px'}}>생년월일</h5>
+                <h4 style={{margin: '0px', width: '100px'}}>생년월일</h4>
                 <input readOnly value={User.birthyear} style={{margin: '0px'}}/> {/*소속 창, 쓰기 불가능*/}
               </div>
               <div style={{display: 'flex', width: '500px', justifyContent: 'end'}}>
-                <Button>회원정보 수정</Button> {/*회원정보 수정 버튼, 아직 아무 기능 X*/}
-                <Button>회원 탈퇴</Button> {/*회원 탈퇴 버튼, 아직 아무 기능 X*/}
+                <NavLink to="/Mypage/edit"><Button>회원정보 수정</Button></NavLink>
+                <Button onClick={onRemove}>회원 탈퇴</Button>
               </div>
             </div>
           </div>
         </div>
-      </div>
     );
 }
 

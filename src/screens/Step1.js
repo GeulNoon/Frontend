@@ -107,7 +107,7 @@ function Step1 () {
 
   useEffect(async () => {
     if(sessionStorage.getItem('s2') === '0') {
-        axios.put(`http://127.0.0.1:8000/api/Step1/`, {a_id: sessionStorage.getItem('a_id')})
+        axios.put(`http://127.0.0.1:8000/api/Step1/`, {a_id: sessionStorage.getItem('a_id'), s_id: sessionStorage.getItem('s_id')})
         .then(response => {
           console.log('ok')
           sessionStorage.setItem('s2', response.data['s2'])

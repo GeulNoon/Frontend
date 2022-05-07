@@ -119,27 +119,9 @@ function Step2 () {
     }
   },[]);
 
-  useEffect(async () => {
-    if(sessionStorage.getItem('s3') === '0') {
-      axios.put(`http://127.0.0.1:8000/api/makeQuiz/`, {a_id: sessionStorage.getItem('a_id'), s_id: sessionStorage.getItem('s_id')})
-        .then(response => {
-          console.log('ok')
-          sessionStorage.setItem('s3', response.data['s3'])
-    }).catch(error => {
-      // 오류발생시 실행
-    }).then(() => {
-      // 항상 실행
-    });
-  }
-  },[]);
 
   const handleInputChange = (e) => {
     setText(e.target.value)
-  }
-
-  const handleClick = (e) => {
-    if(sessionStorage.getItem('s3') !=='ok')
-      e.preventDefault()
   }
 
   let Input = null;
@@ -233,7 +215,7 @@ function Step2 () {
           </div>}
             <div style={{width: '80vw', display: 'flex', flexDirection: 'column', alignItems: 'flex-end'}}>
               {!isSubmitted && <div><SubmitButton type="submit" disabled={isSubmitted}>제출하기</SubmitButton></div>}
-              <NavLink onClick={handleClick} to="/Study/Step3">
+              <NavLink to="/Study/Step3">
                 <img alt="" src ={NextIcon} width='37.5px' height='37.5px'/>               
             </NavLink> {/*다음 단계 버튼*/}
             </div>

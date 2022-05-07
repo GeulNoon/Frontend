@@ -144,7 +144,6 @@ function Register() {
                             value={values.birthyear}
                             className={errors.birthyear && touched.birthyear && "error"}
                           >
-                            <option  value='' disabled>출생 연도</option>
                             {options.map(option => (
                               <option key={option} value={option}>{option}</option>
                             ))}
