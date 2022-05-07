@@ -19,6 +19,7 @@ import ReviewStep4 from './screens/ReviewStep4';
 import ReviewStep5 from './screens/ReviewStep5';
 import Answer from './screens/Answer';
 import More from './screens/More';
+import EditMypage from './screens/MyPage_Edit';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import logo from './image/logo.png';
@@ -114,6 +115,7 @@ class App extends Component {
             <Route path="/Review/ReviewStep5" element={<PrivateRoute><ReviewStep5/></PrivateRoute>}/>
             <Route path="/Review/Answer" element={<PrivateRoute><Answer/></PrivateRoute>}/>
             <Route path="/Result/More" element={<PrivateRoute><More/></PrivateRoute>}/>
+            <Route path="/Mypage/edit" element={<PrivateRoute><EditMypage/></PrivateRoute>}/>
           </Routes>
           </div>
         </div>

@@ -23,7 +23,7 @@ function Study() {
               }).then(response => {
               sessionStorage.setItem('timer', '0')
               sessionStorage.setItem('s2', '0')
-              sessionStorage.setItem('s3', '0')
+              //sessionStorage.setItem('s3', '0')
               sessionStorage.setItem('s_id', response.data['s_id'])
               sessionStorage.setItem('a_id', response.data['a_id'])
               navigate('/Study/Step1')
