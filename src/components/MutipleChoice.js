@@ -6,7 +6,9 @@ import { RadioGroup, FormControl, FormControlLabel, Radio } from '@mui/material'
 const MultipleChoice = (props) => {
     //임시 데이터(동음이의어 뜻 개수에 따라 수가 바뀌어야 함)
     const [choice, setChoice] = useState([]);  
-    const [mean, setMean] = useState([]);  
+    const [mean, setMean] = useState([]); 
+    const [real_user_answer, setReal] = useState([]);
+    const [is_answer_correct, setCorrect] = useState([]); 
     ///선택한 번호 콘솔창에 출력(선택한 값 저장용 함수)
     const handleChange = (e) => {
         //console.log(`선택한 값 : ${e.target.name}${e.target.value}`);
@@ -21,6 +23,10 @@ const MultipleChoice = (props) => {
             setChoice(props.choice);
         if(props.mean)
             setMean(props.mean);
+        if(props.real_user_answer)
+            setReal(props.real_user_answer);
+        if(props.is_answer_correct)
+            setCorrect(props.is_answer_correct);
     });
       return (
           <div style={{marginTop: 10, marginBottom:10}}>
@@ -62,6 +68,13 @@ const MultipleChoice = (props) => {
                     alignItems: 'center',
                     marginLeft: 50,
                 }}>
+                    {props.isSubmitted ? 
+                    <>
+                    {real_user_answer.map((i,j) => parseInt(is_answer_correct[j]) ? 
+                    <p style = {{color: 'green', margin: 0}} key = {j}>{i}</p> : 
+                    <p style = {{color: 'red', margin: 0}} key = {j}>{i}</p>)}
+                    </>
+                    : <>
                     {choice.map((value,i) => (
                     <FormControl key={i} component="fieldset">
                         <RadioGroup
@@ -79,6 +92,7 @@ const MultipleChoice = (props) => {
                         </RadioGroup>
                     </FormControl>
                 ))}
+                    </>}
                 </div>
             </div>
           </div>

@@ -19,9 +19,9 @@ import ReviewStep4 from './screens/ReviewStep4';
 import ReviewStep5 from './screens/ReviewStep5';
 import Answer from './screens/Answer';
 import More from './screens/More';
-import PrivateRoute from './components/PrivateRoute'
-import PublicRoute from './components/PublicRoute'
-import logo from './image/logo.png'
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
+import logo from './image/logo.png';
 
 class Subject extends Component{
   render(){

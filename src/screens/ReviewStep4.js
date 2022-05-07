@@ -163,6 +163,7 @@ function ReviewStep4 () {
   const [Title, setTitle] = useState(' ');
   const [Name, setName] = useState(' ');
   const [Summary, setSummary] = useState(' ');
+  const [SummaryU, setSummaryU] = useState(' ');
   const [KeywordScore, setKeywordScore] = useState(0);
   const [keywordAnswer, setKeywordAnswer] = useState([]);
   const [keywordUser, setKeywordUser] = useState([]);
@@ -171,6 +172,7 @@ function ReviewStep4 () {
   const [Quiz2, setQuiz2] = useState({});
   const [Quiz3, setQuiz3] = useState({});
   const [Quiz4, setQuiz4] = useState({});
+  const [Article_avg_comprehension, setArtivle_avg_comprehension] = useState(0);
   const state = {
     contents: [
       {id: 'ReviewStep1', title: '1단계', desc: '전문보기', type: 1},
@@ -200,6 +202,8 @@ function ReviewStep4 () {
     setQuiz2(response.data['quiz2'])
     setQuiz3(response.data['quiz3'])
     setQuiz4(response.data['quiz4'])
+    setArtivle_avg_comprehension(response.data['avg_article_comporehension'])
+    setSummaryU(response.data['user_summary'])
   },[]);
     
     return (
@@ -214,7 +218,7 @@ function ReviewStep4 () {
                 display: 'flex', alignItems: 'center',
                 justifyContent: 'center', backgroundColor: '#94c973',
                 borderRadius: '50%', fontSize: '32px'}}>
-                  {Article_comprehension}%
+                  {Article_avg_comprehension}%
                 </div> {/*지문이해도 값*/}
               </div>
               <div style={{display: 'flex', alignItems: 'center',justifyContent: 'space-between', width: '10vw'}}>
@@ -227,7 +231,8 @@ function ReviewStep4 () {
               </div>
             </div>
             <div className='pointer'>요약문 정답</div>
-            <TextBox>{Summary}</TextBox>
+            <TextBox>{Article_comprehension}점: {Summary}</TextBox>
+            <TextBox>사용자 요약문: {SummaryU}</TextBox>
             <AnswerBox><div className='pointer' style={{marginRight: '20px'}}>어휘풀기 정답</div>
               정답은 파란색, 사용자 답은 빨간색으로 표시 됩니다.
             </AnswerBox>
@@ -271,7 +276,9 @@ function ReviewStep4 () {
             </AnswerBox>
             <TextBox>
               사용자 답:
-              {keywordUser.map((word,i) =>i+1+"."+word['value']+" ")}
+              {keywordUser.map((word,i) => word['value'] === keywordAnswer[i] ?
+              <p key = {i} style={{color: 'green', marginLeft: '5px'}}>{i+1}. {word['value']}</p> : 
+              <p key = {i} style={{color: 'red', marginLeft: '5px'}}>{i+1}. {word['value']}</p>)}
             </TextBox>
           </div>
         </div>

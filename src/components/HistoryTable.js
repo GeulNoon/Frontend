@@ -18,11 +18,23 @@ import styled from "styled-components";
 
 const Button = styled.div`
   display: inline-flex;
-  font-weight: norwmal;
+  font-weight: normal;
   font-size: 14px;
   color: black;
   background-color: white;
   border-bottom: 1px solid grey;
+  cursor: pointer;
+`;
+
+const DeleteButton = styled.button`
+  padding: 5px;
+  background-color: #5b6d5b;
+  :hover{
+    background-color: #5b6d5b;
+    opacity: 0.7;
+  }
+  color: white;
+  border: none;
   cursor: pointer;
 `;
 
@@ -44,6 +56,25 @@ function HistoryTable() {
     }
     fetchData();
   }, []);
+
+  const StudyDelete = (s_id) => {
+    if(window.confirm("정말 삭제합니까?")) {
+    setTimeout(() => {
+      axios({
+        method: "put",
+        url: "http://127.0.0.1:8000/api/getMoreHistory/",
+        headers: { "Content-Type": "application/json" },
+        data: { "s_id": s_id},
+      }).catch(error => {
+        alert('삭제 실패')
+      })
+      .then(response => {
+      window.location.reload();
+      });
+    }, 500);} else {
+      alert("취소합니다.")
+    }
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -72,6 +103,7 @@ function HistoryTable() {
               <TableCell align="center">요약하기 지문 이해도</TableCell>
               <TableCell align="center">어휘풀기 점수</TableCell>
               <TableCell align="center">빈칸풀기 점수</TableCell>
+              <TableCell align="center">삭제</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -92,6 +124,9 @@ function HistoryTable() {
                   <TableCell align="center">{i[2]}</TableCell>
                   <TableCell align="center">{i[3]}</TableCell>
                   <TableCell align="center">{i[4]}</TableCell>
+                  <TableCell align="center">
+                    <DeleteButton onClick={() => StudyDelete(i[6])}>삭제</DeleteButton>
+                  </TableCell>
                 </TableRow>
               ))}
           </TableBody>

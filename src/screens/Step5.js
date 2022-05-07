@@ -62,6 +62,8 @@ function Step5 () {
   const [Content, setContent] = useState(' ');
   const [wordValue, setWordValue] = useState([]);
   const [isSubmitted, SetIsSubmitted] = useState(true)
+  const [keywordAnswer, setKeywordAnswer] = useState([]);
+  const [keywordUser, setKeywordUser] = useState([]);
   const state = {
     contents: [
       {id: 'Step1', title: '1단계', desc: '전문보기', type: 1},
@@ -99,6 +101,8 @@ function Step5 () {
     setContent(response.data['keyword'])
     setWordValue(response.data['answerlist'])
     SetIsSubmitted(response.data['issubmitted']);
+    setKeywordAnswer(response.data['keyword_answer'])
+    setKeywordUser(response.data['keyword_user_answer']['answer'])
   },[]);
     return (
       <div style={{display:'flex'}}>
@@ -110,11 +114,18 @@ function Step5 () {
           <div style={{display:'flex', flexDirection:'column'}}>
             <TextBox>{Content}</TextBox>
             각 번호에 해당하는 단어를 적어주세요.
+            {isSubmitted ?
+            <div style={{display:'flex', width: '80vw', flexFlow:'wrap', justifyContent: 'space-around'}}>
+              {keywordUser.map((word,i) => word['value'] === keywordAnswer[i] ?
+              <p key = {i} style={{color: 'green'}}>{i+1}. {word['value']}</p> : 
+              <p key = {i} style={{color: 'red'}}>{i+1}. {word['value']}</p>)}
+            </div> :
             <div style={{display:'flex', width: '80vw', flexFlow:'wrap', justifyContent: 'space-between'}}>
               {wordValue.map(word => <TextInput key={word.id} placeholder={word.id+1+"."} onChange={handleChange} name={word.id}/>)}
             </div>
+            }
             <div style={{width: '80vw', display: 'flex', justifyContent: 'end'}}>
-              <Button onClick={submitAnswer} disabled={isSubmitted}>제출하기</Button>
+            {!isSubmitted && <Button onClick={submitAnswer} disabled={isSubmitted}>제출하기</Button>}
             </div>
           </div>
           <div style={{width: '80vw', display: 'flex', justifyContent: 'end'}}>

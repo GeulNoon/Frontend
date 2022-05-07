@@ -163,6 +163,7 @@ function Step4 () {
   const [Title, setTitle] = useState(' ');
   const [Name, setName] = useState(' ');
   const [Summary, setSummary] = useState(' ');
+  const [SummaryU, setSummaryU] = useState(' ');
   const [KeywordScore, setKeywordScore] = useState(0);
   const [keywordAnswer, setKeywordAnswer] = useState([]);
   const [keywordUser, setKeywordUser] = useState([]);
@@ -202,6 +203,7 @@ function Step4 () {
     setQuiz3(response.data['quiz3'])
     setQuiz4(response.data['quiz4'])
     setArtivle_avg_comprehension(response.data['avg_article_comporehension'])
+    setSummaryU(response.data['user_summary'])
   },[]);
     
     return (
@@ -230,6 +232,7 @@ function Step4 () {
             </div>
             <div className='pointer'>요약문 정답</div>
             <TextBox>{Article_comprehension}점: {Summary}</TextBox>
+            <TextBox>사용자 요약문: {SummaryU}</TextBox>
             <AnswerBox><div className='pointer' style={{marginRight: '20px'}}>어휘풀기 정답</div>
               정답은 파란색, 사용자 답은 빨간색으로 표시 됩니다.
             </AnswerBox>
@@ -273,7 +276,9 @@ function Step4 () {
             </AnswerBox>
             <TextBox>
               사용자 답:
-              {keywordUser.map((word,i) =>i+1+"."+word['value']+" ")}
+              {keywordUser.map((word,i) => word['value'] === keywordAnswer[i] ?
+              <p key = {i} style={{color: 'green', marginLeft: '5px'}}>{i+1}. {word['value']}</p> : 
+              <p key = {i} style={{color: 'red', marginLeft: '5px'}}>{i+1}. {word['value']}</p>)}
             </TextBox>
           </div>
         </div>

@@ -34,7 +34,6 @@ const Choice = (props) => {
     useEffect(async () => {
         if(props.example)
             setexample(props.example);
-            console.log(example);
     });
 
       return (
@@ -54,6 +53,14 @@ const Choice = (props) => {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
+                {props.isSubmitted ? 
+                <div style={{display: 'flex', justifyContent: 'space-around', width: "50vw", marginLeft: '15vw', marginRight: '15vw', marginBottom: '10px'}}>
+                    {example.map((i,j) => props.true_answer === i ?
+                    <p key={j} style={{color: 'green'}}>{j+1}. {i}</p> :
+                    (props.user_answer === i
+                    ? <p key={j} style={{color: 'red'}}>{j+1}. {i}</p>
+                    : <p key={j}>{j+1}. {i}</p>))}
+                </div> :
                 <FormControl component="fieldset">
                 <RadioGroup
                     row
@@ -68,7 +75,7 @@ const Choice = (props) => {
                     </div>
                     ))}
                 </RadioGroup>
-                </FormControl>{/*선택지*/}
+                </FormControl>}
             </div>
           </div>
       );

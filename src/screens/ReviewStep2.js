@@ -1,5 +1,5 @@
 //학습하기의 문제풀기:요약하기
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState, useEffect, Component} from 'react';
 import NavigationBar from '../components/NavigationBar';
 import { DragBlock } from '../components/DragBlock';
 import styled from "styled-components";
@@ -7,19 +7,6 @@ import { NavLink } from "react-router-dom";
 import NextIcon from "../image/NextIcon.png";
 import axios from "axios"
 import { Formik } from "formik";
-import {useNavigate} from 'react-router-dom';
-
-//문단내용 박스
-const TextBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 80vw;
-  height: 30vh;
-  background-color: #e5e5e5;
-  font-size: 11px;
-  border: none;
-`;
 
 //순서배열, 직접작성 선택 버튼
 const Button = styled.div`
@@ -65,12 +52,16 @@ class Subject extends Component{
 }
 
 //메인함수
-function ReviewStep2 () {
+function Step2 () {
   const [Summary, setSummary] = useState([]);
   const [Title, setTitle] = useState('');
-  const [isSelected, SetSelected] = useState(false); /*순서배열, 직접작성 중 선택 여부*/
   const [text, setText] = useState(""); //사용자가 입력한 답
-  const navigate = useNavigate();
+  const [isSelected, SetSelected] = useState(false); 
+  const [sumview, setSumview] = useState(true);
+  const [sumArray, setSumArray] = useState(['', '', '']);
+  const [s1, sets1] = useState([]);
+  const [s2, sets2] = useState([]);
+  const [s3, sets3] = useState([]);
 
   const state = {
     contents: [
@@ -80,10 +71,16 @@ function ReviewStep2 () {
       {id: 'ReviewStep5', title: '4단계', desc: '빈칸풀기', type: 1},
       {id: 'ReviewStep4', title: '5단계', desc: '결과보기', type: 1},
     ]
-  }
+};
 
   const handleChange = (e) => {
     setText(e.target.value)
+  }
+
+  const handleChange3 = (e) => {
+    sumArray[parseInt(e.target.name)] = e.target.value;
+    setSumArray(sumArray);
+    setText(sumArray.join(" "));
   }
 
   useEffect(async () => {
@@ -94,11 +91,36 @@ function ReviewStep2 () {
 
   useEffect(async () => {
     const response = await axios.get(`http://127.0.0.1:8000/api/Step2`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
-    setSummary(response.data['summary']);
+    if(response){
+      setSummary(response.data['summary']);
+      console.log(response.data['s1'])
+      sets1(response.data['s1'])
+      sets2(response.data['s2'])
+      sets3(response.data['s3'])
+    }
+  },[]);
+
+  useEffect(async () => {
+    if(sessionStorage.getItem('s3') === '0') {
+      axios.put(`http://127.0.0.1:8000/api/makeQuiz/`, {a_id: sessionStorage.getItem('a_id'), s_id: sessionStorage.getItem('s_id')})
+        .then(response => {
+          console.log('ok')
+          sessionStorage.setItem('s3', response.data['s3'])
+    }).catch(error => {
+      // 오류발생시 실행
+    }).then(() => {
+      // 항상 실행
+    });
+  }
   },[]);
 
   const handleInputChange = (e) => {
     setText(e.target.value)
+  }
+
+  const handleClick = (e) => {
+    if(sessionStorage.getItem('s3') !=='ok')
+      e.preventDefault()
   }
 
   let Input = null;
@@ -154,17 +176,44 @@ function ReviewStep2 () {
           <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw', marginTop: '3vw'}}>
             <div style={{width: '80vw'}}>          
               <Subject title="2단계: 요약하기" sub={Summary.summary}></Subject>
+              <div style={{width: '80vw', display:'flex'}}>
+                <Button style = {{border: 'none', backgroundColor: 'white',  marginRight: 10, fontWeight: (sumview === true) ? 'bold':'normal'}} onClick={()=>{setSumview(true)}}>한줄 요약</Button>
+                <Button style = {{border: 'none', backgroundColor: 'white', fontWeight: (sumview === false) ? 'bold':'normal'}} onClick={()=>{setSumview(false)}}>세줄 요약</Button>
+              </div >
             </div>
-            <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
+            {sumview && <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
               <div style={{width: '80vw', display:'flex', margin: 10}}>
                 <Button onClick={()=>{ SetSelected(true); }} style = {{backgroundColor: (isSelected === true) ? '#5b6d5b':'white', color: (isSelected === true) ? 'white':'black'}}> 순서배열 </Button>
                 <Button onClick={()=>{ SetSelected(false); }} style = {{backgroundColor: (isSelected === false) ? '#5b6d5b':'white', color: (isSelected === false) ? 'white':'black'}}> 직접입력 </Button>
               </div>
               {Input}
-            </div>
+            </div>}
+            {!sumview && <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
+              {'포함해야할 키워드: [' + s1.join(', ') + ']'}
+              <input
+              placeholder='요약하신 문장을 입력해주세요.'
+              style={{width: '80vw', height: '50px', marginTop: 20, backgroundColor: '#f6f6f6', borderWidth: '1px'}}
+              onChange={handleChange3}
+              name="0"
+          />
+          {'포함해야할 키워드: [' + s2.join(', ') + ']'}
+          <input
+              placeholder='요약하신 문장을 입력해주세요.'
+              style={{width: '80vw', height: '50px', marginTop: 20, backgroundColor: '#f6f6f6', borderWidth: '1px'}}
+              onChange={handleChange3}
+              name="1"
+          />
+          {'포함해야할 키워드: [' + s3.join(', ') + ']'}
+          <input
+              placeholder='요약하신 문장을 입력해주세요.'
+              style={{width: '80vw', height: '50px', marginTop: 20, backgroundColor: '#f6f6f6', borderWidth: '1px'}}
+              onChange={handleChange3}
+              name="2"
+          />
+          </div>}
             <div style={{width: '80vw', display: 'flex', flexDirection: 'column', alignItems: 'flex-end'}}>
               <SubmitButton type="submit">제출하기</SubmitButton>
-              <NavLink to="/Review/ReviewStep3">
+              <NavLink onClick={handleClick} to="/Study/Step3">
                 <img alt="" src ={NextIcon} width='37.5px' height='37.5px'/>               
             </NavLink> {/*다음 단계 버튼*/}
             </div>
@@ -177,4 +226,4 @@ function ReviewStep2 () {
   );
 }
 
-export default ReviewStep2;
+export default Step2;
