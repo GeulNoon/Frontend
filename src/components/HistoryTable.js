@@ -113,6 +113,7 @@ function HistoryTable() {
                   </TableCell>
                   <TableCell align="left">
                     <Button onClick={() => navigateToStudy(i[6], i[5])}>
+                      {i[7] ? "(재)" : null}
                       {i[0]}
                     </Button>
                   </TableCell>
