@@ -28,7 +28,7 @@ function Review() {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <div style={{ width: "70%" }}>
+      <div style={{ width: "75%" }}>
         <Subject title="틀린지문 다시풀기"></Subject>
         <BorderWrapper>
           <ReviewList />
