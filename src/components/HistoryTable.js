@@ -59,19 +59,15 @@ function HistoryTable() {
 
   const StudyDelete = (s_id) => {
     if(window.confirm("정말 삭제합니까?")) {
-    setTimeout(() => {
-      axios({
-        method: "put",
-        url: "http://127.0.0.1:8000/api/getMoreHistory/",
-        headers: { "Content-Type": "application/json" },
-        data: { "s_id": s_id},
-      }).catch(error => {
+      axios.delete(`http://127.0.0.1:8000/api/getMoreHistory/`, 
+      {data: {"s_id": s_id}})
+      .catch(error => {
         alert('삭제 실패')
       })
       .then(response => {
       window.location.reload();
       });
-    }, 500);} else {
+    } else {
       alert("취소합니다.")
     }
   };

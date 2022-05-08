@@ -130,13 +130,13 @@ function ContentBox2(props) {
         <h4>
           {props.word}
         </h4>
-        {Object.keys(Comment).map((i,j) => <p style = {{margin: 0}} key = {j}>{j}. {i}</p>)}
+        {Object.keys(Comment).map((i,j) => <p style = {{margin: 0}} key = {j}>{j+1}. {i}</p>)}
       </TextBox2>
       <div style={{marginBottom: '10px'}}>
         {props.question}
         <div style={{display: 'flex',justifyContent: 'space-around' ,width: '80vw-20px'}}>
           <div>
-            {Choice.map((i,j) => <p key = {j}>{j}. {i}</p>)}
+            {Choice.map((i,j) => <p key = {j}>{j+1}. {i}</p>)}
           </div>
           <div>
             {Answer_u.map((i,j) => Answer_u_is_correct[j] ? 

@@ -41,7 +41,7 @@ const MultipleChoice = (props) => {
                 whiteSpace: 'pre-wrap'}}>
                     {props.sentence}<br/>
                     <h4>{props.word}</h4>
-                {mean.map((i,j) => <p key = {i} style={{margin:0}}>{j+". "+ i}</p>)}
+                {mean.map((i,j) => <p key = {i} style={{margin:0}}>{(j+1)+". "+ i}</p>)}
             </div>{/*문제 보기*/}
             {props.question}
            {/*문제 제시문*/}
@@ -58,7 +58,7 @@ const MultipleChoice = (props) => {
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
-                    {choice.map((i,j) => <p key = {i} style={{margin:0}}>{j+'. '+i}</p>)}
+                    {choice.map((i,j) => <p key = {i} style={{margin:0}}>{(j+1)+'. '+i}</p>)}
                 </div>
                 {/*문제 보기*/}
                 <div style={{
@@ -86,7 +86,7 @@ const MultipleChoice = (props) => {
                         >  
                             {mean.map((value, i) => (
                                 <div key={i} style={{width: '50px'}}>
-                                    <FormControlLabel value={value} control={<Radio color= "success" size="small" onChange={handleChange} />} label={i} />
+                                    <FormControlLabel value={value} control={<Radio color= "success" size="small" onChange={handleChange} />} label={i+1} />
                                 </div>
                             ))}
                         </RadioGroup>

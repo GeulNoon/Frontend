@@ -175,7 +175,7 @@ function Step1 () {
           <div style={{display:'flex'}}>
             <TextBox>{Content}</TextBox>
             <div style = {{marginLeft: '3vw'}}>
-              {<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',
+              {timer && <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',
               width: '25vw', height: '40px', border: '1px solid #5b6d5b', backgroundColor: '#f8f7f3',
               fontSize: '18px', fontWeight: 'bold', borderRadius: '5px'}}>
                 남은 시간: <p style={{color:'#5b6d5b'}}>{min}</p> 분 <p style={{color:'#5b6d5b'}}>{sec}</p> 초
