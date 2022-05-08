@@ -57,8 +57,10 @@ function Step2 () {
   const [Title, setTitle] = useState('');
   const [text, setText] = useState(""); //사용자가 입력한 답
   const [isSelected, SetSelected] = useState(false); 
+  const [isSubmitted, SetIsSubmitted] = useState(false);
   const [sumview, setSumview] = useState(true);
-  const [sumArray, setSumArray] = useState(['', '', '']);
+  const [sumArray3, setSumArray3] = useState(['','', '']);
+  const [type, setType] = useState(0);
   const [s1, sets1] = useState([]);
   const [s2, sets2] = useState([]);
   const [s3, sets3] = useState([]);
@@ -73,15 +75,20 @@ function Step2 () {
     ]
 };
 
-  const handleChange = (e) => {
-    setText(e.target.value)
-  }
+const handleChange = (e) => {
+  setText(e.target.value)
+  setType(1)
+  console.log(text)
+}
 
-  const handleChange3 = (e) => {
-    sumArray[parseInt(e.target.name)] = e.target.value;
-    setSumArray(sumArray);
-    setText(sumArray.join(" "));
-  }
+const handleChange3 = (e) => {
+  sumArray3[parseInt(e.target.name)] = e.target.value;
+  setSumArray3(sumArray3)
+  setText(sumArray3)
+  setType(3)
+  console.log(text)
+}
+
 
   useEffect(async () => {
     const response = await axios.get(`http://127.0.0.1:8000/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
@@ -97,35 +104,21 @@ function Step2 () {
       sets1(response.data['s1'])
       sets2(response.data['s2'])
       sets3(response.data['s3'])
+      SetIsSubmitted(response.data['issubmitted']);
     }
   },[]);
 
-  useEffect(async () => {
-    if(sessionStorage.getItem('s3') === '0') {
-      axios.put(`http://127.0.0.1:8000/api/makeQuiz/`, {a_id: sessionStorage.getItem('a_id'), s_id: sessionStorage.getItem('s_id')})
-        .then(response => {
-          console.log('ok')
-          sessionStorage.setItem('s3', response.data['s3'])
-    }).catch(error => {
-      // 오류발생시 실행
-    }).then(() => {
-      // 항상 실행
-    });
-  }
-  },[]);
 
   const handleInputChange = (e) => {
     setText(e.target.value)
   }
 
-  const handleClick = (e) => {
-    if(sessionStorage.getItem('s3') !=='ok')
-      e.preventDefault()
-  }
 
   let Input = null;
   /*isSelected가 true일 시 순서배열, 아닐 시 직접작성*/
   if (isSelected) {
+    if(type !== 1)
+      setType(1)
     Input = <DragBlock data={Summary} setText = {setText}/>;
   } else {
     Input = <input
@@ -149,7 +142,7 @@ function Step2 () {
             url: "http://127.0.0.1:8000/api/Step2/",
             headers: { "Content-Type": "application/json" },
             params: {'s_id': sessionStorage.getItem('s_id')},
-            data: { "user_summary": text},
+            data: { "user_summary": text, "type": type},
           }).then(
             alert('제출 성공!')
           ).catch(error => { alert('실패')
@@ -212,8 +205,8 @@ function Step2 () {
           />
           </div>}
             <div style={{width: '80vw', display: 'flex', flexDirection: 'column', alignItems: 'flex-end'}}>
-              <SubmitButton type="submit">제출하기</SubmitButton>
-              <NavLink onClick={handleClick} to="/Study/Step3">
+            {!isSubmitted && <div><SubmitButton type="submit" disabled={isSubmitted}>제출하기</SubmitButton></div>}
+              <NavLink to="/Study/Step3">
                 <img alt="" src ={NextIcon} width='37.5px' height='37.5px'/>               
             </NavLink> {/*다음 단계 버튼*/}
             </div>

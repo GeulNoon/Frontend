@@ -132,7 +132,7 @@ function Step2 () {
   let Input = null;
   /*isSelected가 true일 시 순서배열, 아닐 시 직접작성*/
   if (isSelected) {
-    if(type === 3)
+    if(type !== 1)
       setType(1)
     Input = <DragBlock data={Summary} setText = {setText}/>;
   } else {
