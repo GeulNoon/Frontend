@@ -74,7 +74,8 @@ function Step2 () {
   const [isSubmitted, SetIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false);
   const [sumview, setSumview] = useState(true);
-  const [sumArray, setSumArray] = useState(['', '', '']);
+  const [sumArray3, setSumArray3] = useState(['','', '']);
+  const [type, setType] = useState(0);
   const [s1, sets1] = useState([]);
   const [s2, sets2] = useState([]);
   const [s3, sets3] = useState([]);
@@ -92,12 +93,16 @@ function Step2 () {
 
   const handleChange = (e) => {
     setText(e.target.value)
+    setType(1)
+    console.log(text)
   }
 
   const handleChange3 = (e) => {
-    sumArray[parseInt(e.target.name)] = e.target.value;
-    setSumArray(sumArray);
-    setText(sumArray.join(" "));
+    sumArray3[parseInt(e.target.name)] = e.target.value;
+    setSumArray3(sumArray3)
+    setText(sumArray3)
+    setType(3)
+    console.log(text)
   }
 
   useEffect(async () => {
@@ -127,10 +132,12 @@ function Step2 () {
   let Input = null;
   /*isSelected가 true일 시 순서배열, 아닐 시 직접작성*/
   if (isSelected) {
+    if(type === 3)
+      setType(1)
     Input = <DragBlock data={Summary} setText = {setText}/>;
   } else {
     Input = <input
-              defaultValue= {isSubmitted ? userSummary : null}
+              defaultValue= {userSummary}
               placeholder='요약하신 문장을 입력해주세요.'
               style={{width: '80vw', height: '50px', marginTop: 20, backgroundColor: '#f6f6f6', borderWidth: '1px'}}
               onChange={handleChange}
@@ -151,7 +158,7 @@ function Step2 () {
             url: "http://127.0.0.1:8000/api/Step2/",
             headers: { "Content-Type": "application/json" },
             params: {'s_id': sessionStorage.getItem('s_id')},
-            data: { "user_summary": text},
+            data: { "user_summary": text, "type": type},
           }).then(
             alert('제출 성공!')
           ).catch(error => { alert('실패')

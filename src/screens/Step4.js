@@ -15,7 +15,8 @@ const TextBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80vw-20px;
+  width: 80vw;
+  box-sizing: border-box;
   background-color: #e5e5e5;
   border: none;
   padding: 10px;
@@ -230,8 +231,12 @@ function Step4 () {
                 </NavLink>
               </div>
             </div>
+            <div style={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}>
+              <h3 style={{margin:0}}>요약하기:</h3><h1 style={{color: '#5b6d5b', margin:0}}>{Article_comprehension}</h1>
+              <h3 style={{margin:0}}>빈칸풀기:</h3><h1 style={{color: '#5b6d5b', margin:0}}>{KeywordScore}</h1>
+            </div>
             <div className='pointer'>요약문 정답</div>
-            <TextBox>{Article_comprehension}점: {Summary}</TextBox>
+            <TextBox>{Summary}</TextBox>
             <TextBox>사용자 요약문: {SummaryU}</TextBox>
             <AnswerBox><div className='pointer' style={{marginRight: '20px'}}>어휘풀기 정답</div>
               정답은 파란색, 사용자 답은 빨간색으로 표시 됩니다.
@@ -271,7 +276,6 @@ function Step4 () {
             answer_u = {Quiz4.Answer_u}
             isCorrect = {wordC[3]} />
             <AnswerBox><div className='pointer' style={{marginRight: '20px'}}>빈칸풀기 정답</div>
-              {KeywordScore}점:
               {keywordAnswer.map((word,i) =>i+1+"."+word+" ")}
             </AnswerBox>
             <TextBox>
