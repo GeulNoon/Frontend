@@ -43,13 +43,26 @@ function ReviewList() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [title, setTitle] = useState([]);
-  useEffect(() => {
+  /*useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
         `http://127.0.0.1:8000/api/getMoreHistory`,
         { params: { email: sessionStorage.getItem("user") } }
       );
       setTitle(response.data.title);
+    }
+    fetchData();
+  }, []);*/
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/getMoreReview`,
+        { params: { email: sessionStorage.getItem("user") } }
+      );
+      setTitle(response.data.title);
+      if(response.data)
+        console.log(title)
     }
     fetchData();
   }, []);
@@ -86,11 +99,16 @@ function ReviewList() {
   return (
     <ThemeProvider theme={theme}>
       <TableContainer>
-        <Table size="small">
+        <Table size="small" style={{ width: '100%' }}h>
           <TableHead>
             <TableRow>
               <TableCell align="left">지문</TableCell>
-              <TableCell align="left">문제 풀기</TableCell>
+              <TableCell align="left">최근 학습날짜</TableCell>
+              <TableCell align="left">총 학습 횟수</TableCell>
+              <TableCell align="left">요약하기 최고 점수</TableCell>
+              <TableCell align="left">어휘 문제 최고 점수</TableCell>
+              <TableCell align="left">빈칸문제 최고 점수</TableCell>
+              <TableCell align="left">문제 풀기 </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -99,11 +117,14 @@ function ReviewList() {
               .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
               .map((i, j) => (
                 <TableRow key={j}>
-                  <TableCell align="left">
-                    <h4>{i[0]}</h4>
-                  </TableCell>
+                  <TableCell align="left"><h4>{i[0]}</h4></TableCell>
+                    <TableCell align="left"><h5>{i[1]}</h5></TableCell>
+                    <TableCell align="left"><h5>{i[2]}</h5></TableCell>
+                    <TableCell align="left"><h5>{i[3]}</h5></TableCell>
+                    <TableCell align="left"><h5>{i[4]}</h5></TableCell>
+                    <TableCell align="left"><h5>{i[5]}</h5></TableCell>
                   <TableCell align="center">
-                    <Button onClick={() => navigateToStudy(i[5])}>
+                    <Button onClick={() => navigateToStudy(i[6])}>
                       문제풀기
                     </Button>
                   </TableCell>

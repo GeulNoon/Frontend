@@ -34,12 +34,11 @@ const Choice = (props) => {
     useEffect(async () => {
         if(props.example)
             setexample(props.example);
-            console.log(example);
     });
 
       return (
           <div style={{marginTop: 10, marginBottom:10}}>
-            {props.question}
+            {props.type === 1 ? '다음 단어 중 빈칸에 들어갈 수 있는 단어를 고르시오.' : '다음 단어 중 주어진 사전적 의미에 부합하는 단어를 고르시오.'}
             <div style={{width: '80vw', 
                 height: '10vh',
                 display:'flex', 
@@ -54,6 +53,14 @@ const Choice = (props) => {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
+                {props.isSubmitted ? 
+                <div style={{display: 'flex', justifyContent: 'space-around', width: "50vw", marginLeft: '15vw', marginRight: '15vw', marginBottom: '10px'}}>
+                    {example.map((i,j) => props.true_answer === i ?
+                    <p key={j} style={{color: 'green'}}>{j+1}. {i}</p> :
+                    (props.user_answer === i
+                    ? <p key={j} style={{color: 'red'}}>{j+1}. {i}</p>
+                    : <p key={j}>{j+1}. {i}</p>))}
+                </div> :
                 <FormControl component="fieldset">
                 <RadioGroup
                     row
@@ -68,7 +75,7 @@ const Choice = (props) => {
                     </div>
                     ))}
                 </RadioGroup>
-                </FormControl>{/*선택지*/}
+                </FormControl>}
             </div>
           </div>
       );

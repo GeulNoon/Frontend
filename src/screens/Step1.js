@@ -84,6 +84,13 @@ function Step1 () {
   const state = {
     contents: [
       {id: 'Step1', title: '1단계', desc: '전문보기', type: 0},
+      {id: 'Step2', title: '2단계', desc: '요약하기', type: 2},
+      {id: 'Step3', title: '3단계', desc: '어휘풀기', type: 2},
+      {id: 'Step5', title: '4단계', desc: '빈칸풀기', type: 2},
+      {id: 'Step4', title: '5단계', desc: '결과보기', type: 2},
+    ],
+    contents_done: [
+      {id: 'Step1', title: '1단계', desc: '전문보기', type: 0},
       {id: 'Step2', title: '2단계', desc: '요약하기', type: 1},
       {id: 'Step3', title: '3단계', desc: '어휘풀기', type: 1},
       {id: 'Step5', title: '4단계', desc: '빈칸풀기', type: 1},
@@ -160,15 +167,19 @@ function Step1 () {
   
     return (
       <div style={{display:'flex'}}>
-        <NavigationBar list={state.contents} title = {Title} prev={"Study"}/> {/*화면 좌측 단계이동 바*/}
+        {timer ? <NavigationBar list={state.contents} title = {Title} prev={"Study"}/> : <NavigationBar list={state.contents_done} title = {Title} prev={"Study"}/>}
         <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw', marginTop: '3vw'}}>
           <div style={{width: '80vw'}}>          
-            <Subject title="1단계: 전문보기" sub="기사의 전문을 읽어봅시다."></Subject>
+            <Subject title="1단계: 전문보기" sub="글을 자세히 읽어주세요. 일정 시간동안 다음 단계로 넘어갈 수 없습니다."></Subject>
           </div>
-          {timer && <div> {min} 분 {sec} 초</div>}
           <div style={{display:'flex'}}>
             <TextBox>{Content}</TextBox>
             <div style = {{marginLeft: '3vw'}}>
+              {timer && <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',
+              width: '25vw', height: '40px', border: '1px solid #5b6d5b', backgroundColor: '#f8f7f3',
+              fontSize: '18px', fontWeight: 'bold', borderRadius: '5px'}}>
+                남은 시간: <p style={{color:'#5b6d5b'}}>{min}</p> 분 <p style={{color:'#5b6d5b'}}>{sec}</p> 초
+              </div>}
               <div style={{width: '25vw'}}>
                 <h3>단어 검색</h3>
                 <div style={{display:"flex", alignItems: 'center', marginBottom: '10px'}}>

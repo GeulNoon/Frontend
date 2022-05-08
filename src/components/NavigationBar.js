@@ -24,6 +24,15 @@ const Selected = styled.button`
   margin-bottom: 3vh;
 `;
 
+const Disabled = styled.button`
+  width: 10vw;
+  color: #e5e5e5;
+  font-size: 18px;
+  background-color: #aac4ab;
+  border: none;
+  margin-bottom: 3vh;
+`;
+
 class TOC extends Component{
   render(){
     var list = [];
@@ -38,11 +47,18 @@ class TOC extends Component{
               {data.title}<br/>{data.desc} 
               </Button>
               </NavLink>);
-      } else {
+      } else if(data.type === 0) {
         list.push(
           <Selected key={data.id}>
             {data.title}<br/>{data.desc}
           </Selected>
+        )
+      }
+      else {
+        list.push(
+          <Disabled key={data.id}>
+            {data.title}<br/>{data.desc}
+          </Disabled>
         )
       }
       i = i+1;

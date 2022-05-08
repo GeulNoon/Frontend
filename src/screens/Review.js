@@ -5,7 +5,7 @@ import ReviewList from "../components/ReviewList";
 
 //테두리가 있는 박스 디자인(큰 틀)
 const BorderWrapper = styled.div`
-  width: 850px;
+  width: 100%;
   border: 1px solid #5b6d5b;
   font-size: 14px;
   padding: 20px;
@@ -28,8 +28,8 @@ function Review() {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <div style={{ width: "900px" }}>
-        <Subject title="틀린문제 다시풀기"></Subject>
+      <div style={{ width: "70%" }}>
+        <Subject title="틀린지문 다시풀기"></Subject>
         <BorderWrapper>
           <ReviewList />
         </BorderWrapper>

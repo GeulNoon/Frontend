@@ -5,7 +5,7 @@ import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 //블럭 요소
-const MovableItem = ({name, setItems, setTexts ,item}) => {
+const MovableItem = ({name, setItems, setTexts, item}) => {
     //다른 박스로 블럭 옮길 때 기존 박스에서 해당 블럭 제거 후 다른 박스 가장 뒤에 배치
     const changeItemColumn = (currentItem, columnName) => {
         const newList = item.filter((it) => it.name !== currentItem.name);
