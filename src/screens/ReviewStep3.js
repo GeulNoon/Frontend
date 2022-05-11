@@ -2,6 +2,7 @@
 import React, { useState, useEffect, Component } from 'react';
 import NavigationBar from "../components/NavigationBar";
 import Choice from "../components/Choice";
+import Choice2 from '../components/Choice2';
 import MultipleChoice from "../components/MutipleChoice";
 import { NavLink } from "react-router-dom";
 import NextIcon from "../image/NextIcon.png";
@@ -58,15 +59,11 @@ const ReviewStep3 = () => {
   const [Question2C, setQuestion2C] = useState();
   const [Question2M, setQuestion2M] = useState();
   const [Question2A, setQuestion2A] = useState();
+  const [Question3T, setQuestion3T] = useState();
   const [Question3, setQuestion3] = useState();
-  const [Question3W, setQuestion3W] = useState();
-  const [Question3S, setQuestion3S] = useState();
-  const [Question3C, setQuestion3C] = useState();
-  const [Question3M, setQuestion3M] = useState();
-  const [Question3A, setQuestion3A] = useState();
+  const [Example3, setExample3] = useState();
   const [Question4, setQuestion4] = useState();
   const [Example4, setExample4] = useState();
-  const [isSubmitted, SetIsSubmitted] = useState(false)
 
 
   useEffect(async () => {
@@ -85,15 +82,11 @@ const ReviewStep3 = () => {
     setQuestion2C(response.data['quiz2']['Choice']);
     setQuestion2M(response.data['quiz2']['MEAN']);
     setQuestion2A(response.data['quiz2']['User_answer']);
+    setQuestion3T(response.data['quiz3']['Type']);
     setQuestion3(response.data['quiz3']['Test']);
-    setQuestion3W(response.data['quiz3']['Word']);
-    setQuestion3S(response.data['quiz3']['Sentence']);
-    setQuestion3C(response.data['quiz3']['Choice']);
-    setQuestion3M(response.data['quiz3']['MEAN']);
-    setQuestion3A(response.data['quiz3']['User_answer']);
+    setExample3(response.data['quiz3']['Choice']);
     setQuestion4(response.data['quiz4']['Test']);
     setExample4(response.data['quiz4']['Choice']);
-    SetIsSubmitted(response.data['issubmitted']);
   },[]);
 
   const submitAnswer = () => {
@@ -157,16 +150,13 @@ const ReviewStep3 = () => {
           id={2} 
           userAnswer = {Question2A} 
           setUseranswer = {setQuestion2A} />{" "}
-          <MultipleChoice answer={answer} 
-          setAnswer={setAnswer} 
-          question = {Question3} 
-          word = {Question3W} 
-          sentence = {Question3S} 
-          choice={Question3C} 
-          mean = {Question3M} 
-          id={3} 
-          userAnswer = {Question3A} 
-          setUseranswer = {setQuestion3A} />{" "}
+          <Choice2 type = {Question3T}
+          answer={answer}
+          setAnswer={setAnswer}
+          example = {Example3}
+          question = {Question3}
+          id={3}
+          />
           {/*동음이의어 문제*/}
           <Choice type = {3} answer={answer} setAnswer={setAnswer} example = {Example4} question = {Question4} id={4} />
           {answer.map((ans) => ans.value)}{" "}

@@ -2,6 +2,7 @@
 import React, { useState, useEffect, Component } from 'react';
 import NavigationBar from "../components/NavigationBar";
 import Choice from "../components/Choice";
+import Choice2 from "../components/Choice2";
 import MultipleChoice from "../components/MutipleChoice";
 import { NavLink } from "react-router-dom";
 import NextIcon from "../image/NextIcon.png";
@@ -62,14 +63,11 @@ const Step3 = () => {
   const [Question2A, setQuestion2A] = useState();
   const [Question2UA, setQuestion2UA] = useState();
   const [Question2UAC, setQuestion2UAC] = useState(); 
+  const [Question3T, setQuestion3T] = useState();
   const [Question3, setQuestion3] = useState();
-  const [Question3W, setQuestion3W] = useState();
-  const [Question3S, setQuestion3S] = useState();
-  const [Question3C, setQuestion3C] = useState();
-  const [Question3M, setQuestion3M] = useState();
+  const [Example3, setExample3] = useState();
   const [Question3A, setQuestion3A] = useState();
   const [Question3UA, setQuestion3UA] = useState();
-  const [Question3UAC, setQuestion3UAC] = useState(); 
   const [Question4, setQuestion4] = useState();
   const [Example4, setExample4] = useState();
   const [Question4A, setQuestion4A] = useState();
@@ -97,14 +95,11 @@ const Step3 = () => {
     setQuestion2A(response.data['quiz2']['User_answer']);
     setQuestion2UA(response.data['quiz2']['Answer_u']);
     setQuestion2UAC(response.data['quiz2']['Is_Correct']);
+    setQuestion3T(response.data['quiz3']['Type']);
     setQuestion3(response.data['quiz3']['Test']);
-    setQuestion3W(response.data['quiz3']['Word']);
-    setQuestion3S(response.data['quiz3']['Sentence']);
-    setQuestion3C(response.data['quiz3']['Choice']);
-    setQuestion3M(response.data['quiz3']['MEAN']);
-    setQuestion3A(response.data['quiz3']['User_answer']);
+    setExample3(response.data['quiz3']['Choice']);
+    setQuestion3A(response.data['quiz3']['Answer']);
     setQuestion3UA(response.data['quiz3']['Answer_u']);
-    setQuestion3UAC(response.data['quiz3']['Is_Correct']);
     setQuestion4(response.data['quiz4']['Test']);
     setExample4(response.data['quiz4']['Choice']);
     setQuestion4A(response.data['quiz4']['Answer']);
@@ -185,19 +180,16 @@ const Step3 = () => {
           isSubmitted={isSubmitted}
           real_user_answer = {Question2UA}
           is_answer_correct = {Question2UAC} />{" "}
-          <MultipleChoice answer={answer} 
-          setAnswer={setAnswer} 
-          question = {Question3} 
-          word = {Question3W} 
-          sentence = {Question3S} 
-          choice={Question3C} 
-          mean = {Question3M} 
-          id={3} 
-          userAnswer = {Question3A} 
-          setUseranswer = {setQuestion3A}
+          <Choice2 type = {Question3T}
+          answer={answer}
+          setAnswer={setAnswer}
+          example = {Example3}
+          question = {Question3}
+          id={3}
           isSubmitted={isSubmitted}
-          real_user_answer = {Question3UA}
-          is_answer_correct = {Question3UAC} />{" "}
+          true_answer = {Question3A}
+          user_answer = {Question3UA}
+          />
           {/*동음이의어 문제*/}
           <Choice type = {3}
           answer={answer}

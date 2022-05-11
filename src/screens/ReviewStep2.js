@@ -205,7 +205,7 @@ const handleChange3 = (e) => {
           />
           </div>}
             <div style={{width: '80vw', display: 'flex', flexDirection: 'column', alignItems: 'flex-end'}}>
-            {!isSubmitted && <div><SubmitButton type="submit" disabled={isSubmitted}>제출하기</SubmitButton></div>}
+            {<div><SubmitButton type="submit">제출하기</SubmitButton></div>}
               <NavLink to="/Study/Step3">
                 <img alt="" src ={NextIcon} width='37.5px' height='37.5px'/>               
             </NavLink> {/*다음 단계 버튼*/}

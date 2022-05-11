@@ -160,7 +160,7 @@ function ContentBox2(props) {
 
 //메인함수
 function Step4 () {
-  const [Article_comprehension, setArticle_comprehension] = useState(' ');
+  const [Article_comprehension, setArticle_comprehension] = useState(0);
   const [Title, setTitle] = useState(' ');
   const [Name, setName] = useState(' ');
   const [Summary, setSummary] = useState(' ');
@@ -173,6 +173,7 @@ function Step4 () {
   const [Quiz2, setQuiz2] = useState({});
   const [Quiz3, setQuiz3] = useState({});
   const [Quiz4, setQuiz4] = useState({});
+  const [QuizScore, setQuizScore] = useState(0);
   const [Article_avg_comprehension, setArtivle_avg_comprehension] = useState(0);
   const state = {
     contents: [
@@ -203,6 +204,7 @@ function Step4 () {
     setQuiz2(response.data['quiz2'])
     setQuiz3(response.data['quiz3'])
     setQuiz4(response.data['quiz4'])
+    setQuizScore(response.data['quiz_score'])
     setArtivle_avg_comprehension(response.data['avg_article_comporehension'])
     setSummaryU(response.data['user_summary'])
   },[]);
@@ -232,7 +234,8 @@ function Step4 () {
               </div>
             </div>
             <div style={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}>
-              <h3 style={{margin:0}}>요약하기:</h3><h1 style={{color: '#5b6d5b', margin:0}}>{Article_comprehension}</h1>
+              <h3 style={{margin:0}}>요약하기:</h3><h1 style={{color: '#5b6d5b', margin:0, marginRight: '5px'}}>{Article_comprehension}</h1>
+              <h3 style={{margin:0}}>어휘풀기:</h3><h1 style={{color: '#5b6d5b', margin:0, marginRight: '5px'}}>{QuizScore}</h1>
               <h3 style={{margin:0}}>빈칸풀기:</h3><h1 style={{color: '#5b6d5b', margin:0}}>{KeywordScore}</h1>
             </div>
             <div className='pointer'>요약문 정답</div>
@@ -258,16 +261,13 @@ function Step4 () {
             answer_u_is_correct = {Quiz2.Is_Correct}
             isCorrect = {wordC[1]}
             />
-            <ContentBox2 
-            question ={Quiz3.Test}
-            word = {Quiz3.Word}
-            sentence = {Quiz3.Sentence} 
-            comment = {Quiz3.MEAN}
+            <ContentBox question = {Quiz3.Type}
+            content = {Quiz3.Test}
             choice = {Quiz3.Choice}
+            comment = {Quiz3.Mean}
+            answer = {Quiz3.Answer}
             answer_u = {Quiz3.Answer_u}
-            answer_u_is_correct = {Quiz3.Is_Correct}
-            isCorrect = {wordC[2]}
-            />
+            isCorrect = {wordC[2]} />
             <ContentBox question = "4. 다음 단어 중 주어진 사전적 의미에 부합하는 단어를 고르시오." 
             content = {Quiz4.Test}
             choice = {Quiz4.Choice}
