@@ -18,7 +18,7 @@ function Login() {
             data: { "email": values['email'],"password": values['password']},
           }).then(response => {
             sessionStorage.setItem('user', values['email'])
-            window.location.replace("/")
+            window.location.replace("/Frontend/")
           })
           .catch(error => {
             alert('로그인 실패!')
