@@ -1,5 +1,5 @@
 import React ,{Component} from 'react';
-import { HashRouter,Route, NavLink, Routes } from "react-router-dom";
+import { BrowserRouter,Route, NavLink, Routes } from "react-router-dom";
 import Home from "./screens/Home";
 import Study from "./screens/Study";
 import Review from "./screens/Review";
@@ -83,7 +83,7 @@ class App extends Component {
           onClick={() => {sessionStorage.removeItem('user'); window.location.replace("/")}}>로그아웃
         </button>    
     return (
-      <HashRouter basename="/"> 
+      <BrowserRouter basename={process.env.PUBLIC_URL}> 
         <div>
           <div style={{position: 'fixed', height: '10vh', width: '100%', backgroundColor: 'white', zIndex: 1}}>
             <div style={{display: 'flex', justifyContent: 'flex-end', marginTop: '10px', marginRight: '5px'}}>
@@ -119,7 +119,7 @@ class App extends Component {
           </Routes>
           </div>
         </div>
-      </HashRouter>
+      </BrowserRouter>
     )
   }
 }
