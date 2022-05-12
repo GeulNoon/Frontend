@@ -96,7 +96,7 @@ class App extends Component {
           </div>
           <div style={{paddingTop: '15vh'}}>
           <Routes> 
-          <Route exact path="*" element={<Home/>}/> 
+          <Route exact path="/*" element={<Home/>}/> 
           <Route path="/Study/*" element={<PrivateRoute><Study/></PrivateRoute>}/>
             <Route path="/Review/*" element={<PrivateRoute><Review/></PrivateRoute>}/>
             <Route path="/Result" element={<PrivateRoute><Result/></PrivateRoute>}/>
