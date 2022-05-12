@@ -3,7 +3,7 @@ import React, { useState, useEffect, Component } from 'react';
 import user from "../image/user.png";
 import styled from 'styled-components';
 import axios from "axios"
-import { NavLink } from "react-router-dom";
+import {useNavigate, NavLink} from 'react-router-dom';
 
 //회원정보 수정, 회원 탈퇴 버튼 디자인
 const Button = styled.div`
@@ -23,6 +23,7 @@ const Button = styled.div`
 //메인 함수(div는 요소 배치을 위해 불가피하게 많이 사용하게 되었습니다...기능과 크게 상관이 없어 무시해도 괜찮습니다)
 function MyPage () {
     const [User, setUser] = useState(' ');
+    const navigate = useNavigate();
     useEffect(async () => {
       const response = await axios.get(`http://127.0.0.1:8000/api/MyPage`, {params: {'email': sessionStorage.getItem('user')}});
       setUser(response.data);
@@ -37,7 +38,7 @@ function MyPage () {
             console.log(response.data)
             alert("삭제되었습니다.")
             sessionStorage.clear()
-            window.location.replace("/")
+            window.location.replace("/Frontend/")
           }}).catch(error => {
             // 오류발생시 실행
           });

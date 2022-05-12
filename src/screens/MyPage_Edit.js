@@ -62,7 +62,7 @@ function MyPage_Edit () {
             }).then((response) => {
                 if(response.data['edit'] === 'ok'){
                   alert("수정되었습니다.")
-                  window.location.replace("/Frontend/MyPage")
+                  navigate('/MyPage')
             }})
             .catch(error => {
               alert('수정 실패. 다시 시도해주세요.')

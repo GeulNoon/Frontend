@@ -80,7 +80,7 @@ class App extends Component {
         </NavLink>
     else
       signinButton = <button style={{border: 'none', backgroundColor: 'white', color: 'grey', marginRight:20}}
-          onClick={() => {sessionStorage.removeItem('user'); window.location.replace("/")}}>로그아웃
+          onClick={() => {sessionStorage.removeItem('user'); window.location.replace("/Frontend/")}}>로그아웃
         </button>    
     return (
       <BrowserRouter basename={process.env.PUBLIC_URL}> 
