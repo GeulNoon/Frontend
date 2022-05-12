@@ -83,7 +83,7 @@ class App extends Component {
           onClick={() => {sessionStorage.removeItem('user'); window.location.replace("/")}}>로그아웃
         </button>    
     return (
-      <BrowserRouter> 
+      <BrowserRouter basename={process.env.PUBLIC_URL}> 
         <div>
           <div style={{position: 'fixed', height: '10vh', width: '100%', backgroundColor: 'white', zIndex: 1}}>
             <div style={{display: 'flex', justifyContent: 'flex-end', marginTop: '10px', marginRight: '5px'}}>
@@ -96,7 +96,7 @@ class App extends Component {
           </div>
           <div style={{paddingTop: '15vh'}}>
           <Routes> 
-          <Route exact path="/*" element={<Home/>}/> 
+          <Route exact path="*" element={<Home/>}/> 
           <Route path="/Study/*" element={<PrivateRoute><Study/></PrivateRoute>}/>
             <Route path="/Review/*" element={<PrivateRoute><Review/></PrivateRoute>}/>
             <Route path="/Result" element={<PrivateRoute><Result/></PrivateRoute>}/>
