@@ -17,7 +17,7 @@ function Study() {
             setTimeout(() => {
               axios({
                 method: "post",
-                url: "http://127.0.0.1:8000/api/study",
+                url: "http://3.38.70.33:8000/api/study",
                 headers: { "Content-Type": "application/json" },
                 data: { "title": values['title'],"content": values['content'], "email": sessionStorage.getItem('user')},
               }).then(response => {

@@ -186,13 +186,13 @@ function Step4 () {
   }
 
   useEffect(async () => {
-    const response = await axios.get(`http://127.0.0.1:8000/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
+    const response = await axios.get(`http://3.38.70.33:8000/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
     setTitle(response.data['title']);
     console.log(Title);
   },[]);
     
   useEffect(async () => {
-    const response = await axios.get(`http://127.0.0.1:8000/api/Step4`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
+    const response = await axios.get(`http://3.38.70.33:8000/api/Step4`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
     setName(response.data['name']);
     setArticle_comprehension(response.data['article_comprehension']);
     setSummary(response.data['summary'])
