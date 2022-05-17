@@ -80,10 +80,10 @@ class App extends Component {
         </NavLink>
     else
       signinButton = <button style={{border: 'none', backgroundColor: 'white', color: 'grey', marginRight:20}}
-          onClick={() => {sessionStorage.removeItem('user'); window.location.replace("/")}}>로그아웃
+          onClick={() => {sessionStorage.removeItem('user'); window.location.replace("/Frontend/")}}>로그아웃
         </button>    
     return (
-      <BrowserRouter> 
+      <BrowserRouter basename={process.env.PUBLIC_URL}> 
         <div>
           <div style={{position: 'fixed', height: '10vh', width: '100%', backgroundColor: 'white', zIndex: 1}}>
             <div style={{display: 'flex', justifyContent: 'flex-end', marginTop: '10px', marginRight: '5px'}}>

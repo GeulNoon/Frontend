@@ -85,8 +85,8 @@ function Result() {
     const [statistics, setStatistics] = useState([]);
     useEffect(() => {
       async function fetchData(){
-      const response = await axios.get(`http://127.0.0.1:8000/api/getHistory`, {params: {'email': sessionStorage.getItem('user')}});
-      const stat = await axios.get(`http://127.0.0.1:8000/api/getStatistics`, {params: {'email': sessionStorage.getItem('user'), 'option': option}});  
+      const response = await axios.get(`http://3.38.70.33:8000/api/getHistory`, {params: {'email': sessionStorage.getItem('user')}});
+      const stat = await axios.get(`http://3.38.70.33:8000/api/getStatistics`, {params: {'email': sessionStorage.getItem('user'), 'option': option}});  
       setTitle(response.data.title);
       setTotal_study(response.data['total_study']);
       setAvg_article_comprehension(response.data['avg_article_comprehension'])
@@ -97,7 +97,7 @@ function Result() {
     },[]);
     const changeOption = async(i) => {
       setOption(i)
-      const stat = await axios.get(`http://127.0.0.1:8000/api/getStatistics`, {params: {'email': sessionStorage.getItem('user'), 'option': i}});
+      const stat = await axios.get(`http://3.38.70.33:8000/api/getStatistics`, {params: {'email': sessionStorage.getItem('user'), 'option': i}});
       setStatistics(stat.data) 
     }
    return (

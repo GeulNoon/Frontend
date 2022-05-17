@@ -28,7 +28,7 @@ function MyPage_Edit () {
     const navigate = useNavigate();
     
     useEffect(async () => {
-      const response = await axios.get(`http://127.0.0.1:8000/api/MyPage`, {params: {'email': sessionStorage.getItem('user')}});
+      const response = await axios.get(`http://3.38.70.33:8000/api/MyPage`, {params: {'email': sessionStorage.getItem('user')}});
         setUser(response.data)
         console.log(User.birthyear)
     },[]);
@@ -56,13 +56,13 @@ function MyPage_Edit () {
           setTimeout(() => {
             axios({
               method: "put",
-              url: "http://127.0.0.1:8000/api/MyPage/",
+              url: "http://3.38.70.33:8000/api/MyPage/",
               headers: { "Content-Type": "application/json" },
               data: { "email": sessionStorage.getItem('user'), "nickname": nickname, "password": values['password'], "birthyear": birthyear},
             }).then((response) => {
                 if(response.data['edit'] === 'ok'){
                   alert("수정되었습니다.")
-                  window.location.replace("/MyPage")
+                  navigate('/MyPage')
             }})
             .catch(error => {
               alert('수정 실패. 다시 시도해주세요.')
