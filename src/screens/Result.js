@@ -18,6 +18,7 @@ const ResultSummWrapper = styled.div`
   height: 125px;
   border: none;
   border-radius: 20px;
+  padding: 3px 7px;
   background-color: #eff0ef;
 `;
 

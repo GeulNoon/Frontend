@@ -13,7 +13,7 @@ function Login() {
         setTimeout(() => {
           axios({
             method: "post",
-            url: "http://127.0.0.1:8000/api/login",
+            url: "http://ec2-52-79-76-82.ap-northeast-2.compute.amazonaws.com:8080/api/login",
             headers: { "Content-Type": "application/json" },
             data: { "email": values['email'],"password": values['password']},
           }).then(response => {

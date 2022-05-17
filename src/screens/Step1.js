@@ -109,10 +109,9 @@ function Step1 () {
     if(sessionStorage.getItem('s2') === '0') {
         axios.put(`http://127.0.0.1:8000/api/Step1/`, {a_id: sessionStorage.getItem('a_id'), s_id: sessionStorage.getItem('s_id')})
         .then(response => {
-          console.log('ok')
           sessionStorage.setItem('s2', response.data['s2'])
     }).catch(error => {
-      // 오류발생시 실행
+      alert('문제 생성 오류! 다른 지문을 넣어보세요')
     }).then(() => {
       // 항상 실행
     });
@@ -142,23 +141,6 @@ function Step1 () {
     });
     }, 500);
   }
-  const [question, setQuestion] = useState('');
-  const [answer, setAnswer] = useState([]);
-  const [isAnswerVisible, setIsAnswerVisible] = useState(0);
-  const onSubmitQuestion = () => {
-    setTimeout(() => {
-      axios({
-        method: "post",
-        url: "http://127.0.0.1:8000/api/getAnswer/",
-        headers: { "Content-Type": "application/json" },
-        params: {'a_id': sessionStorage.getItem('a_id')},
-        data: { "question": question},
-      }).then((res)=> setAnswer(res["data"]["answer"], setIsAnswerVisible(1))
-      ).catch(error => {
-        alert('검색 실패!')
-    });
-    }, 500);
-  }
 
   const handleClick = (e) => {
     if(sessionStorage.getItem('s2') !=='ok' || timer)
@@ -175,11 +157,17 @@ function Step1 () {
           <div style={{display:'flex'}}>
             <TextBox>{Content}</TextBox>
             <div style = {{marginLeft: '3vw'}}>
-              {timer && <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',
-              width: '25vw', height: '40px', border: '1px solid #5b6d5b', backgroundColor: '#f8f7f3',
-              fontSize: '18px', fontWeight: 'bold', borderRadius: '5px'}}>
-                남은 시간: <p style={{color:'#5b6d5b'}}>{min}</p> : <p style={{color:'#5b6d5b'}}>{sec}</p>
-              </div>}
+              {timer &&
+              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',
+              fontSize: '16px', fontWeight: 'bold'}}>
+                남은 시간:
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',
+                width: '25vw', height: '40px', border: '1px solid #5b6d5b', backgroundColor: '#f8f7f3',
+                fontSize: '21px', fontWeight: 'bold', borderRadius: '5px'}}>
+                  <p style={{color:'#5b6d5b'}}>{('00'+min).slice(-2)}</p> 분 <p style={{color:'#5b6d5b', marginLeft: '5px'}}>{('00'+sec).slice(-2)}</p> 초 
+                </div>
+              </div>
+              }
               <div style={{width: '25vw'}}>
                 <h3>단어 검색</h3>
                 <div style={{display:"flex", alignItems: 'center', marginBottom: '10px'}}>
@@ -192,21 +180,6 @@ function Step1 () {
                     <Button style={{width: '20px', marginRight: '2px'}} onClick={()=>{setIsVisible(0)}}>X</Button>
                   </div>
                   {result.map((def,index) => <p key={def}>{index+1}. {def}</p>)}
-                </div> :
-                null}
-              </div>
-              <div style={{width: '25vw'}}>
-              <h3>질의 응답</h3>
-                <div style={{display:"flex", alignItems: 'center', marginBottom: '10px'}}>
-                  <input type="text" placeholder='지문 속 궁금한 내용을 검색해봅시다.' onChange={(event) => setQuestion(event.target.value)} style={{width:"200px", marginBottom:"0px", marginRight: "10px"}}/>
-                  <Button onClick={onSubmitQuestion}>검색</Button>
-                </div>
-                {isAnswerVisible ? 
-                <div style={{border: "1px solid #5b6d5b"}}>
-                  <div style={{width: '25vw', display:"flex", justifyContent: 'end'}}>
-                    <Button style={{width: '20px', marginRight: '2px'}} onClick={()=>{setIsAnswerVisible(0)}}>X</Button>
-                  </div>
-                  {answer}
                 </div> :
                 null}
               </div>
