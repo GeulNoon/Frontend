@@ -43,7 +43,7 @@ class Home extends Component {
     //TOC에 전달해줄 요소
     contents: [
       {id: 'Study', title: '학습하기', desc: '학습하기 기능', color: '#5b6d5b'},
-      {id: 'Review', title: '오답노트', desc: '오답노트 기능', color: '#94c973'},
+      {id: 'Review', title: '복습하기', desc: '오답노트 기능', color: '#94c973'},
       {id: 'Result', title: '학습결과', desc: '학습결과 기능', color: '#4b754b'},
       {id: 'Login' , title: '로그인', desc: '로그인 기능', color: '#5b6d5b'}
     ]

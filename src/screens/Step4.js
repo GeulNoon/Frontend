@@ -188,13 +188,13 @@ function Step4 () {
   }
 
   useEffect(async () => {
-    const response = await axios.get(`http://3.38.70.33:8000/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
+    const response = await axios.get(`http://127.0.0.1:8000/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
     setTitle(response.data['title']);
     console.log(Title);
   },[]);
     
   useEffect(async () => {
-    const response = await axios.get(`http://3.38.70.33:8000/api/Step4`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
+    const response = await axios.get(`http://127.0.0.1:8000/api/Step4`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
     setName(response.data['name']);
     setArticle_comprehension(response.data['article_comprehension']);
     setSummary(response.data['summary'])
@@ -240,7 +240,7 @@ function Step4 () {
                   <IconBox><img alt="" src ={HomeIcon} width='50px' height='50px' />홈</IconBox> {/*홈 아이콘*/}
                 </NavLink>
                 <NavLink to="/Review" style={{color: 'black', textDecoration: 'none'}}>
-                  <IconBox><img alt="" src ={ReviewIcon} width='50px' height='50px' />오답노트</IconBox> {/*오답노트 아이콘*/}
+                  <IconBox><img alt="" src ={ReviewIcon} width='50px' height='50px' />복습하기</IconBox> {/*오답노트 아이콘*/}
                 </NavLink>
               </div>
             </div>

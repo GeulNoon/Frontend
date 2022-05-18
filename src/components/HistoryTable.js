@@ -49,7 +49,7 @@ function HistoryTable() {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        `http://3.38.70.33:8000/api/getMoreHistory`,
+        `http://127.0.0.1:8000/api/getMoreHistory`,
         { params: { email: sessionStorage.getItem("user") } }
       );
       setTitle(response.data.title);
@@ -59,7 +59,7 @@ function HistoryTable() {
 
   const StudyDelete = (s_id) => {
     if(window.confirm("정말 삭제합니까?")) {
-      axios.delete(`http://3.38.70.33:8000/api/getMoreHistory/`, 
+      axios.delete(`http://127.0.0.1:8000/api/getMoreHistory/`, 
       {data: {"s_id": s_id}})
       .catch(error => {
         alert('삭제 실패')

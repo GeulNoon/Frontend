@@ -99,7 +99,7 @@ function Step1 () {
   }
 
   useEffect(async () => { 
-    const response = await axios.get(`http://3.38.70.33:8000/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
+    const response = await axios.get(`http://127.0.0.1:8000/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
     setTitle(response.data['title']);
     console.log(Title);
   },[]);
@@ -107,7 +107,7 @@ function Step1 () {
 
   useEffect(async () => {
     if(sessionStorage.getItem('s2') === '0') {
-        axios.put(`http://3.38.70.33:8000/api/Step1/`, {a_id: sessionStorage.getItem('a_id'), s_id: sessionStorage.getItem('s_id')})
+        axios.put(`http://127.0.0.1:8000/api/Step1/`, {a_id: sessionStorage.getItem('a_id'), s_id: sessionStorage.getItem('s_id')})
         .then(response => {
           sessionStorage.setItem('s2', response.data['s2'])
     }).catch(error => {
@@ -120,7 +120,7 @@ function Step1 () {
 
 
   useEffect(async () => {
-    const response = await axios.get(`http://3.38.70.33:8000/api/Step1`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
+    const response = await axios.get(`http://127.0.0.1:8000/api/Step1`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
     setContent(response.data["content"]);
     setSubmitted(response.data["issubmitted"]);
   },[]);
@@ -132,7 +132,7 @@ function Step1 () {
     setTimeout(() => {
       axios({
         method: "post",
-        url: "http://3.38.70.33:8000/api/searchWord/",
+        url: "http://127.0.0.1:8000/api/searchWord/",
         headers: { "Content-Type": "application/json" },
         data: { "word": word},
       }).then((res)=> setResult(res["data"]["definition"], setIsVisible(1))

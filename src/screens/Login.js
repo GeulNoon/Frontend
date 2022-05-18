@@ -13,7 +13,7 @@ function Login() {
         setTimeout(() => {
           axios({
             method: "post",
-            url: "http://3.38.70.33:8000/api/login",
+            url: "http://127.0.0.1:8000/api/login",
             headers: { "Content-Type": "application/json" },
             data: { "email": values['email'],"password": values['password']},
           }).then(response => {
