@@ -1,7 +1,7 @@
 {
   "main.css": "/Frontend/static/css/main.9efbfdfc.chunk.css",
-  "main.js": "/Frontend/static/js/main.3a88790d.chunk.js",
-  "main.js.map": "/Frontend/static/js/main.3a88790d.chunk.js.map",
+  "main.js": "/Frontend/static/js/main.734d333f.chunk.js",
+  "main.js.map": "/Frontend/static/js/main.734d333f.chunk.js.map",
   "static/js/1.7ec9a479.chunk.js": "/Frontend/static/js/1.7ec9a479.chunk.js",
   "static/js/1.7ec9a479.chunk.js.map": "/Frontend/static/js/1.7ec9a479.chunk.js.map",
   "static/js/2.53246a10.chunk.js": "/Frontend/static/js/2.53246a10.chunk.js",
@@ -10,12 +10,12 @@
   "runtime~main.js.map": "/Frontend/static/js/runtime~main.ab1043e9.js.map",
   "static/media/user.png": "/Frontend/static/media/user.2c6e94aa.png",
   "static/media/ReviewIcon.png": "/Frontend/static/media/ReviewIcon.5746cd64.png",
-  "static/media/main.png": "/Frontend/static/media/main.d3c1775c.png",
+  "static/media/main.png": "/Frontend/static/media/main.74ef523b.png",
   "static/media/main2.png": "/Frontend/static/media/main2.9e7c2eb5.png",
   "static/media/button.png": "/Frontend/static/media/button.489b1b5b.png",
   "static/media/logo.png": "/Frontend/static/media/logo.612ea285.png",
   "static/css/main.9efbfdfc.chunk.css.map": "/Frontend/static/css/main.9efbfdfc.chunk.css.map",
   "index.html": "/Frontend/index.html",
-  "precache-manifest.32cd30697616f819b42dd9b4d3a19b87.js": "/Frontend/precache-manifest.32cd30697616f819b42dd9b4d3a19b87.js",
+  "precache-manifest.c0b468e5987aad72d9fd84be2a65cdc4.js": "/Frontend/precache-manifest.c0b468e5987aad72d9fd84be2a65cdc4.js",
   "service-worker.js": "/Frontend/service-worker.js"
 }
