@@ -30,7 +30,7 @@ function MyPage_Edit () {
     useEffect(async () => {
       const response = await axios.get(`https://www.geulnoon.com/api/MyPage`, {params: {'email': sessionStorage.getItem('user')}});
         setUser(response.data)
-        console.log(User.birthyear)
+        //console.log(User.birthyear)
     },[]);
 
     const options = [];
@@ -38,14 +38,14 @@ function MyPage_Edit () {
 
     const handleChangeB = (e) => {
       SetBirthyear(e.target.value)
-      console.log(e.target.value)
-      console.log(birthyear)
+      //console.log(e.target.value)
+      //console.log(birthyear)
     }
 
     const handleChangeN = (e) => {
       SetNickname(e.target.value)
-      console.log(e.target.value)
-      console.log(nickname)
+      //console.log(e.target.value)
+      //console.log(nickname)
     }
     return (
 

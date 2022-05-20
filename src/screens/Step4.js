@@ -190,7 +190,7 @@ function Step4 () {
   useEffect(async () => {
     const response = await axios.get(`https://www.geulnoon.com/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
     setTitle(response.data['title']);
-    console.log(Title);
+    //console.log(Title);
   },[]);
     
   useEffect(async () => {

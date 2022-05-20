@@ -66,14 +66,14 @@ function ReviewStep1 () {
   useEffect(async () => {
     const response = await axios.get(`https://www.geulnoon.com/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
     setTitle(response.data['title']);
-    console.log(Title);
+    //console.log(Title);
   },[]);
 
   useEffect(async () => {
     const response = await axios.get(`https://www.geulnoon.com/api/Step1`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
     setContent(response.data["content"]);
     setSubmitted(response.data["issubmitted"]);
-    console.log([Submiited.issubmitted]);
+    //console.log([Submiited.issubmitted]);
   },[]);
 
   const [word, setWord] = useState('');

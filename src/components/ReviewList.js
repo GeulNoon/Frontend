@@ -61,8 +61,8 @@ function ReviewList() {
         { params: { email: sessionStorage.getItem("user") } }
       );
       setTitle(response.data.title);
-      if(response.data)
-        console.log(title)
+      //if(response.data)
+        //console.log(title)
     }
     fetchData();
   }, []);
@@ -78,14 +78,14 @@ function ReviewList() {
 
   const navigateToStudy = (a_id) => {
     setTimeout(() => {
-      console.log(a_id)
+      //console.log(a_id)
       axios({
         method: "put",
         url: "https://www.geulnoon.com/api/reviewStudy/",
         headers: { "Content-Type": "application/json" },
         data: { "email": sessionStorage.getItem('user'), "a_id": a_id},
       }).then(response => {
-      console.log(response.data['s_id'])
+      //console.log(response.data['s_id'])
       sessionStorage.setItem('s_id', response.data['s_id'])
       sessionStorage.setItem('a_id', a_id)
       navigate("/Review/ReviewStep1")

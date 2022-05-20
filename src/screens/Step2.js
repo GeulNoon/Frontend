@@ -94,7 +94,7 @@ function Step2 () {
   const handleChange = (e) => {
     setText(e.target.value)
     setType(1)
-    console.log(text)
+    //console.log(text)
   }
 
   const handleChange3 = (e) => {
@@ -102,20 +102,20 @@ function Step2 () {
     setSumArray3(sumArray3)
     setText(sumArray3)
     setType(3)
-    console.log(text)
+    //console.log(text)
   }
 
   useEffect(async () => {
     const response = await axios.get(`https://www.geulnoon.com/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
     setTitle(response.data['title']);
-    console.log(Title);
+    //console.log(Title);
   },[]);
 
   useEffect(async () => {
     const response = await axios.get(`https://www.geulnoon.com/api/Step2`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
     if(response){
       setSummary(response.data['summary']);
-      console.log(response.data['s1'])
+      //console.log(response.data['s1'])
       sets1(response.data['s1'])
       sets2(response.data['s2'])
       sets3(response.data['s3'])

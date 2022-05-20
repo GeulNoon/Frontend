@@ -27,7 +27,7 @@ function MyPage () {
     useEffect(async () => {
       const response = await axios.get(`https://www.geulnoon.com/api/MyPage`, {params: {'email': sessionStorage.getItem('user')}});
       setUser(response.data);
-      console.log(response.data);
+      //console.log(response.data);
     },[]);
 
     const onRemove = () => {
@@ -35,7 +35,7 @@ function MyPage () {
         axios.delete(`https://www.geulnoon.com/api/MyPage/`, {data: {'email': sessionStorage.getItem('user')}})
         .then(response => {
           if(response.data['delete'] === 'ok'){
-            console.log(response.data)
+            //console.log(response.data)
             alert("삭제되었습니다.")
             sessionStorage.clear()
             window.location.replace("/Frontend/")
