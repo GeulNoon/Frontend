@@ -9,6 +9,7 @@ import ReviewIcon from '../image/ReviewIcon.png';
 import Right from '../image/Right.png';
 import Wrong from '../image/Wrong.png';
 import axios from "axios"
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 //요약문 및 어휘문제 전반적인 해설 박스
 const TextBox = styled.div`
@@ -91,10 +92,10 @@ function ContentBox(props) {
         </div>
         <TextBox style={{whiteSpace: 'pre-wrap'}}>
           <div>
-            {Object.keys(Comment).map((i,j) => <p key = {j}>{i}:  </p>)}
+            {Object.keys(Comment).map((i,j) => <p key = {j}>{i}</p>)}
           </div>
           <div>
-            {Object.values(Comment).map((i,j) => <p key={j}>{i}</p>)}
+            {Object.values(Comment).map((i,j) => <p key={j}>:  {i}</p>)}
           </div>
         </TextBox>
       </div>
@@ -174,6 +175,7 @@ function ReviewStep4 () {
   const [Quiz4, setQuiz4] = useState({});
   const [QuizScore, setQuizScore] = useState(0);
   const [Article_avg_comprehension, setArtivle_avg_comprehension] = useState(0);
+  const [isLoading, setIsLoading] = useState(1);
   const state = {
     contents: [
       {id: 'ReviewStep1', title: '1단계', desc: '전문보기', type: 1},
@@ -206,12 +208,21 @@ function ReviewStep4 () {
     setQuizScore(response.data['quiz_score'])
     setArtivle_avg_comprehension(response.data['avg_article_comporehension'])
     setSummaryU(response.data['user_summary'])
+    setIsLoading(0)
   },[]);
     
     return (
       <div style={{display:'flex'}}>
         <NavigationBar list={state.contents} title = {Title} prev={"Review"}/> {/*화면 좌측 단계이동 바*/}
         <div style={{width: '90vw', display:'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '9vw', marginTop: '3vw'}}>
+          {isLoading ? 
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '10vh'}}>
+          <div style={{display:'flex', alignItems:'center'}}>
+            <CircularProgress size={30} color={'inherit'}/>
+            <h2 style={{marginLeft: '10px'}}>로딩중...</h2>
+          </div>
+          <h4 style={{color: '#5b6d5b'}}>채점 중입니다.</h4>
+        </div> : (
           <div style={{width: '80vw'}}>
             <div style={{display: 'flex'}}>
               <div style={{display: 'flex', alignItems: 'center',width: '70vw'}}>
@@ -233,9 +244,9 @@ function ReviewStep4 () {
               </div>
             </div>
             <div style={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}>
-              <h3 style={{margin:0}}>요약하기:</h3><h1 style={{color: '#5b6d5b', margin:0, marginRight: '5px'}}>{Article_comprehension}</h1>
-              <h3 style={{margin:0}}>어휘풀기:</h3><h1 style={{color: '#5b6d5b', margin:0, marginRight: '5px'}}>{QuizScore}</h1>
-              <h3 style={{margin:0}}>빈칸풀기:</h3><h1 style={{color: '#5b6d5b', margin:0}}>{KeywordScore}</h1>
+              <h3 style={{margin:0}}>요약하기:</h3><h1 style={{color: '#5b6d5b', margin:0, marginRight: '5px'}}>{Article_comprehension}</h1><h3 style={{margin:0, marginRight: '10px'}}>점</h3>
+              <h3 style={{margin:0}}>어휘풀기:</h3><h1 style={{color: '#5b6d5b', margin:0, marginRight: '5px'}}>{QuizScore}</h1><h3 style={{margin:0, marginRight: '10px'}}>점</h3>
+              <h3 style={{margin:0}}>빈칸풀기:</h3><h1 style={{color: '#5b6d5b', margin:0}}>{KeywordScore}</h1><h3 style={{margin:0}}>점</h3>
             </div>
             <div className='pointer'>요약문 정답</div>
             <TextBox>{Summary}</TextBox>
@@ -284,6 +295,7 @@ function ReviewStep4 () {
               <p key = {i} style={{color: 'red', marginLeft: '5px'}}>{i+1}. {word['value']}</p>)}
             </TextBox>
           </div>
+        )}
         </div>
       </div>
     );

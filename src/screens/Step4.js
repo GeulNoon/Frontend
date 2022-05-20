@@ -93,10 +93,10 @@ function ContentBox(props) {
         </div>
         <TextBox style={{whiteSpace: 'pre-wrap'}}>
           <div>
-            {Object.keys(Comment).map((i,j) => <p key = {j}>{i}:  </p>)}
+            {Object.keys(Comment).map((i,j) => <p key = {j}>{i}</p>)}
           </div>
           <div>
-            {Object.values(Comment).map((i,j) => <p key={j}>{i}</p>)}
+            {Object.values(Comment).map((i,j) => <p key={j}>:  {i}</p>)}
           </div>
         </TextBox>
       </div>

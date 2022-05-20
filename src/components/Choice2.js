@@ -50,7 +50,7 @@ const Choice2 = (props) => {
                     onChange={handleChange}
                 >
                     {example.map((value, i) => (
-                    <div style={{width: '100px'}} key={i}>
+                    <div style={{width: '125px'}} key={i}>
                         <FormControlLabel value={value} control={<Radio color='success' />} label={example[i]} />
                     </div>
                     ))}
