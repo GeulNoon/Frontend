@@ -78,7 +78,7 @@ function ReviewStep5 () {
     setTimeout(() => {
       axios({
         method: "put",
-        url: "http://127.0.0.1:8000/api/Step5/",
+        url: "https://www.geulnoon.com/api/Step5/",
         headers: { "Content-Type": "application/json" },
         params: {'s_id': sessionStorage.getItem('s_id')},
         data: { "answer": wordValue},
@@ -89,13 +89,13 @@ function ReviewStep5 () {
     }, 500);
   }
   useEffect(async () => {
-    const response = await axios.get(`http://127.0.0.1:8000/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
+    const response = await axios.get(`https://www.geulnoon.com/api/title`, {params: {'a_id': sessionStorage.getItem('a_id')}});
     setTitle(response.data['title']);
     console.log(Title);
   },[]);
     
   useEffect(async () => {
-    const response = await axios.get(`http://127.0.0.1:8000/api/Step5`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
+    const response = await axios.get(`https://www.geulnoon.com/api/Step5`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
     setContent(response.data['keyword'])
     setWordValue(response.data['answerlist'])
   },[]);

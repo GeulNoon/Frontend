@@ -17,7 +17,7 @@ function Study() {
             setTimeout(() => {
               axios({
                 method: "post",
-                url: "http://127.0.0.1:8000/api/study",
+                url: "https://www.geulnoon.com/api/study",
                 headers: { "Content-Type": "application/json" },
                 data: { "title": values['title'],"content": values['content'], "email": sessionStorage.getItem('user')},
               }).then(response => {
@@ -33,7 +33,7 @@ function Study() {
                 setIsLoading(false)
               });
               setSubmitting(false);
-            }, 500);
+            }, 50000);
           }}
         >
           {props => {
@@ -82,8 +82,8 @@ function Study() {
               <div style={{display: 'flex', flexDirection: 'column'}}>
                 <h3 style={{margin: 0}}>지문 내용</h3>
                 <div style={{display: 'flex', alignItems:'center'}}>
-                  <h5 style={{color: "#676767", marginTop: 0}}>문제 생성에 적합한 글자 수는 1000자 내외입니다.</h5>
-                  <h4 style={{marginTop: 0}}>글자 수:</h4> 
+                  <h5 style={{color: "#676767", marginTop: 0}}>문제 생성에 적합한 글자 수는 800자 내외입니다.</h5>
+                  <h4 style={{marginLeft: 20, marginTop: 0}}>글자 수:</h4> 
                   <h3 style={{color: '#5b6e5b', marginTop: 0}}>{values.content.length}</h3> 
                   <h4 style={{marginTop: 0}}>자</h4>
                 </div>

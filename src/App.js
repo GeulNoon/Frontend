@@ -67,7 +67,7 @@ class App extends Component {
   state = {
     contents: [
       {id: 'Study', title: '학습하기', desc: '학습하기 기능'},
-      {id: 'Review', title: '복습하기', desc: '오답노트 기능'},
+      {id: 'Review', title: '복습하기', desc: '복습하기 기능'},
       {id: 'Result', title: '학습결과', desc: '학습결과 기능'},
       {id: 'MyPage' , title: '내정보', desc: '내정보 기능'}
     ]
