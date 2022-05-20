@@ -92,23 +92,6 @@ function ReviewStep1 () {
     });
     }, 500);
   }
-  const [question, setQuestion] = useState('');
-  const [answer, setAnswer] = useState([]);
-  const [isAnswerVisible, setIsAnswerVisible] = useState(0);
-  const onSubmitQuestion = () => {
-    setTimeout(() => {
-      axios({
-        method: "post",
-        url: "https://www.geulnoon.com/api/getAnswer/",
-        headers: { "Content-Type": "application/json" },
-        params: {'a_id': sessionStorage.getItem('a_id')},
-        data: { "question": question},
-      }).then((res)=> setAnswer(res["data"]["answer"], setIsAnswerVisible(1))
-      ).catch(error => {
-        alert('검색 실패!')
-    });
-    }, 500);
-  }
   return (
     <div style={{display:'flex'}}>
         <NavigationBar list={state.contents} title = {Title} prev={"Review"}/> {/*화면 좌측 단계이동 바*/}
@@ -131,21 +114,6 @@ function ReviewStep1 () {
                     <Button style={{width: '20px', marginRight: '2px'}} onClick={()=>{setIsVisible(0)}}>X</Button>
                   </div>
                   {result.map((def,index) => <p key={def}>{index+1}. {def}</p>)}
-                </div> :
-                null}
-              </div>
-              <div style={{width: '25vw'}}>
-              <h3>질의 응답</h3>
-                <div style={{display:"flex", alignItems: 'center', marginBottom: '10px'}}>
-                  <input type="text" placeholder='지문 속 궁금한 내용을 검색해봅시다.' onChange={(event) => setQuestion(event.target.value)} style={{width:"200px", marginBottom:"0px", marginRight: "10px"}}/>
-                  <Button onClick={onSubmitQuestion}>검색</Button>
-                </div>
-                {isAnswerVisible ? 
-                <div style={{border: "1px solid #5b6d5b"}}>
-                  <div style={{width: '25vw', display:"flex", justifyContent: 'end'}}>
-                    <Button style={{width: '20px', marginRight: '2px'}} onClick={()=>{setIsAnswerVisible(0)}}>X</Button>
-                  </div>
-                  {answer}
                 </div> :
                 null}
               </div>
