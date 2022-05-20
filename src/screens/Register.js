@@ -16,7 +16,7 @@ function Register() {
         setTimeout(() => {
           axios({
             method: "post",
-            url: "http://3.38.70.33:8000/api/signup",
+            url: "https://www.geulnoon.com/api/signup",
             headers: { "Content-Type": "application/json" },
             data: { "email": values['email'],"nickname": values['nickname'], "password": values['password'], "birthyear": values['birthyear']},
           }).then(() => navigate('/'))

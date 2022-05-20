@@ -13,7 +13,7 @@ function Login() {
         setTimeout(() => {
           axios({
             method: "post",
-            url: "http://3.38.70.33:8000/api/login",
+            url: "https://www.geulnoon.com/api/login",
             headers: { "Content-Type": "application/json" },
             data: { "email": values['email'],"password": values['password']},
           }).then(response => {

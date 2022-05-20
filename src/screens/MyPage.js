@@ -25,14 +25,14 @@ function MyPage () {
     const [User, setUser] = useState(' ');
     const navigate = useNavigate();
     useEffect(async () => {
-      const response = await axios.get(`http://3.38.70.33:8000/api/MyPage`, {params: {'email': sessionStorage.getItem('user')}});
+      const response = await axios.get(`https://www.geulnoon.com/api/MyPage`, {params: {'email': sessionStorage.getItem('user')}});
       setUser(response.data);
       console.log(response.data);
     },[]);
 
     const onRemove = () => {
       if (window.confirm("정말 삭제합니까?")) {
-        axios.delete(`http://3.38.70.33:8000/api/MyPage`, {data: {'email': sessionStorage.getItem('user')}})
+        axios.delete(`https://www.geulnoon.com/api/MyPage/`, {data: {'email': sessionStorage.getItem('user')}})
         .then(response => {
           if(response.data['delete'] === 'ok'){
             console.log(response.data)

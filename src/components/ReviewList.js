@@ -57,7 +57,7 @@ function ReviewList() {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        `http://3.38.70.33:8000/api/getMoreReview`,
+        `https://www.geulnoon.com/api/getMoreReview`,
         { params: { email: sessionStorage.getItem("user") } }
       );
       setTitle(response.data.title);
@@ -81,7 +81,7 @@ function ReviewList() {
       console.log(a_id)
       axios({
         method: "put",
-        url: "http://3.38.70.33:8000/api/reviewStudy/",
+        url: "https://www.geulnoon.com/api/reviewStudy/",
         headers: { "Content-Type": "application/json" },
         data: { "email": sessionStorage.getItem('user'), "a_id": a_id},
       }).then(response => {

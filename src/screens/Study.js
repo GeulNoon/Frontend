@@ -17,7 +17,7 @@ function Study() {
             setTimeout(() => {
               axios({
                 method: "post",
-                url: "http://3.38.70.33:8000/api/study",
+                url: "https://www.geulnoon.com/api/study",
                 headers: { "Content-Type": "application/json" },
                 data: { "title": values['title'],"content": values['content'], "email": sessionStorage.getItem('user')},
               }).then(response => {
@@ -33,7 +33,7 @@ function Study() {
                 setIsLoading(false)
               });
               setSubmitting(false);
-            }, 500);
+            }, 50000);
           }}
         >
           {props => {
@@ -61,7 +61,7 @@ function Study() {
             <LeftWrapper>
             <header>
               <h2>학습하기</h2>
-              <h6 style={{color: "#676767"}}>학습대상이 될 기사를 직접 선택할 수 있습니다.</h6>
+              <h5 style={{color: "#676767"}}>학습대상이 될 기사를 직접 선택할 수 있습니다.</h5>
             </header>
               <div style={{display: 'flex', alignItems:'center'}}>
                 <h4 style={{marginRight: '20px'}}>지문 제목</h4>
@@ -79,8 +79,14 @@ function Study() {
                 </ContentWrapper>
             </LeftWrapper>
             <RightWrapper>
-              <div style={{display: 'flex', alignItems: 'center'}}>
-                <h3>지문 내용</h3>
+              <div style={{display: 'flex', flexDirection: 'column'}}>
+                <h3 style={{margin: 0}}>지문 내용</h3>
+                <div style={{display: 'flex', alignItems:'center'}}>
+                  <h5 style={{color: "#676767", marginTop: 0}}>문제 생성에 적합한 글자 수는 800자 내외입니다.</h5>
+                  <h4 style={{marginLeft: 20, marginTop: 0}}>글자 수:</h4> 
+                  <h3 style={{color: '#5b6e5b', marginTop: 0}}>{values.content.length}</h3> 
+                  <h4 style={{marginTop: 0}}>자</h4>
+                </div>
               </div>
               <BorderInput
                 name="content"
@@ -133,7 +139,7 @@ const RightWrapper = styled.div`
 
 //지문 내용 입력창
 const BorderInput = styled.textarea`
-  height: 350px;
+  height: 325px;
   width: 560px;
   padding: 20px;
   border: 1px solid #5b6d5b;
