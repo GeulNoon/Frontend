@@ -14,9 +14,9 @@ Dev - 전체적인 개발 코드
 ## 시스템 아키텍쳐
 (아키텍쳐 사진)
 ## 포스터
-(포스터)
-## 시연영상
-(영상)
+![29팀_글눈_포스터_page-0001](https://user-images.githubusercontent.com/68368589/170729123-2c6637af-ad11-4996-a4e1-3d4450f4f360.jpg)
+## 시연영상 URL
+https://youtu.be/ZMhYZTsl3Aw
 ## 사이트 URL
 https://geulnoon.github.io/Frontend/
 ## 역할
