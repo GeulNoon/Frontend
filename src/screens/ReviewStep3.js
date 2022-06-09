@@ -1,8 +1,8 @@
-//학습하기의 문제풀기:어휘풀기
+//복습하기의 문제풀기:어휘풀기
 import React, { useState, useEffect, Component } from 'react';
 import NavigationBar from "../components/NavigationBar";
 import Choice from "../components/Choice";
-import Choice2 from '../components/Choice2';
+import Choice2 from "../components/Choice2";
 import MultipleChoice from "../components/MutipleChoice";
 import { NavLink } from "react-router-dom";
 import NextIcon from "../image/NextIcon.png";
@@ -48,22 +48,31 @@ const ReviewStep3 = () => {
       {id: 'ReviewStep5', title: '4단계', desc: '빈칸풀기', type: 1},
       {id: 'ReviewStep4', title: '5단계', desc: '결과보기', type: 1},
     ]
-  };
+  }
 
   const [Title, setTitle] = useState('');
   const [Example1, setExample1] = useState();
   const [Question1, setQuestion1] = useState();
+  const [Question1A, setQuestion1A] = useState();
+  const [Question1UA, setQuestion1UA] = useState();
   const [Question2, setQuestion2] = useState();
   const [Question2W, setQuestion2W] = useState();
   const [Question2S, setQuestion2S] = useState();
   const [Question2C, setQuestion2C] = useState();
   const [Question2M, setQuestion2M] = useState();
   const [Question2A, setQuestion2A] = useState();
+  const [Question2UA, setQuestion2UA] = useState();
+  const [Question2UAC, setQuestion2UAC] = useState(); 
   const [Question3T, setQuestion3T] = useState();
   const [Question3, setQuestion3] = useState();
   const [Example3, setExample3] = useState();
+  const [Question3A, setQuestion3A] = useState();
+  const [Question3UA, setQuestion3UA] = useState();
   const [Question4, setQuestion4] = useState();
   const [Example4, setExample4] = useState();
+  const [Question4A, setQuestion4A] = useState();
+  const [Question4UA, setQuestion4UA] = useState();
+  const [isSubmitted, SetIsSubmitted] = useState(false)
 
 
   useEffect(async () => {
@@ -76,17 +85,26 @@ const ReviewStep3 = () => {
     const response = await axios.get(`https://www.geulnoon.com/api/Step3`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
     setExample1(response.data['quiz1']['Choice']);
     setQuestion1(response.data['quiz1']['Test']);
+    setQuestion1A(response.data['quiz1']['Answer']);
+    setQuestion1UA(response.data['quiz1']['Answer_u']);
     setQuestion2(response.data['quiz2']['Test']);
     setQuestion2W(response.data['quiz2']['Word']);
     setQuestion2S(response.data['quiz2']['Sentence']);
     setQuestion2C(response.data['quiz2']['Choice']);
     setQuestion2M(response.data['quiz2']['MEAN']);
     setQuestion2A(response.data['quiz2']['User_answer']);
+    setQuestion2UA(response.data['quiz2']['Answer_u']);
+    setQuestion2UAC(response.data['quiz2']['Is_Correct']);
     setQuestion3T(response.data['quiz3']['Type']);
     setQuestion3(response.data['quiz3']['Test']);
     setExample3(response.data['quiz3']['Choice']);
+    setQuestion3A(response.data['quiz3']['Answer']);
+    setQuestion3UA(response.data['quiz3']['Answer_u']);
     setQuestion4(response.data['quiz4']['Test']);
     setExample4(response.data['quiz4']['Choice']);
+    setQuestion4A(response.data['quiz4']['Answer']);
+    setQuestion4UA(response.data['quiz4']['Answer_u']);
+    SetIsSubmitted(response.data['issubmitted']);
   },[]);
 
   const submitAnswer = () => {
@@ -113,7 +131,7 @@ const ReviewStep3 = () => {
   ]); //사용자가 입력한 답. 문제 마다 value에 저장
   return (
     <div style={{ display: "flex" }}>
-      <NavigationBar list={state.contents} title={Title} prev={"Review"} />{" "}
+      <NavigationBar list={state.contents} title={Title} prev={"Review"} />  {/*화면 좌측 단계이동 바*/}
       {/*화면 좌측 단계이동 바*/}
       <div
         style={{
@@ -138,7 +156,16 @@ const ReviewStep3 = () => {
             alignItems: "center",
           }}
         >
-          <Choice type={1} answer={answer} setAnswer={setAnswer} example = {Example1} question = {Question1} id={1} />{" "}
+          <Choice type = {1}
+          answer={answer}
+          setAnswer={setAnswer}
+          example = {Example1}
+          question = {Question1} 
+          id={1} 
+          isSubmitted={isSubmitted}
+          true_answer = {Question1A}
+          user_answer = {Question1UA}
+          />{" "}
           {/*객관식 문제*/}
           <MultipleChoice answer={answer} 
           setAnswer={setAnswer} 
@@ -149,16 +176,31 @@ const ReviewStep3 = () => {
           mean = {Question2M} 
           id={2} 
           userAnswer = {Question2A} 
-          setUseranswer = {setQuestion2A} />{" "}
+          setUseranswer = {setQuestion2A}
+          isSubmitted={isSubmitted}
+          real_user_answer = {Question2UA}
+          is_answer_correct = {Question2UAC} />{" "}
           <Choice2 type = {Question3T}
           answer={answer}
           setAnswer={setAnswer}
           example = {Example3}
           question = {Question3}
           id={3}
+          isSubmitted={isSubmitted}
+          true_answer = {Question3A}
+          user_answer = {Question3UA}
           />
           {/*동음이의어 문제*/}
-          <Choice type = {3} answer={answer} setAnswer={setAnswer} example = {Example4} question = {Question4} id={4} />
+          <Choice type = {3}
+          answer={answer}
+          setAnswer={setAnswer}
+          example = {Example4}
+          question = {Question4}
+          id={4}
+          isSubmitted={isSubmitted}
+          true_answer = {Question4A}
+          user_answer = {Question4UA}
+          />
         </div>
         <div
           style={{
@@ -168,7 +210,7 @@ const ReviewStep3 = () => {
             alignItems: "flex-end",
           }}
         >
-          <SubmitButton onClick={submitAnswer}>제출하기</SubmitButton>
+          {!isSubmitted && <div><SubmitButton onClick={submitAnswer} disabled={isSubmitted}>제출하기</SubmitButton></div>}
           <NavLink to="/Review/ReviewStep5">
             <img alt="" src={NextIcon} width="37.5px" height="37.5px" />
           </NavLink>{" "}

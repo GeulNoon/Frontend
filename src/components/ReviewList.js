@@ -88,6 +88,7 @@ function ReviewList() {
       //console.log(response.data['s_id'])
       sessionStorage.setItem('s_id', response.data['s_id'])
       sessionStorage.setItem('a_id', a_id)
+      sessionStorage.setItem('Review', '0')
       navigate("/Review/ReviewStep1")
       })
       .catch(error => {

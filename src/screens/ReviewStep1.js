@@ -1,4 +1,4 @@
-//오답노트의 문제풀기:전문보기
+//복습하기:전문보기
 import React, { useState, useEffect, Component } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import styled from "styled-components";

@@ -20,8 +20,8 @@ function Login() {
             sessionStorage.setItem('user', values['email'])
             window.location.replace("/Frontend/")
           })
-          .catch(error => {
-            alert('로그인 실패!')
+          .catch(err=> {
+            alert(err.response.data['message'])
         });
         setSubmitting(false);
         }, 500);

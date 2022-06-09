@@ -136,7 +136,7 @@ function MyPage_Edit () {
               </div>
               </div>
               <div style={{display: 'flex', width: '500px', alignItems: 'center'}}>
-                <h4 style={{margin: '0px', width: '200px', marginRight: '10px'}}>생년월일</h4>
+                <h4 style={{margin: '0px', width: '200px', marginRight: '10px'}}>출생 연도</h4>
                 <select
                   name ='birthyear'
                   type ='birthyear'

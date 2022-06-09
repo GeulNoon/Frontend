@@ -1,4 +1,4 @@
-//학습하기의 문제풀기:요약하기
+//복습하기의 문제풀기:요약하기
 import React, { useState, useEffect, Component} from 'react';
 import NavigationBar from '../components/NavigationBar';
 import { DragBlock } from '../components/DragBlock';
@@ -7,6 +7,19 @@ import { NavLink } from "react-router-dom";
 import NextIcon from "../image/NextIcon.png";
 import axios from "axios"
 import { Formik } from "formik";
+import {useNavigate} from 'react-router-dom';
+
+//문단내용 박스
+const TextBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80vw;
+  height: 30vh;
+  background-color: #e5e5e5;
+  font-size: 11px;
+  border: none;
+`;
 
 //순서배열, 직접작성 선택 버튼
 const Button = styled.div`
@@ -52,10 +65,11 @@ class Subject extends Component{
 }
 
 //메인함수
-function Step2 () {
+function ReviewStep2 () {
   const [Summary, setSummary] = useState([]);
   const [Title, setTitle] = useState('');
   const [text, setText] = useState(""); //사용자가 입력한 답
+  const navigate = useNavigate();
   const [isSelected, SetSelected] = useState(false); 
   const [isSubmitted, SetIsSubmitted] = useState(false);
   const [sumview, setSumview] = useState(true);
@@ -64,6 +78,7 @@ function Step2 () {
   const [s1, sets1] = useState([]);
   const [s2, sets2] = useState([]);
   const [s3, sets3] = useState([]);
+  const [userSummary, setUserSummary] = useState('');
 
   const state = {
     contents: [
@@ -105,6 +120,7 @@ const handleChange3 = (e) => {
       sets2(response.data['s2'])
       sets3(response.data['s3'])
       SetIsSubmitted(response.data['issubmitted']);
+      setUserSummary(response.data['user_summary'])
     }
   },[]);
 
@@ -122,6 +138,7 @@ const handleChange3 = (e) => {
     Input = <DragBlock data={Summary} setText = {setText}/>;
   } else {
     Input = <input
+              defaultValue= {userSummary}
               placeholder='요약하신 문장을 입력해주세요.'
               style={{width: '80vw', height: '50px', marginTop: 20, backgroundColor: '#f6f6f6', borderWidth: '1px'}}
               onChange={handleChange}
@@ -205,8 +222,8 @@ const handleChange3 = (e) => {
           />
           </div>}
             <div style={{width: '80vw', display: 'flex', flexDirection: 'column', alignItems: 'flex-end'}}>
-            {<div><SubmitButton type="submit">제출하기</SubmitButton></div>}
-              <NavLink to="/Study/Step3">
+            {!isSubmitted && <div><SubmitButton type="submit" disabled={isSubmitted}>제출하기</SubmitButton></div>}
+              <NavLink to="/Review/ReviewStep3">
                 <img alt="" src ={NextIcon} width='37.5px' height='37.5px'/>               
             </NavLink> {/*다음 단계 버튼*/}
             </div>
@@ -219,4 +236,4 @@ const handleChange3 = (e) => {
   );
 }
 
-export default Step2;
+export default ReviewStep2;

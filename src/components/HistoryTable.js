@@ -84,6 +84,9 @@ function HistoryTable() {
   const navigateToStudy = (s_id, a_id) => {
     sessionStorage.setItem("s_id", s_id);
     sessionStorage.setItem("a_id", a_id);
+    sessionStorage.setItem('s2', 'ok')
+    sessionStorage.setItem('timer', 'done');
+    sessionStorage.setItem('Review', 'ok');
     navigate("/Study/Step4");
   };
 

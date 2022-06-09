@@ -194,7 +194,7 @@ function Step4 () {
   },[]);
     
   useEffect(async () => {
-    const response = await axios.get(`https://www.geulnoon.com/api/Step4`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id')}});
+    const response = await axios.get(`https://www.geulnoon.com/api/Step4`, {params: {'a_id': sessionStorage.getItem('a_id'), 's_id': sessionStorage.getItem('s_id'), 'Review': sessionStorage.getItem('Review')}});
     setName(response.data['name']);
     setArticle_comprehension(response.data['article_comprehension']);
     setSummary(response.data['summary'])
@@ -209,6 +209,7 @@ function Step4 () {
     setQuizScore(response.data['quiz_score'])
     setArtivle_avg_comprehension(response.data['avg_article_comporehension'])
     setSummaryU(response.data['user_summary'])
+    sessionStorage.setItem('Review', 'ok')
     setIsLoading(0)
   },[]);
     
@@ -228,7 +229,7 @@ function Step4 () {
             <div style={{display: 'flex'}}>
               <div style={{display: 'flex', alignItems: 'center',width: '70vw'}}>
                 <Subject name={Name}></Subject>
-                <div style={{width: '80px', height: '80px', 
+                <div style={{width: '90px', height: '90px', 
                 display: 'flex', alignItems: 'center',
                 justifyContent: 'center', backgroundColor: '#94c973',
                 borderRadius: '50%', fontSize: '32px'}}>

@@ -4,7 +4,7 @@ import { RadioGroup, FormControl, FormControlLabel, Radio } from '@mui/material'
 
 const json = 
     {
-        "TYPE1": "다음 단어 중 빈칸에 들어갈 수 있는 단어를 고르시오.",
+        "TYPE1": "다음 단어들 중 빈칸에 들어갈 수 있는 가장 적절한 단어를 고르시오.",
         "WORD": "우려",
         "TEST1": "집값 상승에 대한 ____의 목소리가 높아지고 있다.",
         "MEAN": "근심하거나 걱정함. 또는 그 근심이나 걱정.",
@@ -38,7 +38,7 @@ const Choice = (props) => {
 
       return (
           <div style={{marginTop: 10, marginBottom:10}}>
-            {props.type === 1 ? '다음 단어 중 빈칸에 들어갈 수 있는 단어를 고르시오.' : '다음 단어 중 주어진 사전적 의미에 부합하는 단어를 고르시오.'}
+            {props.type === 1 ? '다음 단어들 중 빈칸에 들어갈 수 있는 가장 적절한 단어를 고르시오.' : '다음 단어들 중 주어진 사전적 의미에 부합하는 가장 적절한 단어를 고르시오.'}
             <div style={{width: '80vw', 
                 height: '10vh',
                 display:'flex', 

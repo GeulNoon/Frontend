@@ -20,8 +20,8 @@ function Register() {
             headers: { "Content-Type": "application/json" },
             data: { "email": values['email'],"nickname": values['nickname'], "password": values['password'], "birthyear": values['birthyear']},
           }).then(() => navigate('/'))
-          .catch(error => {
-            alert('회원가입 실패!\n이메일 중복 여부를 확인해주세요.')
+          .catch(err=> {
+            alert(err.response.data['message'])
           });
           setSubmitting(false);
         }, 500);

@@ -65,7 +65,7 @@ function MyPage () {
                 <input readOnly value={User.nickname} style={{margin: '0px'}}/> {/*닉네임 창, 쓰기 불가능*/}
               </div>
               <div style={{display: 'flex', width: '500px', alignItems: 'center'}}>
-                <h4 style={{margin: '0px', width: '100px'}}>생년월일</h4>
+                <h4 style={{margin: '0px', width: '100px'}}>출생 연도</h4>
                 <input readOnly value={User.birthyear} style={{margin: '0px'}}/> {/*소속 창, 쓰기 불가능*/}
               </div>
               <div style={{display: 'flex', width: '500px', justifyContent: 'end'}}>
